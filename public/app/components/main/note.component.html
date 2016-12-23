@@ -1,0 +1,54 @@
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading"
+             [ngClass]="{
+                'bg-lightgrey': notedata.status.index === noteState.Empty,
+                'bg-orange': notedata.status.index == noteState.Todo,
+                'bg-green': notedata.status.index == noteState.Done,
+                'bg-red': notedata.status.index == noteState.NotDone
+                }"
+        >
+            <h3 class="panel-title"><strong>{{notedata.title}}</strong></h3>
+        </div>
+        <div class="panel-body">{{notedata.body}}</div>
+
+        <div *ngIf="notedata.isInEditMode" class="panel-body">
+            <h4>Edit note</h4>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Title: </label>
+                    <div class="controls">
+                        <input type="text" name="title" [(ngModel)]="notedata.title" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Body: </label>
+                    <div class="controls">
+                        <!--<input type="text" name="body" [(ngModel)]="notedata.body" />-->
+                        <textarea rows="3" name="body" [(ngModel)]="notedata.body"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="panel-footer">
+            <!--TODO create function to get the alt -->
+            <img class="status-image img-polaroid"
+                 src={{getStatusImagePath()}}
+                 alt="status image"
+                 (click)="toggleStatus()"
+            >
+            <button *ngIf="notedata.areUnsavedChanges" type="button" class="btn btn-xs btn-success" (click)="saveNote()"><i class="icon-save"></i> Save</button>
+            <button *ngIf="!notedata.areUnsavedChanges" type="button" class="btn btn-xs btn-default" (click)="saveNote()"><i class="icon-save"></i> Save</button>
+            <button type="button" class="btn btn-xs btn-default" (click)="toggleEditNote()"><i class="icon-pencil"></i>
+                <span *ngIf="notedata.isInEditMode">Done editing</span>
+                <span *ngIf="!notedata.isInEditMode">Edit</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-danger" (click)="toggleDeleteNote()">
+                <span *ngIf="notedata.isDeleted">Cancel delete</span>
+                <span *ngIf="!notedata.isDeleted">Delete</span>
+            </button>
+        </div>
+    </div>
+</div><!-- /.col-sm-4 -->
