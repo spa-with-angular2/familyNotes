@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
 	styles: [`
 		header{
 			font-family: Arial, Helvetica, sans-serif;
-			border: 1px solid red;
 			
 			margin: 0;
 			padding: 0;

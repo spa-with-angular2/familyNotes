@@ -4,5 +4,5 @@ function __export(m) {
 }
 // my barrel in header folder re-export all of its exports
 __export(require('../header/nav.component'));
-__export(require('../header/topband.component'));
+// export * from '../header/topband.component'; 
 //# sourceMappingURL=index.js.map

@@ -5,7 +5,7 @@ import { NotesComponent } from '../main/notes.component';
 @Component({
     selector: 'navigation',
     templateUrl: './app/components/header/nav.component.html',
-    styles: [``],
+    styleUrls: ['./app/components/header/nav.css'],
     providers: [ NotesComponent]
 })
 

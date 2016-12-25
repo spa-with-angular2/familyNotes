@@ -16,7 +16,6 @@ var TopbandComponent = (function () {
         core_1.Component({
             selector: 'top-band',
             templateUrl: './app/components/header/topband.component.html',
-            styles: ["\n        .top-band{\n            background-color: lightgray;\n        }\n        .logo{\n            color: white;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [])
     ], TopbandComponent);

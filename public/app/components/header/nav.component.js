@@ -19,7 +19,7 @@ var NavComponent = (function () {
         core_1.Component({
             selector: 'navigation',
             templateUrl: './app/components/header/nav.component.html',
-            styles: [""],
+            styleUrls: ['./app/components/header/nav.css'],
             providers: [notes_component_1.NotesComponent]
         }), 
         __metadata('design:paramtypes', [notes_component_1.NotesComponent])
