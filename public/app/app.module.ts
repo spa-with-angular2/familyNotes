@@ -20,7 +20,8 @@ import { NotesComponent } from './components/main/notes.component';
 import { UserComponent } from './components/users/user.component';
 
 import { AboutComponent } from './components/main/about.component';
-
+import { ProfileComponent } from './components/profile/profile.component'; 
+ 
 // import {
 // 	HomeComponent,
 // 	NotesComponent,
@@ -40,7 +41,8 @@ import { AboutComponent } from './components/main/about.component';
 		NavComponent,
 		FooterComponent,
 		NoContentComponent,
-		AboutComponent
+		AboutComponent,
+		ProfileComponent
 
 	],
 	providers:[],

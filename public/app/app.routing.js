@@ -4,6 +4,7 @@ var home_component_1 = require('./components/main/home.component');
 var notes_component_1 = require('./components/main/notes.component');
 var about_component_1 = require('./components/main/about.component');
 var no_content_component_1 = require('./components/error-pages/no-content.component');
+var profile_component_1 = require('./components/profile/profile.component');
 // import {
 //     HomeComponent,
 //     NotesComponent,
@@ -26,6 +27,10 @@ var appRoutes = [
     {
         path: 'about',
         component: about_component_1.AboutComponent
+    },
+    {
+        path: 'profile',
+        component: profile_component_1.ProfileComponent
     },
     // {
     //     path: 'detail', loadChildren: () => System.import('./+detail')

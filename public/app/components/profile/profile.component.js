@@ -9,22 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_component_1 = require('../users/user.component');
-var HomeComponent = (function () {
-    function HomeComponent() {
-        this.userCtrl = new user_component_1.UserComponent();
-        this.alex = this.userCtrl.createUser();
-        console.log(this.alex);
+var ProfileComponent = (function () {
+    function ProfileComponent() {
     }
-    HomeComponent = __decorate([
+    ProfileComponent = __decorate([
         core_1.Component({
-            selector: 'home',
-            templateUrl: './app/components/main/home.component.html',
-            styleUrls: ['./app/components/main/home-component.css']
+            selector: 'profile',
+            templateUrl: './app/components/profile/profile.component.html',
+            styleUrls: ['./app/components/profile/profile-component.css'],
         }), 
         __metadata('design:paramtypes', [])
-    ], HomeComponent);
-    return HomeComponent;
+    ], ProfileComponent);
+    return ProfileComponent;
 }());
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.ProfileComponent = ProfileComponent;
+//# sourceMappingURL=profile.component.js.map

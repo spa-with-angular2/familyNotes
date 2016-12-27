@@ -5,6 +5,7 @@ import { HomeComponent } from './components/main/home.component';
 import { NotesComponent } from './components/main/notes.component';
 import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 // import {
 //     HomeComponent,
@@ -30,6 +31,10 @@ const appRoutes: Routes = [
         path: 'about',
         component: AboutComponent
     },
+    {
+        path: 'profile'
+        component: ProfileComponent
+    }
     // {
     //     path: 'detail', loadChildren: () => System.import('./+detail')
     //     .then((comp: any) => comp.default),
@@ -38,6 +43,7 @@ const appRoutes: Routes = [
         path: '**',
         component: NoContentComponent
     }
+    
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

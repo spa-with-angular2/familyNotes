@@ -27,6 +27,7 @@ var home_component_1 = require('./components/main/home.component');
 var note_component_1 = require('./components/main/note.component');
 var notes_component_1 = require('./components/main/notes.component');
 var about_component_1 = require('./components/main/about.component');
+var profile_component_1 = require('./components/profile/profile.component');
 // import {
 // 	HomeComponent,
 // 	NotesComponent,
@@ -49,7 +50,8 @@ var AppModule = (function () {
                 nav_component_1.NavComponent,
                 footer_component_1.FooterComponent,
                 no_content_component_1.NoContentComponent,
-                about_component_1.AboutComponent
+                about_component_1.AboutComponent,
+                profile_component_1.ProfileComponent
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
