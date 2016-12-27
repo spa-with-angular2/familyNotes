@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NoteComponentInterface } from './contracts/note-component.contract';
 
 enum State {
     Empty = 0,
@@ -7,6 +8,7 @@ enum State {
     NotDone = 3
 }
 
+// TODO extract function
 function isNullOrUndefined(obj : any) : obj is null | undefined {
     return typeof obj === "undefined" || obj === null;
 }
@@ -50,7 +52,8 @@ function enumLength(enumClass:any){
         }
     `]
 })
-export class Note{
+export class Note implements NoteComponentInterface{
+
     @Input() notedata = {
         title: 'Note title',
         body: 'Note body text.',
@@ -80,27 +83,6 @@ export class Note{
         this.status1 = true;
     }
 
-    toggleStatus():void{
-        console.log('status toggled');
-        var statusIndexToReturn = this.notedata.status.index;
-        var statusLen = enumLength(this.noteState);
-
-        // TODO status to return out of range refactor magic numbers
-        if(statusIndexToReturn < 0 || statusIndexToReturn >= statusLen){
-            throw new Error ('Note status out of range!');
-        }
-
-        if(statusIndexToReturn == (statusLen - 1)){
-            statusIndexToReturn = 0
-        } else {
-            statusIndexToReturn += 1;
-        }
-
-        console.log('index'+this.notedata.status.index);
-        this.notedata.status.index = statusIndexToReturn;
-        this.notedata.areUnsavedChanges = true;
-    }
-
     getStatusImagePath(): string {
         var imageSrcToReturn:string = this.placeholderImage;
         var statusIndex:number = 0;
@@ -121,19 +103,28 @@ export class Note{
         return imageSrcToReturn;
     }
 
-    toggleDeleteNote():void {
-        if(this.notedata.isDeleted){
-            this.notedata.isDeleted = false;
-            console.log('delete cancel!');
-        } else {
-            this.notedata.isDeleted = true;
-            console.log('note is deleted!');
+    toggleState():void{
+        console.log('status toggled');
+        var statusIndexToReturn = this.notedata.status.index;
+        var statusLen = enumLength(this.noteState);
+
+        // TODO status to return out of range refactor magic numbers
+        if(statusIndexToReturn < 0 || statusIndexToReturn >= statusLen){
+            throw new Error ('Note status out of range!');
         }
 
+        if(statusIndexToReturn == (statusLen - 1)){
+            statusIndexToReturn = 0
+        } else {
+            statusIndexToReturn += 1;
+        }
+
+        console.log('index'+this.notedata.status.index);
+        this.notedata.status.index = statusIndexToReturn;
         this.notedata.areUnsavedChanges = true;
     }
 
-    toggleEditNote():void {
+    toggleEdit():void {
         if(this.notedata.isInEditMode){
             this.notedata.isInEditMode = false;
             console.log('note is not in edit mode');
@@ -145,7 +136,22 @@ export class Note{
         this.notedata.areUnsavedChanges = true;
     }
 
-    saveNote():void {
+    toggleDelete():void {
+        if(this.notedata.isDeleted){
+            this.notedata.isDeleted = false;
+            console.log('delete cancel!');
+        } else {
+            this.notedata.isDeleted = true;
+            console.log('note is deleted!');
+        }
+
+        this.notedata.areUnsavedChanges = true;
+    }
+
+    toggleColor(): void {
+    }
+
+    save(): Note {
         // TODO note save to database
 
         // TODO Reload new note data
@@ -153,5 +159,14 @@ export class Note{
         this.notedata.areUnsavedChanges = false;
 
         console.log('Note changes saved to database!');
+
+        return undefined;
+    }
+
+
+
+    delete(): Note {
+
+        return undefined;
     }
 }

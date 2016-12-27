@@ -24,4 +24,4 @@ var SortEnumUnusedClass = (function () {
     return SortEnumUnusedClass;
 }());
 exports.SortEnumUnusedClass = SortEnumUnusedClass;
-//# sourceMappingURL=sort.enumaration.js.map
+//# sourceMappingURL=sort.enum.js.map
