@@ -20,7 +20,7 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'home',
             templateUrl: './app/components/main/home.component.html',
-            styles: ["\n    "]
+            styleUrls: ['./app/components/main/home-component-css.css']
         }), 
         __metadata('design:paramtypes', [])
     ], HomeComponent);

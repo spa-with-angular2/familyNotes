@@ -6,8 +6,7 @@ import { UserComponent } from '../users/user.component';
 @Component ({
     selector: 'home',
     templateUrl: './app/components/main/home.component.html',
-    styles: [`
-    `]
+    styleUrls: ['./app/components/main/home-component-css.css']
 })
 export class HomeComponent{
     userCtrl: UserComponent;

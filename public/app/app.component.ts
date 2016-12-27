@@ -19,7 +19,6 @@ import { Component } from '@angular/core';
 		main {
 			min-height: 100px;
 			backgroud-color: white;
-			border: 1px solid green;
 		}	
 		
 		footer{
