@@ -37,15 +37,15 @@
             <img class="status-image img-polaroid"
                  src={{getStatusImagePath()}}
                  alt="status image"
-                 (click)="toggleStatus()"
+                 (click)="toggleState()"
             >
-            <button *ngIf="notedata.areUnsavedChanges" type="button" class="btn btn-xs btn-success" (click)="saveNote()"><i class="icon-save"></i> Save</button>
-            <button *ngIf="!notedata.areUnsavedChanges" type="button" class="btn btn-xs btn-default" (click)="saveNote()"><i class="icon-save"></i> Save</button>
-            <button type="button" class="btn btn-xs btn-default" (click)="toggleEditNote()"><i class="icon-pencil"></i>
+            <button *ngIf="notedata.areUnsavedChanges" type="button" class="btn btn-xs btn-success" (click)="save()"><i class="icon-save"></i> Save</button>
+            <button *ngIf="!notedata.areUnsavedChanges" type="button" class="btn btn-xs btn-default" (click)="save()"><i class="icon-save"></i> Save</button>
+            <button type="button" class="btn btn-xs btn-default" (click)="toggleEdit()"><i class="icon-pencil"></i>
                 <span *ngIf="notedata.isInEditMode">Done editing</span>
                 <span *ngIf="!notedata.isInEditMode">Edit</span>
             </button>
-            <button type="button" class="btn btn-xs btn-danger" (click)="toggleDeleteNote()">
+            <button type="button" class="btn btn-xs btn-danger" (click)="toggleDelete()">
                 <span *ngIf="notedata.isDeleted">Cancel delete</span>
                 <span *ngIf="!notedata.isDeleted">Delete</span>
             </button>
