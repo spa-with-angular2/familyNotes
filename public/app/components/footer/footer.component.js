@@ -16,7 +16,7 @@ var FooterComponent = (function () {
         core_1.Component({
             selector: 'footer',
             templateUrl: './app/components/footer/footer.component.html',
-            styles: ["\n        span.active {\n\t\t\tbackground-color: gray;\n        }\t\t\n    "]
+            styleUrls: ['./app/components/footer/footer-component.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], FooterComponent);

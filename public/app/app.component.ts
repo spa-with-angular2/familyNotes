@@ -10,24 +10,9 @@ import { Component } from '@angular/core';
 			margin: 0;
 			padding: 0;
 		}
-		
-		nav{
-			background-color: dimgray; 
-			border: 1px solid green;
-		}
-		
 		main {
 			min-height: 100px;
-			backgroud-color: white;
 		}	
-		
-		footer{
-			border: 1px solid black;
-		}
-		
-		footer span.active {
-			background-color: gray;
-		}
 	`]
 
 })

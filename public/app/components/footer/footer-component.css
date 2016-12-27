@@ -1,0 +1,31 @@
+ p {
+     display: inline-block;
+     text-align: center;
+     margin: 10px;
+     color: papayawhip;
+ }
+ 
+ .wrap {
+     background-color: #3E3F3A;
+     min-height: 45px;
+ }
+ 
+ a {
+     display: inline-block;
+     color: grey;
+     text-decoration: none;
+     margin: 10px;
+     float: right;
+ }
+ 
+ @media only screen and (max-width: 480px) {
+     a {
+         display: none;
+     }
+ }
+ 
+ @media only screen and (max-width: 480px) {
+     p {
+         display: block;
+     }
+ }
