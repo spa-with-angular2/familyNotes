@@ -1,8 +1,7 @@
 import { User } from '../user.model';
-import { Note} from '../note.model';
 import { NoteStatesEnum } from '../../enumerations/note-states.enum';
 
-export interface INote
+export interface NoteInterface
 {
     title: string;
     body: number;

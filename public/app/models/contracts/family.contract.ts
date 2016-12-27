@@ -1,7 +1,6 @@
-import { IStringArray } from './string-array.contract';
 import { User } from '../user.model';
 
-export interface IFamily
+export interface FamilyInterface
 {
     name: string;
     creator: User;

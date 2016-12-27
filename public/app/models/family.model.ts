@@ -1,11 +1,11 @@
-import { IFamily } from './contracts/family.contract';
+import { FamilyInterface } from './contracts/family.contract';
 import { User } from './user.model';
 import { UserComponent } from '../components/users/user.component';
 
 const noFamilyPictureUrl: string = '../assets/images/default-family.png';
 const mainFamilyPictureIndex: number = 0;
 
-export class Family implements IFamily{
+export class Family implements FamilyInterface{
     private id: string;
 
     public name: string;

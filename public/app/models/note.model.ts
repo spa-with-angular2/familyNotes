@@ -1,7 +1,8 @@
+import { NoteInterface } from './contracts/note.contract';
 import { NoteStatesEnum } from '../enumerations/note-states.enum';
 import { User } from './user.model';
 
-export class Note{
+export class Note implements NoteInterface{
     private id: string;
 
     public title: string;
