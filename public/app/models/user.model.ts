@@ -1,9 +1,9 @@
-import { IUser } from './contracts/user.contract';
+import { UserInterface } from './contracts/user.contract';
 
 const noProfilePictureUrl: string = '../assets/images/default-user.png';
 const mainProfilePictureIndex: number = 0;
 
-export class User implements IUser{
+export class User implements UserInterface{
     private id: string;
 
     public firstName: string;
@@ -63,6 +63,10 @@ export class User implements IUser{
         mainProfilePictureUrlToReturn = this.profilePictures[mainProfilePictureIndex];
 
         return mainProfilePictureUrlToReturn;
+    }
+
+    public geProfilePicturesUrl(): string[] {
+        return undefined;
     }
 
     public hasFamily():boolean {

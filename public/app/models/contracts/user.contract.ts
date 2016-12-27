@@ -1,6 +1,6 @@
 import { IStringArray } from './string-array.contract';
 
-export interface IUser
+export interface UserInterface
 {
     firstName: string;
     lastName: string;
@@ -9,6 +9,8 @@ export interface IUser
     families: IStringArray;
 
     getMainProfilePictureUrl(): string;
+
+    geProfilePicturesUrl(): string[];
 
     getFamilies(): string[];
 

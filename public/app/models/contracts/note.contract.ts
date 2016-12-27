@@ -12,16 +12,4 @@ export interface INote
 
     expireDate: Date;
     color: string;
-
-    toggleState(): void;
-
-    toggleEdit(): void;
-
-    toggleDelete(): void;
-
-    toggleColor(): void;
-
-    save(): Note;
-
-    delete():Note;
 }

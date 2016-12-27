@@ -22,6 +22,9 @@ var User = (function () {
         mainProfilePictureUrlToReturn = this.profilePictures[mainProfilePictureIndex];
         return mainProfilePictureUrlToReturn;
     };
+    User.prototype.geProfilePicturesUrl = function () {
+        return undefined;
+    };
     User.prototype.hasFamily = function () {
         if (this.families == null || this.families == undefined) {
             return false;
