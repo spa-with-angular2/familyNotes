@@ -16,7 +16,7 @@ var NoContentComponent = (function () {
         core_1.Component({
             selector: 'no-content',
             templateUrl: './app/components/error-pages/no-content.component.html',
-            styles: [""]
+            styleUrls: ['./app/components/error-pages/error-page-404.css']
         }), 
         __metadata('design:paramtypes', [])
     ], NoContentComponent);

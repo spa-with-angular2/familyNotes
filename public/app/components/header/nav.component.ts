@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 
 import { NotesComponent } from '../main/notes.component';
 
+
 @Component({
     selector: 'navigation',
     templateUrl: './app/components/header/nav.component.html',
-    styleUrls: ['./app/components/header/nav.css'],
+    styleUrls: ['./app/components/header/nav.css', './app/assets/css/hover.css' ],
     providers: [ NotesComponent]
 })
 
