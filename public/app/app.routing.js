@@ -4,7 +4,7 @@ var home_component_1 = require('./components/main/home.component');
 var notes_component_1 = require('./components/main/notes.component');
 var about_component_1 = require('./components/main/about.component');
 var no_content_component_1 = require('./components/error-pages/no-content.component');
-var profile_component_1 = require('./components/profile/profile.component');
+var profile_component_1 = require('./components/main/profile/profile.component');
 // import {
 //     HomeComponent,
 //     NotesComponent,

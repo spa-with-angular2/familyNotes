@@ -5,7 +5,7 @@ import { HomeComponent } from './components/main/home.component';
 import { NotesComponent } from './components/main/notes.component';
 import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/main/profile/profile.component';
 
 // import {
 //     HomeComponent,

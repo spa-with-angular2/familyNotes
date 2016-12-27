@@ -8058,7 +8058,6 @@ button.close {
 }
 
 .navbar .nav>li>a {
-    font-size: 11px;
     line-height: 22px;
     font-weight: 500;
     text-transform: uppercase
@@ -8243,4 +8242,12 @@ input:focus,
     width: 40px;
     height: 40px;
     margin: 10px;
+}
+
+.hvr-grow {
+    font-size: 13px;
+}
+
+.btn-search{
+    font-size: 13px;
 }

@@ -27,7 +27,7 @@ var home_component_1 = require('./components/main/home.component');
 var note_component_1 = require('./components/main/note.component');
 var notes_component_1 = require('./components/main/notes.component');
 var about_component_1 = require('./components/main/about.component');
-var profile_component_1 = require('./components/profile/profile.component');
+var profile_component_1 = require('./components/main/profile/profile.component');
 // import {
 // 	HomeComponent,
 // 	NotesComponent,
