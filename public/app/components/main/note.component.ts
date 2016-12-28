@@ -67,8 +67,9 @@ export class Note implements NoteComponentInterface{
         this.noteColorsIndexes = EnumUtils.indexes(ColorsEnum);
         this.noteColors = EnumUtils.values(ColorsEnum);
 
-        console.log('noteColorsIndexes ' + this.noteColorsIndexes);
-        console.log('noteColorsValues ' + this.noteColors);
+        // TODO remove commented logs
+        // console.log('noteColorsIndexes ' + this.noteColorsIndexes);
+        // console.log('noteColorsValues ' + this.noteColors);
     }
 
     getStatusImagePath(): string {
@@ -107,7 +108,8 @@ export class Note implements NoteComponentInterface{
             currentStateIndex += 1;
         }
 
-        console.log('index'+this.notedata.status.index);
+        // TODO remove commented logs
+        // console.log('index'+this.notedata.status.index);
         this.notedata.status.index = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     }
@@ -115,7 +117,7 @@ export class Note implements NoteComponentInterface{
     toggleEdit():void {
         if(this.notedata.isInEditMode){
             this.notedata.isInEditMode = false;
-            console.log('note is not in edit mode');
+            console.log('note is in view mode');
         } else {
             this.notedata.isInEditMode = true;
             console.log('note is in edit mode!!');
@@ -152,6 +154,8 @@ export class Note implements NoteComponentInterface{
     }
 
     delete(): Note {
+
+        console.log('Note deleted flag set!');
 
         return undefined;
     }

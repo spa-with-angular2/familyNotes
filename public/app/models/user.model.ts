@@ -15,7 +15,7 @@ export class User implements UserInterface{
     private email: string;
     private profilePictures: string[];
 
-    private username: string;
+    public username: string;
     private passHash: string;
     private salt: string;
     private role: string;
@@ -33,7 +33,7 @@ export class User implements UserInterface{
         // _email: string,
         // _profilePictures: string[],
 
-        // _username: string,
+        _username: string,
         // _passHash: string,
         // _salt: string,
         // _role: string,
@@ -51,7 +51,7 @@ export class User implements UserInterface{
         // this.email = _email;
         // this.profilePictures = this.initProfilePictures(_profilePictures);
         //
-        // this.username = _username;
+        this.username = _username;
         // this.passHash = _passHash;
         // this.fbId = _fbId;
         // this.fbToken = _fbToken;

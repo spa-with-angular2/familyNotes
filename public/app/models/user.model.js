@@ -2,7 +2,10 @@
 var noProfilePictureUrl = '../assets/images/default-user.png';
 var mainProfilePictureIndex = 0;
 var User = (function () {
-    function User(_id, _firstName, _lastName, _age, _gender) {
+    function User(_id, _firstName, _lastName, _age, _gender, 
+        // _email: string,
+        // _profilePictures: string[],
+        _username) {
         this.id = _id;
         this.firstName = _firstName;
         this.lastName = _lastName;
@@ -12,7 +15,7 @@ var User = (function () {
         // this.email = _email;
         // this.profilePictures = this.initProfilePictures(_profilePictures);
         //
-        // this.username = _username;
+        this.username = _username;
         // this.passHash = _passHash;
         // this.fbId = _fbId;
         // this.fbToken = _fbToken;

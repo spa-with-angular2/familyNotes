@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import { HomeComponent } from './components/main/home.component';
 import { NotesComponent } from './components/main/notes.component';
+import { AddNoteComponent } from './components/main/add-note.component';
 import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
@@ -27,6 +28,10 @@ const appRoutes: Routes = [
     {
         path: 'notes',
         component: NotesComponent
+    },
+    {
+        path: 'add-note',
+        component: AddNoteComponent
     },
     {
         path: 'about',

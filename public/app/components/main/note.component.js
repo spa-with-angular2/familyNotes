@@ -40,8 +40,9 @@ var Note = (function () {
         this.status1 = true;
         this.noteColorsIndexes = enum_utilities_1.EnumUtils.indexes(colors_enum_1.ColorsEnum);
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
-        console.log('noteColorsIndexes ' + this.noteColorsIndexes);
-        console.log('noteColorsValues ' + this.noteColors);
+        // TODO remove commented logs
+        // console.log('noteColorsIndexes ' + this.noteColorsIndexes);
+        // console.log('noteColorsValues ' + this.noteColors);
     }
     Note.prototype.getStatusImagePath = function () {
         var imageUrlToReturn = this.placeholderImage;
@@ -77,14 +78,15 @@ var Note = (function () {
         else {
             currentStateIndex += 1;
         }
-        console.log('index' + this.notedata.status.index);
+        // TODO remove commented logs
+        // console.log('index'+this.notedata.status.index);
         this.notedata.status.index = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     };
     Note.prototype.toggleEdit = function () {
         if (this.notedata.isInEditMode) {
             this.notedata.isInEditMode = false;
-            console.log('note is not in edit mode');
+            console.log('note is in view mode');
         }
         else {
             this.notedata.isInEditMode = true;
@@ -113,6 +115,7 @@ var Note = (function () {
         return undefined;
     };
     Note.prototype.delete = function () {
+        console.log('Note deleted flag set!');
         return undefined;
     };
     __decorate([

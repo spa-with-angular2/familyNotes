@@ -6,7 +6,7 @@ export class Note implements NoteInterface{
     private id: string;
 
     public title: string;
-    public body: number;
+    public body: string;
     public author: User;
     public state: NoteStatesEnum;
     public postedDate: Date;
@@ -22,7 +22,7 @@ export class Note implements NoteInterface{
         // _id: string,
 
         _title: string,
-        _body: number,
+        _body: string,
         _author: User,
         _state: NoteStatesEnum,
         // _postedDate: Date,

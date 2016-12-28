@@ -26,6 +26,7 @@ var no_content_component_1 = require('./components/error-pages/no-content.compon
 var home_component_1 = require('./components/main/home.component');
 var note_component_1 = require('./components/main/note.component');
 var notes_component_1 = require('./components/main/notes.component');
+var add_note_component_1 = require('./components/main/add-note.component');
 var about_component_1 = require('./components/main/about.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
@@ -47,6 +48,7 @@ var AppModule = (function () {
                 home_component_1.HomeComponent,
                 note_component_1.Note,
                 notes_component_1.NotesComponent,
+                add_note_component_1.AddNoteComponent,
                 //UserComponent,
                 nav_component_1.NavComponent,
                 footer_component_1.FooterComponent,

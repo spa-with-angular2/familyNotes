@@ -2,6 +2,7 @@
 var router_1 = require('@angular/router');
 var home_component_1 = require('./components/main/home.component');
 var notes_component_1 = require('./components/main/notes.component');
+var add_note_component_1 = require('./components/main/add-note.component');
 var about_component_1 = require('./components/main/about.component');
 var no_content_component_1 = require('./components/error-pages/no-content.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
@@ -24,6 +25,10 @@ var appRoutes = [
     {
         path: 'notes',
         component: notes_component_1.NotesComponent
+    },
+    {
+        path: 'add-note',
+        component: add_note_component_1.AddNoteComponent
     },
     {
         path: 'about',

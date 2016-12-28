@@ -4,7 +4,7 @@ import { NoteStatesEnum } from '../../enumerations/note-states.enum';
 export interface NoteInterface
 {
     title: string;
-    body: number;
+    body: string;
     author: User;
     state: NoteStatesEnum;
     postedDate: Date;

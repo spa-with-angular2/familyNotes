@@ -17,6 +17,7 @@ import { NoContentComponent } from './components/error-pages/no-content.componen
 import { HomeComponent } from './components/main/home.component';
 import { Note } from './components/main/note.component';
 import { NotesComponent } from './components/main/notes.component';
+import { AddNoteComponent } from './components/main/add-note.component';
 import { UserComponent } from './components/users/user.component';
 
 import { AboutComponent } from './components/main/about.component';
@@ -38,6 +39,7 @@ import { LoginComponent } from './components/main/login/login.component';
 		HomeComponent,
 		Note,
 		NotesComponent,
+		AddNoteComponent,
 		//UserComponent,
 		NavComponent,
 		FooterComponent,
