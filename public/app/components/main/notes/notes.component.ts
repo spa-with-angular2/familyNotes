@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component ({
     selector: 'notes-container',
-    templateUrl: './app/components/main/notes.component.html',
+    templateUrl: './app/components/main/notes/notes.component.html',
     styles: [``]
 })
 export class NotesComponent{

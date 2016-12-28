@@ -24,9 +24,9 @@ var no_content_component_1 = require('./components/error-pages/no-content.compon
 // 	NoContentComponent
 // } from './components';
 var home_component_1 = require('./components/main/home.component');
-var note_component_1 = require('./components/main/note.component');
-var notes_component_1 = require('./components/main/notes.component');
-var add_note_component_1 = require('./components/main/add-note.component');
+var note_component_1 = require('./components/main/notes/note.component');
+var notes_component_1 = require('./components/main/notes/notes.component');
+var add_note_component_1 = require('./components/main/notes/add-note.component');
 var about_component_1 = require('./components/main/about.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');

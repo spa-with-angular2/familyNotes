@@ -9,9 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var colors_enum_1 = require('../../enumerations/colors.enum');
-var note_states_enum_1 = require('../../enumerations/note-states.enum');
-var enum_utilities_1 = require('../../enumerations/utilities/enum.utilities');
+var colors_enum_1 = require('../../../enumerations/colors.enum');
+var note_states_enum_1 = require('../../../enumerations/note-states.enum');
+var enum_utilities_1 = require('../../../enumerations/utilities/enum.utilities');
 // TODO extract function
 function isNullOrUndefined(obj) {
     return typeof obj === "undefined" || obj === null;
@@ -125,7 +125,7 @@ var Note = (function () {
     Note = __decorate([
         core_1.Component({
             selector: 'single-note',
-            templateUrl: './app/components/main/note.component.html',
+            templateUrl: './app/components/main/notes/note.component.html',
             styles: ["\n        .status-image{\n            min-width: 16px;\n            max-width: 20px;\n            cursor: pointer;\n        }\n        .bg-lightgrey {\n            background-color: lightgrey;\n        }\n        .bg-orange {\n            background-color: orange;\n        }\n        .bg-green {\n            background-color: green;\n        }\n        .bg-red {\n            background-color: red;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [])

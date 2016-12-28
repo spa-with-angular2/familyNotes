@@ -15,9 +15,9 @@ import { NoContentComponent } from './components/error-pages/no-content.componen
 // 	NoContentComponent
 // } from './components';
 import { HomeComponent } from './components/main/home.component';
-import { Note } from './components/main/note.component';
-import { NotesComponent } from './components/main/notes.component';
-import { AddNoteComponent } from './components/main/add-note.component';
+import { Note } from './components/main/notes/note.component';
+import { NotesComponent } from './components/main/notes/notes.component';
+import { AddNoteComponent } from './components/main/notes/add-note.component';
 import { UserComponent } from './components/users/user.component';
 
 import { AboutComponent } from './components/main/about.component';

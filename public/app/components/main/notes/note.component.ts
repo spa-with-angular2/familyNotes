@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { NoteComponentInterface } from './contracts/note-component.contract';
-import { ColorsEnum } from '../../enumerations/colors.enum';
-import { NoteStatesEnum } from '../../enumerations/note-states.enum';
-import { EnumUtils } from '../../enumerations/utilities/enum.utilities';
+import { NoteComponentInterface } from '../contracts/note-component.contract';
+import { ColorsEnum } from '../../../enumerations/colors.enum';
+import { NoteStatesEnum } from '../../../enumerations/note-states.enum';
+import { EnumUtils } from '../../../enumerations/utilities/enum.utilities';
 
 // TODO extract function
 function isNullOrUndefined(obj : any) : obj is null | undefined {
@@ -12,7 +12,7 @@ function isNullOrUndefined(obj : any) : obj is null | undefined {
 
 @Component ({
     selector: 'single-note',
-    templateUrl: './app/components/main/note.component.html',
+    templateUrl: './app/components/main/notes/note.component.html',
     styles: [`
         .status-image{
             min-width: 16px;

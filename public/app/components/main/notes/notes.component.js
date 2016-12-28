@@ -42,7 +42,7 @@ var NotesComponent = (function () {
     NotesComponent = __decorate([
         core_1.Component({
             selector: 'notes-container',
-            templateUrl: './app/components/main/notes.component.html',
+            templateUrl: './app/components/main/notes/notes.component.html',
             styles: [""]
         }), 
         __metadata('design:paramtypes', [])

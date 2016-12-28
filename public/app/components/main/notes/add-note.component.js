@@ -47,8 +47,8 @@ var AddNoteComponent = (function () {
     AddNoteComponent = __decorate([
         core_1.Component({
             selector: 'add-note-component',
-            templateUrl: './app/components/main/add-note.component.html',
-            styles: ["\n        label{\n            display: inline-block;\n            width: 250px;\n        }\n        \n        input   {\n            width: 350px;\n        }\n        textarea   {\n            width: 350px;\n        }\n        \n        .ng-invalid{\n            border: 1px solid red;\n        }\n    "]
+            templateUrl: './app/components/main/notes/add-note.component.html',
+            styles: ["\n        label{\n            display: inline-block;\n            width: 150px;\n        }\n        \n        input   {\n            width: 350px;\n        }\n        textarea   {\n            width: 350px;\n        }\n        \n        .ng-invalid{\n            border: 1px solid red;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [router_1.Router])
     ], AddNoteComponent);

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NotesComponent } from '../main/notes.component';
+import { NotesComponent } from '../main/notes/notes.component';
 
 
 @Component({

@@ -2,8 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import { HomeComponent } from './components/main/home.component';
-import { NotesComponent } from './components/main/notes.component';
-import { AddNoteComponent } from './components/main/add-note.component';
+import { NotesComponent } from './components/main/notes/notes.component';
+import { AddNoteComponent } from './components/main/notes/add-note.component';
 import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
 import { ProfileComponent } from './components/main/profile/profile.component';

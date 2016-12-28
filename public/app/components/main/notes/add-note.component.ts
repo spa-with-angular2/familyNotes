@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Note } from '../../models/note.model';
+import { Note } from '../../../models/note.model';
 
 function addDays(date: Date, days: number): Date {
     console.log('adding ' + days + ' days');
@@ -13,11 +13,11 @@ function addDays(date: Date, days: number): Date {
 
 @Component ({
     selector: 'add-note-component',
-    templateUrl: './app/components/main/add-note.component.html',
+    templateUrl: './app/components/main/notes/add-note.component.html',
     styles: [`
         label{
             display: inline-block;
-            width: 250px;
+            width: 150px;
         }
         
         input   {
