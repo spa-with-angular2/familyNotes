@@ -1,7 +1,8 @@
-<form action="" #addNoteForm="ngForm" (onSubmit)="onSubmit()">
+<form #addNoteForm="ngForm" (ngSubmit)="onSubmit()">
+<!--<form (ngSubmit)="onSubmit()" #addNoteForm="ngForm">-->
     <div>
-        <label for="title">Title</label>
-        <input type="text" id="title"
+        <label for="input-title">Title</label>
+        <input type="text" id="input-title" name="input-title"
             ngControl="title"
             [(ngModel)]="newNote.title"
             required
@@ -9,33 +10,48 @@
     </div>
 
     <div>
-        <label for="body">Body Text</label>
-        <input type="text" id="body"
+        <label for="input-body">Body Text</label>
+        <textarea rows="5" type="text" id="input-body" name="input-body"
                ngControl="body"
                [(ngModel)]="newNote.body"
                required
-        >
+        ></textarea>
     </div>
 
     <div>
-        <label for="expireDate">Expire Date</label>
-        <input type="text" id="expireDate"
+        <button type="button" class="btn btn-xs btn-default" (click)="toggleShowMoreOptions()"><i class="icon-pencil"></i>
+            <span *ngIf="showMoreOptions">Hide more options</span>
+            <span *ngIf="!showMoreOptions">Show more options</span>
+        </button>
+    </div>
+
+    <div *ngIf="showMoreOptions">
+        <label for="input-expire-date">Expire Date</label>
+        <input type="text" id="input-expire-date" name="input-expire-date"
                ngControl="expireDate"
                [(ngModel)]="newNote.expireDate"
-               required
         >
     </div>
 
-    <div>
-        <label for="color">Note Color</label>
-        <input type="text" id="color"
+    <div *ngIf="showMoreOptions">
+        <label for="input-color">Note Color</label>
+        <input type="text" id="input-color" name="input-color"
                ngControl="color"
                [(ngModel)]="newNote.color"
-               required
         >
     </div>
 
-    <button type="submit">Create Note</button>
-
+    <button type="submit" class="btn btn-default" [disabled]="!addNoteForm.form.valid">Create Note</button>
 
 </form>
+
+<div class="panel panel-default">
+    <div class="panel-heading"
+         [ngClass]="'bg-lightgrey'"
+    >
+        <h3 class="panel-title"><strong>{{newNote.title}}</strong></h3>
+    </div>
+    <div class="panel-body">{{newNote.body}}</div>
+    <div class="panel-body">{{newNote.expireDate}}</div>
+    <div class="panel-body">{{newNote.color}}</div>
+</div>
