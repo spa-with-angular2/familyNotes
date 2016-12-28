@@ -6,6 +6,7 @@ import { NotesComponent } from './components/main/notes.component';
 import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
+import { LoginComponent } from './components/main/login/login.component';
 
 // import {
 //     HomeComponent,
@@ -32,9 +33,15 @@ const appRoutes: Routes = [
         component: AboutComponent
     },
     {
-        path: 'profile'
+        path: 'profile',
         component: ProfileComponent
-    }
+    },
+     {
+        path: 'login',
+        component: LoginComponent
+    },
+
+
     // {
     //     path: 'detail', loadChildren: () => System.import('./+detail')
     //     .then((comp: any) => comp.default),

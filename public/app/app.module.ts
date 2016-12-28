@@ -21,6 +21,7 @@ import { UserComponent } from './components/users/user.component';
 
 import { AboutComponent } from './components/main/about.component';
 import { ProfileComponent } from './components/main/profile/profile.component'; 
+import { LoginComponent } from './components/main/login/login.component';
  
 // import {
 // 	HomeComponent,
@@ -42,7 +43,8 @@ import { ProfileComponent } from './components/main/profile/profile.component';
 		FooterComponent,
 		NoContentComponent,
 		AboutComponent,
-		ProfileComponent
+		ProfileComponent,
+		LoginComponent
 
 	],
 	providers:[],
