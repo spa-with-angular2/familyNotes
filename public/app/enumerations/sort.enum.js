@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 (function (SortEnum) {
-    SortEnum[SortEnum["Asc"] = "Asc"] = "Asc";
-    SortEnum[SortEnum["Desc"] = "Desc"] = "Desc";
+    SortEnum[SortEnum["Asc"] = 0] = "Asc";
+    SortEnum[SortEnum["Desc"] = 1] = "Desc";
 })(exports.SortEnum || (exports.SortEnum = {}));
 var SortEnum = exports.SortEnum;
 var SortEnumUnusedClass = (function () {

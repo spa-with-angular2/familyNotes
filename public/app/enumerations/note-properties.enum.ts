@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 export enum NotePropertiesEnum {
-    Title = <any>'Title',
-    Body = <any>'Body',
-    State = <any>'State'
+    Title,
+    Body,
+    State
 }
 
 @Injectable()

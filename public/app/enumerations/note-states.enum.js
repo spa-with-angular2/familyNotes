@@ -9,12 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// export enum NoteStatesEnum {
-//     Empty = <any>'Empty',
-//     Todo = <any>'Todo',
-//     Done = <any>'Done',
-//     NotDone = <any>'NotDone'
-// }
 (function (NoteStatesEnum) {
     NoteStatesEnum[NoteStatesEnum["Empty"] = 0] = "Empty";
     NoteStatesEnum[NoteStatesEnum["Todo"] = 1] = "Todo";

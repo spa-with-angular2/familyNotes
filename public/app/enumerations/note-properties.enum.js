@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 (function (NotePropertiesEnum) {
-    NotePropertiesEnum[NotePropertiesEnum["Title"] = 'Title'] = "Title";
-    NotePropertiesEnum[NotePropertiesEnum["Body"] = 'Body'] = "Body";
-    NotePropertiesEnum[NotePropertiesEnum["State"] = 'State'] = "State";
+    NotePropertiesEnum[NotePropertiesEnum["Title"] = 0] = "Title";
+    NotePropertiesEnum[NotePropertiesEnum["Body"] = 1] = "Body";
+    NotePropertiesEnum[NotePropertiesEnum["State"] = 2] = "State";
 })(exports.NotePropertiesEnum || (exports.NotePropertiesEnum = {}));
 var NotePropertiesEnum = exports.NotePropertiesEnum;
 var NotePropertiesEnumUnusedClass = (function () {
