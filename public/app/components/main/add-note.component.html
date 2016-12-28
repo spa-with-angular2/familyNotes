@@ -1,0 +1,41 @@
+<form action="" #addNoteForm="ngForm" (onSubmit)="onSubmit()">
+    <div>
+        <label for="title">Title</label>
+        <input type="text" id="title"
+            ngControl="title"
+            [(ngModel)]="newNote.title"
+            required
+        >
+    </div>
+
+    <div>
+        <label for="body">Body Text</label>
+        <input type="text" id="body"
+               ngControl="body"
+               [(ngModel)]="newNote.body"
+               required
+        >
+    </div>
+
+    <div>
+        <label for="expireDate">Expire Date</label>
+        <input type="text" id="expireDate"
+               ngControl="expireDate"
+               [(ngModel)]="newNote.expireDate"
+               required
+        >
+    </div>
+
+    <div>
+        <label for="color">Note Color</label>
+        <input type="text" id="color"
+               ngControl="color"
+               [(ngModel)]="newNote.color"
+               required
+        >
+    </div>
+
+    <button type="submit">Create Note</button>
+
+
+</form>
