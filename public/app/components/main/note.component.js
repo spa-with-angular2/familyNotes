@@ -9,28 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var State;
-(function (State) {
-    State[State["Empty"] = 0] = "Empty";
-    State[State["Todo"] = 1] = "Todo";
-    State[State["Done"] = 2] = "Done";
-    State[State["NotDone"] = 3] = "NotDone";
-})(State || (State = {}));
+var colors_enum_1 = require('../../enumerations/colors.enum');
+var note_states_enum_1 = require('../../enumerations/note-states.enum');
+var enum_utilities_1 = require('../../enumerations/utilities/enum.utilities');
 // TODO extract function
 function isNullOrUndefined(obj) {
     return typeof obj === "undefined" || obj === null;
-}
-function listEnum(enumClass) {
-    var values = [];
-    for (var key in enumClass) {
-        values.push(key);
-    }
-    values.length = values.length / 2;
-    return values;
-}
-function enumLength(enumClass) {
-    var values = listEnum(enumClass);
-    return values.length;
 }
 var Note = (function () {
     function Note() {
@@ -52,45 +36,49 @@ var Note = (function () {
         };
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
-        this.noteState = State;
+        this.noteState = note_states_enum_1.NoteStatesEnum;
         this.status1 = true;
+        this.noteColorsIndexes = enum_utilities_1.EnumUtils.indexes(colors_enum_1.ColorsEnum);
+        this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
+        console.log('noteColorsIndexes ' + this.noteColorsIndexes);
+        console.log('noteColorsValues ' + this.noteColors);
     }
     Note.prototype.getStatusImagePath = function () {
-        var imageSrcToReturn = this.placeholderImage;
-        var statusIndex = 0;
+        var imageUrlToReturn = this.placeholderImage;
+        var currentStateIndex = note_states_enum_1.NoteStatesEnum.Empty;
         if (!isNullOrUndefined(this.notedata.status.index)) {
-            statusIndex = this.notedata.status.index;
+            currentStateIndex = this.notedata.status.index;
         }
-        if (statusIndex == this.noteState.Empty) {
-            imageSrcToReturn = this.iconsPath + 'note-state-empty.png';
+        if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Empty) {
+            imageUrlToReturn = this.iconsPath + 'note-state-empty.png';
         }
-        else if (statusIndex == this.noteState.Todo) {
-            imageSrcToReturn = this.iconsPath + 'note-state-todo.png';
+        else if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Todo) {
+            imageUrlToReturn = this.iconsPath + 'note-state-todo.png';
         }
-        else if (statusIndex == this.noteState.Done) {
-            imageSrcToReturn = this.iconsPath + 'note-state-done.png';
+        else if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Done) {
+            imageUrlToReturn = this.iconsPath + 'note-state-done.png';
         }
-        else if (statusIndex == this.noteState.NotDone) {
-            imageSrcToReturn = this.iconsPath + 'note-state-not-done.png';
+        else if (currentStateIndex === note_states_enum_1.NoteStatesEnum.NotDone) {
+            imageUrlToReturn = this.iconsPath + 'note-state-not-done.png';
         }
-        return imageSrcToReturn;
+        return imageUrlToReturn;
     };
     Note.prototype.toggleState = function () {
-        console.log('status toggled');
-        var statusIndexToReturn = this.notedata.status.index;
-        var statusLen = enumLength(this.noteState);
+        console.log('state toggled');
+        var currentStateIndex = this.notedata.status.index;
+        var statesLen = enum_utilities_1.EnumUtils.values(this.noteState).length;
         // TODO status to return out of range refactor magic numbers
-        if (statusIndexToReturn < 0 || statusIndexToReturn >= statusLen) {
+        if (currentStateIndex < 0 || currentStateIndex >= statesLen) {
             throw new Error('Note status out of range!');
         }
-        if (statusIndexToReturn == (statusLen - 1)) {
-            statusIndexToReturn = 0;
+        if (currentStateIndex == (statesLen - 1)) {
+            currentStateIndex = 0;
         }
         else {
-            statusIndexToReturn += 1;
+            currentStateIndex += 1;
         }
         console.log('index' + this.notedata.status.index);
-        this.notedata.status.index = statusIndexToReturn;
+        this.notedata.status.index = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     };
     Note.prototype.toggleEdit = function () {

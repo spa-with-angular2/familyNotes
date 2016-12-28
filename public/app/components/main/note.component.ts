@@ -1,32 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { NoteComponentInterface } from './contracts/note-component.contract';
 
-enum State {
-    Empty = 0,
-    Todo = 1,
-    Done = 2,
-    NotDone = 3
-}
+import { NoteComponentInterface } from './contracts/note-component.contract';
+import { ColorsEnum } from '../../enumerations/colors.enum';
+import { NoteStatesEnum } from '../../enumerations/note-states.enum';
+import { EnumUtils } from '../../enumerations/utilities/enum.utilities';
 
 // TODO extract function
 function isNullOrUndefined(obj : any) : obj is null | undefined {
     return typeof obj === "undefined" || obj === null;
-}
-
-function listEnum(enumClass:any) {
-    var values = [];
-    for (var key in enumClass) {
-        values.push(key);
-    }
-    values.length = values.length / 2;
-
-    return values;
-}
-
-function enumLength(enumClass:any){
-    var values = listEnum(enumClass);
-
-    return values.length;
 }
 
 @Component ({
@@ -75,52 +56,59 @@ export class Note implements NoteComponentInterface{
     placeholderImage:string;
     noteState:any;
     status1: boolean;
+    noteColors: string[];
+    noteColorsIndexes: number[];
 
     constructor(){
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
-        this.noteState = State;
+        this.noteState = NoteStatesEnum;
         this.status1 = true;
+        this.noteColorsIndexes = EnumUtils.indexes(ColorsEnum);
+        this.noteColors = EnumUtils.values(ColorsEnum);
+
+        console.log('noteColorsIndexes ' + this.noteColorsIndexes);
+        console.log('noteColorsValues ' + this.noteColors);
     }
 
     getStatusImagePath(): string {
-        var imageSrcToReturn:string = this.placeholderImage;
-        var statusIndex:number = 0;
+        var imageUrlToReturn:string = this.placeholderImage;
+        var currentStateIndex: number = NoteStatesEnum.Empty;
         if(!isNullOrUndefined(this.notedata.status.index)){
-            statusIndex = this.notedata.status.index;
+            currentStateIndex = this.notedata.status.index;
         }
 
-        if(statusIndex == this.noteState.Empty ) {
-            imageSrcToReturn = this.iconsPath + 'note-state-empty.png'
-        } else if(statusIndex == this.noteState.Todo){
-            imageSrcToReturn = this.iconsPath + 'note-state-todo.png'
-        } else if(statusIndex == this.noteState.Done){
-            imageSrcToReturn = this.iconsPath + 'note-state-done.png'
-        } else if (statusIndex == this.noteState.NotDone){
-            imageSrcToReturn = this.iconsPath + 'note-state-not-done.png'
+        if(currentStateIndex === NoteStatesEnum.Empty ) {
+            imageUrlToReturn = this.iconsPath + 'note-state-empty.png'
+        } else if(currentStateIndex === NoteStatesEnum.Todo){
+            imageUrlToReturn = this.iconsPath + 'note-state-todo.png'
+        } else if(currentStateIndex === NoteStatesEnum.Done){
+            imageUrlToReturn = this.iconsPath + 'note-state-done.png'
+        } else if (currentStateIndex === NoteStatesEnum.NotDone){
+            imageUrlToReturn = this.iconsPath + 'note-state-not-done.png'
         }
 
-        return imageSrcToReturn;
+        return imageUrlToReturn;
     }
 
     toggleState():void{
-        console.log('status toggled');
-        var statusIndexToReturn = this.notedata.status.index;
-        var statusLen = enumLength(this.noteState);
+        console.log('state toggled');
+        var currentStateIndex = this.notedata.status.index;
+        var statesLen = EnumUtils.values(this.noteState).length;
 
         // TODO status to return out of range refactor magic numbers
-        if(statusIndexToReturn < 0 || statusIndexToReturn >= statusLen){
+        if(currentStateIndex < 0 || currentStateIndex >= statesLen){
             throw new Error ('Note status out of range!');
         }
 
-        if(statusIndexToReturn == (statusLen - 1)){
-            statusIndexToReturn = 0
+        if(currentStateIndex == (statesLen - 1)){
+            currentStateIndex = 0
         } else {
-            statusIndexToReturn += 1;
+            currentStateIndex += 1;
         }
 
         console.log('index'+this.notedata.status.index);
-        this.notedata.status.index = statusIndexToReturn;
+        this.notedata.status.index = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     }
 
@@ -162,8 +150,6 @@ export class Note implements NoteComponentInterface{
 
         return undefined;
     }
-
-
 
     delete(): Note {
 
