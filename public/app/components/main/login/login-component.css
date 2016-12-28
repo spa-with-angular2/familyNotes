@@ -67,11 +67,11 @@ form input {
     font-weight: 300;
 }
 
-form input:-moz-placeholder {
+form input::-moz-placeholder {
     color: white;
 }
 
-form input:-webkit-input-placeholder {
+form input::-webkit-input-placeholder {
     color: white;
 }
 
