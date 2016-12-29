@@ -40,15 +40,16 @@ const DEFAULT_STATE_INDEX: number = NoteStatesEnum.Todo;
 })
 export class NoteComponent implements NoteComponentInterface, OnInit{
 
-    @Input() notedata: Note;
+    @Input() public notedata: Note;
 
-    iconsPath:string;
-    placeholderImage:string;
+    public iconsPath: string;
+    public placeholderImage: string;
+    public stateImageUrl: string;
 
-    noteStatesEnum: any;
-    noteStates: string[];
-    colorsEnum:any;
-    noteColors: string[];
+    public noteStatesEnum: any;
+    public noteStates: string[];
+    public colorsEnum:any;
+    public noteColors: string[];
 
     public showMoreOptions: boolean;
 
@@ -57,14 +58,14 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
 
     ngOnInit(): void {
 
-
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
+        this.stateImageUrl = this.updateStateImageUrl();
 
         this.noteStatesEnum = NoteStatesEnum;
         this.noteStates = EnumUtils.values(NoteStatesEnum);
-        this.notedata.stateIndex = DEFAULT_STATE_INDEX;
-
+        this.notedata.state.index = DEFAULT_STATE_INDEX;
+        this.notedata.state.name = this.noteStates[DEFAULT_STATE_INDEX];
         this.colorsEnum = ColorsEnum;
         this.noteColors = EnumUtils.values(ColorsEnum);
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
@@ -74,14 +75,18 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
 
     changeColor(color: string): void {
         this.notedata.color = color;
-        console.log('noteColor '+ this.notedata.color);
+    }
+    changeNoteState(state: string): void {
+        this.notedata.state.index = this.noteStates.indexOf(state);
+        this.notedata.state.name = state;
+        this.stateImageUrl = this.updateStateImageUrl();
     }
 
-    getStateImagePath(): string {
+    updateStateImageUrl(): string {
         var imageUrlToReturn:string = this.placeholderImage;
         var currentStateIndex: number = DEFAULT_STATE_INDEX;
-        if(!isNullOrUndefined(this.notedata.stateIndex)){
-            currentStateIndex = this.notedata.stateIndex;
+        if(!isNullOrUndefined(this.notedata.state.index)){
+            currentStateIndex = this.notedata.state.index;
         }
 
         if(currentStateIndex === NoteStatesEnum.Todo){
@@ -93,29 +98,6 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
         }
 
         return imageUrlToReturn;
-    }
-
-    toggleState():void{
-        console.log('state toggled');
-        var currentStateIndex = this.notedata.stateIndex;
-        var statesLen = EnumUtils.values(this.noteStatesEnum).length;
-
-        console.log('currentStateIndex '+currentStateIndex);
-        console.log('statesLen '+statesLen);
-
-        // TODO status to return out of range refactor magic numbers
-        if(currentStateIndex < 0 || currentStateIndex >= statesLen){
-            throw new Error ('Note status out of range!');
-        }
-
-        if(currentStateIndex == (statesLen - 1)){
-            currentStateIndex = 0
-        } else {
-            currentStateIndex += 1;
-        }
-
-        this.notedata.stateIndex = currentStateIndex;
-        this.notedata.areUnsavedChanges = true;
     }
 
     toggleEdit():void {
@@ -140,9 +122,6 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
         }
 
         this.notedata.areUnsavedChanges = true;
-    }
-
-    toggleColor(): void {
     }
 
     toggleShowMoreOptions(): void{

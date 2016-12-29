@@ -1,6 +1,7 @@
 import {Note} from "../../../models/note.model";
 import {User} from "../../../models/user.model";
 import {NoteStatesEnum} from "../../../enumerations/note-states.enum";
+import {EnumUtils} from "../../../enumerations/utilities/enum.utilities";
 
 var someUser: any = {
     id: '',
@@ -29,7 +30,10 @@ export const NOTES: Note[] = [
         title: 'Bank',
         body: 'Go to the bank and take the coins for Toni and Veronic',
         author: someUser,
-        stateIndex: NoteStatesEnum.Todo,
+        state: {
+            index: NoteStatesEnum.Todo,
+            name: EnumUtils.values(NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
 
         expireDate: new Date(),
@@ -44,7 +48,10 @@ export const NOTES: Note[] = [
         title: 'Appotheke',
         body: 'Go to the pharmacy and take Nelis pills',
         author: someUser,
-        stateIndex: NoteStatesEnum.Todo,
+        state: {
+            index: NoteStatesEnum.Todo,
+            name: EnumUtils.values(NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
 
         expireDate: new Date(),
@@ -59,7 +66,10 @@ export const NOTES: Note[] = [
         title: 'Maxi Cosi',
         body: 'Put the MaxiCosi for sale in OLX',
         author: someUser,
-        stateIndex: NoteStatesEnum.Todo,
+        state: {
+            index: NoteStatesEnum.Todo,
+            name: EnumUtils.values(NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
 
         expireDate: new Date(),
@@ -74,7 +84,10 @@ export const NOTES: Note[] = [
         title: 'Toni bd',
         body: 'Take wine and present',
         author: someUser,
-        stateIndex: NoteStatesEnum.Todo,
+        state: {
+            index: NoteStatesEnum.Todo,
+            name: EnumUtils.values(NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
 
         expireDate: new Date(),
