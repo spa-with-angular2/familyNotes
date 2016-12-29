@@ -13,6 +13,7 @@ function isNullOrUndefined(obj : any) : obj is null | undefined {
 
 // TODO extract consts
 const DEFAULT_COLOR_INDEX: number = ColorsEnum.Gray;
+const DEFAULT_STATE_INDEX: number = NoteStatesEnum.Todo;
 
 @Component ({
     selector: 'single-note',
@@ -44,9 +45,9 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
     iconsPath:string;
     placeholderImage:string;
 
-    noteStatesEnum:any;
+    noteStatesEnum: any;
+    noteStates: string[];
     colorsEnum:any;
-
     noteColors: string[];
 
     public showMoreOptions: boolean;
@@ -61,25 +62,29 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
 
         this.noteStatesEnum = NoteStatesEnum;
-        this.colorsEnum = ColorsEnum;
+        this.noteStates = EnumUtils.values(NoteStatesEnum);
+        this.notedata.stateIndex = DEFAULT_STATE_INDEX;
 
+        this.colorsEnum = ColorsEnum;
         this.noteColors = EnumUtils.values(ColorsEnum);
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
 
         this.showMoreOptions = false;
     }
 
+    changeColor(color: string): void {
+        this.notedata.color = color;
+        console.log('noteColor '+ this.notedata.color);
+    }
 
-    getStatusImagePath(): string {
+    getStateImagePath(): string {
         var imageUrlToReturn:string = this.placeholderImage;
-        var currentStateIndex: number = NoteStatesEnum.Empty;
+        var currentStateIndex: number = DEFAULT_STATE_INDEX;
         if(!isNullOrUndefined(this.notedata.stateIndex)){
             currentStateIndex = this.notedata.stateIndex;
         }
 
-        if(currentStateIndex === NoteStatesEnum.Empty ) {
-            imageUrlToReturn = this.iconsPath + 'note-state-empty.png'
-        } else if(currentStateIndex === NoteStatesEnum.Todo){
+        if(currentStateIndex === NoteStatesEnum.Todo){
             imageUrlToReturn = this.iconsPath + 'note-state-todo.png'
         } else if(currentStateIndex === NoteStatesEnum.Done){
             imageUrlToReturn = this.iconsPath + 'note-state-done.png'
@@ -88,11 +93,6 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
         }
 
         return imageUrlToReturn;
-    }
-
-    changeColor(color: string): void {
-        this.notedata.color = color;
-        console.log('noteColor '+ this.notedata.color);
     }
 
     toggleState():void{
@@ -114,8 +114,6 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
             currentStateIndex += 1;
         }
 
-        // TODO remove commented logs
-        // console.log('index'+this.notedata.status.index);
         this.notedata.stateIndex = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     }

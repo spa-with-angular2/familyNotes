@@ -19,6 +19,7 @@ function isNullOrUndefined(obj) {
 }
 // TODO extract consts
 var DEFAULT_COLOR_INDEX = colors_enum_1.ColorsEnum.Gray;
+var DEFAULT_STATE_INDEX = note_states_enum_1.NoteStatesEnum.Todo;
 var NoteComponent = (function () {
     function NoteComponent() {
     }
@@ -26,21 +27,24 @@ var NoteComponent = (function () {
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
         this.noteStatesEnum = note_states_enum_1.NoteStatesEnum;
+        this.noteStates = enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum);
+        this.notedata.stateIndex = DEFAULT_STATE_INDEX;
         this.colorsEnum = colors_enum_1.ColorsEnum;
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
         this.showMoreOptions = false;
     };
-    NoteComponent.prototype.getStatusImagePath = function () {
+    NoteComponent.prototype.changeColor = function (color) {
+        this.notedata.color = color;
+        console.log('noteColor ' + this.notedata.color);
+    };
+    NoteComponent.prototype.getStateImagePath = function () {
         var imageUrlToReturn = this.placeholderImage;
-        var currentStateIndex = note_states_enum_1.NoteStatesEnum.Empty;
+        var currentStateIndex = DEFAULT_STATE_INDEX;
         if (!isNullOrUndefined(this.notedata.stateIndex)) {
             currentStateIndex = this.notedata.stateIndex;
         }
-        if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Empty) {
-            imageUrlToReturn = this.iconsPath + 'note-state-empty.png';
-        }
-        else if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Todo) {
+        if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Todo) {
             imageUrlToReturn = this.iconsPath + 'note-state-todo.png';
         }
         else if (currentStateIndex === note_states_enum_1.NoteStatesEnum.Done) {
@@ -50,10 +54,6 @@ var NoteComponent = (function () {
             imageUrlToReturn = this.iconsPath + 'note-state-not-done.png';
         }
         return imageUrlToReturn;
-    };
-    NoteComponent.prototype.changeColor = function (color) {
-        this.notedata.color = color;
-        console.log('noteColor ' + this.notedata.color);
     };
     NoteComponent.prototype.toggleState = function () {
         console.log('state toggled');
@@ -71,8 +71,6 @@ var NoteComponent = (function () {
         else {
             currentStateIndex += 1;
         }
-        // TODO remove commented logs
-        // console.log('index'+this.notedata.status.index);
         this.notedata.stateIndex = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     };

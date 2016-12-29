@@ -39,7 +39,7 @@ export class Note implements NoteInterface{
             this.title = _title;
             this.body = _body;
             this.author = _author;
-            this.stateIndex = NoteStatesEnum.Empty;
+            this.stateIndex = NoteStatesEnum.Todo;
             this.postedDate = new Date();
 
             this.expireDate = _expireDate;
