@@ -15,6 +15,7 @@ require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 var note_model_1 = require("../models/note.model");
 var note_states_enum_1 = require("../enumerations/note-states.enum");
+var mock_notes_1 = require("../components/main/notes/mock-notes");
 var NoteService = (function () {
     function NoteService() {
     }
@@ -35,6 +36,10 @@ var NoteService = (function () {
     NoteService.prototype.insert = function (note) {
         var dbNote;
         // TODO post to server at insert rout
+        Promise.resolve(mock_notes_1.NOTES)
+            .then(function (notes) {
+            notes.push(note);
+        });
         return dbNote;
     };
     NoteService.prototype.update = function (note) {

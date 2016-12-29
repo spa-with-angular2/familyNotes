@@ -6,6 +6,7 @@ import { User } from '../../../models/user.model';
 import {NoteStatesEnum} from "../../../enumerations/note-states.enum";
 
 import {NoteService} from '../../../services/note.service';
+import {NotesComponent} from "./notes.component";
 
 function addDays(date: Date, days: number): Date {
     console.log('adding ' + days + ' days');
@@ -69,9 +70,10 @@ export class AddNoteComponent implements OnInit{
         this.newNote = this._noteService.create(this.noteLikeObject);
 
         // TODO save the note in the database
-        console.log(this.newNote);
+        this._noteService.insert(this.newNote);
 
         // TODO redirect to see notes root
+        //this._router.navigate([NotesRout]);
     }
 
     toggleShowMoreOptions(): void{

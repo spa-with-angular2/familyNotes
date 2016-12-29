@@ -39,8 +39,9 @@ var AddNoteComponent = (function () {
         // TODO create new note with the note.service.create
         this.newNote = this._noteService.create(this.noteLikeObject);
         // TODO save the note in the database
-        console.log(this.newNote);
+        this._noteService.insert(this.newNote);
         // TODO redirect to see notes root
+        //this._router.navigate([NotesRout]);
     };
     AddNoteComponent.prototype.toggleShowMoreOptions = function () {
         console.log('show more options click');

@@ -27,6 +27,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'notes',
+        name: 'NotesRout',
         component: NotesComponent
     },
     {

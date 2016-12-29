@@ -24,6 +24,7 @@ var appRoutes = [
     },
     {
         path: 'notes',
+        name: 'NotesRout',
         component: notes_component_1.NotesComponent
     },
     {

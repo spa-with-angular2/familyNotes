@@ -11,6 +11,7 @@ import {Note} from "../models/note.model";
 import {NoteStatesEnum} from "../enumerations/note-states.enum";
 import {NoteServiceInterface} from "./contracts/note-service.contract";
 import {User} from "../models/user.model";
+import {NOTES} from "../components/main/notes/mock-notes";
 
 @Injectable()
 export class NoteService implements NoteServiceInterface{
@@ -57,6 +58,10 @@ export class NoteService implements NoteServiceInterface{
         var dbNote: Note;
 
         // TODO post to server at insert rout
+        Promise.resolve(NOTES)
+            .then((notes: Note[]) => {
+                notes.push(note);
+            });
 
         return dbNote;
     }
