@@ -7,14 +7,20 @@ legend {
     width: 100%;
 }
 
-fieldset{
-  width: 60%;
-  margin:auto;
+fieldset {
+    width: 50%;
+    margin: auto;
 }
 
 @media only screen and (max-width: 780px) {
     fieldset {
         margin-left: 10px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    fieldset {
         width: 100%;
     }
 }

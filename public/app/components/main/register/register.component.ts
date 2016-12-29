@@ -5,7 +5,7 @@ import { CountriesEnum } from '../../../enumerations/countries.enum'
 @Component({
     selector: 'register',
     templateUrl: './app/components/main/register/register.component.html',
-    styleUrls: ['./app/components/main/register/register-component.css'],
+    styleUrls: ['./app/components/header/nav-component.css' ,'./app/components/main/register/register-component.css' , './app/assets/css/hover.css'],
 })
 export class RegisterComponent {
     options: string[];

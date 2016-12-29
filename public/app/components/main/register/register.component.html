@@ -1,6 +1,5 @@
 <!--NOT FINISHED YET!! -->
 
-
 <form class="form-horizontal">
     <fieldset>
         <legend>Register :</legend>
@@ -40,35 +39,56 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputAge" class="col-lg-2 control-label">Age</label>
-            <div class="col-lg-10">
-                <input type="number" class="form-control" id="inputAge" placeholder="Age">
-                <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
-            </div>
-        </div>
-        <div class="form-group">
             <label for="select" class="col-lg-2 control-label">Gender</label>
             <div class="col-lg-10">
                 <select class="form-control" id="select">
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
+                  <option value="Gender">--Gender--</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAge" class="col-lg-2 control-label">Age</label>
+            <div class="col-lg-10">
+                <input type="number" class="form-control" id="inputAge" placeholder="Age" min=12>
+                <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
             </div>
         </div>
         <div class="form-group">
             <label for="select" class="col-lg-2 control-label">Country</label>
             <div class="col-lg-10">
                 <select class="form-control" id="select" (change)="parseValue($event.target.value)">
+                  <option value="ChooseCountry">--Country--</option>
                   <option *ngFor="let name of options"[value]="name">{{name}}</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
+            <label for="inputLastName" class="col-lg-2 control-label">Picture URL</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputLastName" placeholder="Image Url">
+                <span class="help-block">Picture is not require.</span>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="reset" class="btn btn-default ">Cancel</button>
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
         </div>
     </fieldset>
 </form>
+
+
+
+<!--<div class="form-group has-error">
+  <label class="control-label" for="inputError">Input error</label>
+  <input type="text" class="form-control" id="inputError">
+</div>
+
+<div class="form-group has-success">
+  <label class="control-label" for="inputSuccess">Input success</label>
+  <input type="text" class="form-control" id="inputSuccess">
+</div>-->

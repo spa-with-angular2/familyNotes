@@ -27,7 +27,7 @@ var RegisterComponent = (function () {
         core_1.Component({
             selector: 'register',
             templateUrl: './app/components/main/register/register.component.html',
-            styleUrls: ['./app/components/main/register/register-component.css'],
+            styleUrls: ['./app/components/header/nav-component.css', './app/components/main/register/register-component.css', './app/assets/css/hover.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], RegisterComponent);
