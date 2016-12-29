@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import {NoteComponentInterface } from '../contracts/note-component.contract';
 import {ColorsEnum} from '../../../enumerations/colors.enum';
@@ -12,7 +12,7 @@ function isNullOrUndefined(obj : any) : obj is null | undefined {
 }
 
 // TODO extract consts
-const DEFAULT_COLOR_INDEX: number = 0;
+const DEFAULT_COLOR_INDEX: number = ColorsEnum.Gray;
 
 @Component ({
     selector: 'single-note',
@@ -37,29 +37,38 @@ const DEFAULT_COLOR_INDEX: number = 0;
         }
     `]
 })
-export class NoteComponent implements NoteComponentInterface{
+export class NoteComponent implements NoteComponentInterface, OnInit{
 
     @Input() notedata: Note;
 
     iconsPath:string;
     placeholderImage:string;
-    noteState:any;
+
+    noteStatesEnum:any;
+    colorsEnum:any;
 
     noteColors: string[];
-    noteColor: string;
 
     public showMoreOptions: boolean;
 
     constructor(){
+    }
+
+    ngOnInit(): void {
+
+
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
 
-        this.noteState = NoteStatesEnum;
+        this.noteStatesEnum = NoteStatesEnum;
+        this.colorsEnum = ColorsEnum;
+
         this.noteColors = EnumUtils.values(ColorsEnum);
-        this.noteColor = this.noteColors[DEFAULT_COLOR_INDEX];
+        this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
 
         this.showMoreOptions = false;
     }
+
 
     getStatusImagePath(): string {
         var imageUrlToReturn:string = this.placeholderImage;
@@ -82,14 +91,14 @@ export class NoteComponent implements NoteComponentInterface{
     }
 
     changeColor(color: string): void {
-        this.noteColor = color;
-        console.log('noteColor '+ this.noteColor);
+        this.notedata.color = color;
+        console.log('noteColor '+ this.notedata.color);
     }
 
     toggleState():void{
         console.log('state toggled');
         var currentStateIndex = this.notedata.stateIndex;
-        var statesLen = EnumUtils.values(this.noteState).length;
+        var statesLen = EnumUtils.values(this.noteStatesEnum).length;
 
         console.log('currentStateIndex '+currentStateIndex);
         console.log('statesLen '+statesLen);

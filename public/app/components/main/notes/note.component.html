@@ -2,10 +2,9 @@
     <div class="panel panel-default">
         <div class="panel-heading"
              [ngClass]="{
-                'bg-lightgrey': notedata.stateIndex === noteState.Empty,
-                'bg-orange': notedata.stateIndex == noteState.Todo,
-                'bg-green': notedata.stateIndex == noteState.Done,
-                'bg-red': notedata.stateIndex == noteState.NotDone
+                'bg-lightgrey': notedata.color === noteColors[colorsEnum.Gray],
+                'bg-green': notedata.color == noteColors[colorsEnum.Green],
+                'bg-red': notedata.color == noteColors[colorsEnum.Red]
                 }"
         >
             <h3 class="panel-title"><strong>{{notedata.title}}</strong></h3>
@@ -51,9 +50,9 @@
                     <label for="select-color">Not color</label>
                     <select id="select-color" name="select-color"
                             required
-                            [(ngModel)]="noteColor"
-                            (change)="changeColor(noteColor)"
-                    >
+                            [(ngModel)]="notedata.color">
+                            <!--(change)="changeColor(noteColor)"-->
+                    <!--&gt;-->
                         <option *ngFor="let nColor of noteColors" [ngValue]="nColor">{{nColor}}</option>
                     </select>
 

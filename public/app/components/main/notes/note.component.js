@@ -18,16 +18,19 @@ function isNullOrUndefined(obj) {
     return typeof obj === "undefined" || obj === null;
 }
 // TODO extract consts
-var DEFAULT_COLOR_INDEX = 0;
+var DEFAULT_COLOR_INDEX = colors_enum_1.ColorsEnum.Gray;
 var NoteComponent = (function () {
     function NoteComponent() {
+    }
+    NoteComponent.prototype.ngOnInit = function () {
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
-        this.noteState = note_states_enum_1.NoteStatesEnum;
+        this.noteStatesEnum = note_states_enum_1.NoteStatesEnum;
+        this.colorsEnum = colors_enum_1.ColorsEnum;
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
-        this.noteColor = this.noteColors[DEFAULT_COLOR_INDEX];
+        this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
         this.showMoreOptions = false;
-    }
+    };
     NoteComponent.prototype.getStatusImagePath = function () {
         var imageUrlToReturn = this.placeholderImage;
         var currentStateIndex = note_states_enum_1.NoteStatesEnum.Empty;
@@ -49,13 +52,13 @@ var NoteComponent = (function () {
         return imageUrlToReturn;
     };
     NoteComponent.prototype.changeColor = function (color) {
-        this.noteColor = color;
-        console.log('noteColor ' + this.noteColor);
+        this.notedata.color = color;
+        console.log('noteColor ' + this.notedata.color);
     };
     NoteComponent.prototype.toggleState = function () {
         console.log('state toggled');
         var currentStateIndex = this.notedata.stateIndex;
-        var statesLen = enum_utilities_1.EnumUtils.values(this.noteState).length;
+        var statesLen = enum_utilities_1.EnumUtils.values(this.noteStatesEnum).length;
         console.log('currentStateIndex ' + currentStateIndex);
         console.log('statesLen ' + statesLen);
         // TODO status to return out of range refactor magic numbers

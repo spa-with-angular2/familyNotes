@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 (function (ColorsEnum) {
-    ColorsEnum[ColorsEnum["Gray"] = 1] = "Gray";
-    ColorsEnum[ColorsEnum["Green"] = 2] = "Green";
-    ColorsEnum[ColorsEnum["Red"] = 3] = "Red";
+    ColorsEnum[ColorsEnum["Gray"] = 0] = "Gray";
+    ColorsEnum[ColorsEnum["Green"] = 1] = "Green";
+    ColorsEnum[ColorsEnum["Red"] = 2] = "Red";
 })(exports.ColorsEnum || (exports.ColorsEnum = {}));
 var ColorsEnum = exports.ColorsEnum;
 var ColorsEnumUnusedClass = (function () {
