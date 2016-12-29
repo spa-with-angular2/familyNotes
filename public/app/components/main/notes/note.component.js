@@ -17,14 +17,15 @@ var note_model_1 = require("../../../models/note.model");
 function isNullOrUndefined(obj) {
     return typeof obj === "undefined" || obj === null;
 }
+// TODO extract consts
+var DEFAULT_COLOR_INDEX = 0;
 var NoteComponent = (function () {
     function NoteComponent() {
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
         this.noteState = note_states_enum_1.NoteStatesEnum;
-        this.status1 = true;
-        this.noteColorsIndexes = enum_utilities_1.EnumUtils.indexes(colors_enum_1.ColorsEnum);
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
+        this.noteColor = this.noteColors[DEFAULT_COLOR_INDEX];
         this.showMoreOptions = false;
     }
     NoteComponent.prototype.getStatusImagePath = function () {
@@ -46,6 +47,10 @@ var NoteComponent = (function () {
             imageUrlToReturn = this.iconsPath + 'note-state-not-done.png';
         }
         return imageUrlToReturn;
+    };
+    NoteComponent.prototype.changeColor = function (color) {
+        this.noteColor = color;
+        console.log('noteColor ' + this.noteColor);
     };
     NoteComponent.prototype.toggleState = function () {
         console.log('state toggled');

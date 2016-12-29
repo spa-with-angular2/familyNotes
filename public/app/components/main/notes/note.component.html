@@ -48,11 +48,15 @@
                 </div>
 
                 <div *ngIf="showMoreOptions">
-                    <label for="input-color">Note Color</label>
-                    <input type="text" id="input-color" name="input-color"
-                           ngControl="color"
-                           [(ngModel)]="notedata.color"
+                    <label for="select-color">Not color</label>
+                    <select id="select-color" name="select-color"
+                            required
+                            [(ngModel)]="noteColor"
+                            (change)="changeColor(noteColor)"
                     >
+                        <option *ngFor="let nColor of noteColors" [ngValue]="nColor">{{nColor}}</option>
+                    </select>
+
                 </div>
             </form>
         </div>

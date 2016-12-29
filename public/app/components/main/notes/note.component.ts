@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import {NoteComponentInterface } from '../contracts/note-component.contract';
-import {ColorsEnum } from '../../../enumerations/colors.enum';
+import {ColorsEnum} from '../../../enumerations/colors.enum';
 import {NoteStatesEnum } from '../../../enumerations/note-states.enum';
 import {EnumUtils } from '../../../enumerations/utilities/enum.utilities';
 import {Note} from "../../../models/note.model";
@@ -10,6 +10,9 @@ import {Note} from "../../../models/note.model";
 function isNullOrUndefined(obj : any) : obj is null | undefined {
     return typeof obj === "undefined" || obj === null;
 }
+
+// TODO extract consts
+const DEFAULT_COLOR_INDEX: number = 0;
 
 @Component ({
     selector: 'single-note',
@@ -41,19 +44,20 @@ export class NoteComponent implements NoteComponentInterface{
     iconsPath:string;
     placeholderImage:string;
     noteState:any;
-    status1: boolean;
+
     noteColors: string[];
-    noteColorsIndexes: number[];
+    noteColor: string;
 
     public showMoreOptions: boolean;
 
     constructor(){
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
+
         this.noteState = NoteStatesEnum;
-        this.status1 = true;
-        this.noteColorsIndexes = EnumUtils.indexes(ColorsEnum);
         this.noteColors = EnumUtils.values(ColorsEnum);
+        this.noteColor = this.noteColors[DEFAULT_COLOR_INDEX];
+
         this.showMoreOptions = false;
     }
 
@@ -75,6 +79,11 @@ export class NoteComponent implements NoteComponentInterface{
         }
 
         return imageUrlToReturn;
+    }
+
+    changeColor(color: string): void {
+        this.noteColor = color;
+        console.log('noteColor '+ this.noteColor);
     }
 
     toggleState():void{
