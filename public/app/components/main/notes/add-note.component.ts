@@ -73,7 +73,9 @@ export class AddNoteComponent implements OnInit{
         this._noteService.insert(this.newNote);
 
         // TODO redirect to see notes root
-        //this._router.navigate([NotesRout]);
+        this._router.navigate(['/notes']);
+        // this.router.navigate(['/login']);
+
     }
 
     toggleShowMoreOptions(): void{

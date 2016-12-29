@@ -41,7 +41,8 @@ var AddNoteComponent = (function () {
         // TODO save the note in the database
         this._noteService.insert(this.newNote);
         // TODO redirect to see notes root
-        //this._router.navigate([NotesRout]);
+        this._router.navigate(['/notes']);
+        // this.router.navigate(['/login']);
     };
     AddNoteComponent.prototype.toggleShowMoreOptions = function () {
         console.log('show more options click');
