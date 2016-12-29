@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var note_service_1 = require('../../../services/note.service');
 function addDays(date, days) {
     console.log('adding ' + days + ' days');
     console.log(date);
@@ -18,11 +19,28 @@ function addDays(date, days) {
     return date;
 }
 var AddNoteComponent = (function () {
-    function AddNoteComponent(_router) {
+    function AddNoteComponent(_noteService, _router) {
+        this._noteService = _noteService;
         this._router = _router;
     }
+    AddNoteComponent.prototype.ngOnInit = function () {
+        var dtExpire = new Date();
+        dtExpire = addDays(dtExpire, 5);
+        this.noteLikeObject = {
+            title: '',
+            body: '',
+            expireDate: dtExpire,
+            color: ''
+        };
+        this.showMoreOptions = false;
+    };
     AddNoteComponent.prototype.onSubmit = function () {
         console.log('add note submit action');
+        // TODO create new note with the note.service.create
+        this.newNote = this._noteService.create(this.noteLikeObject);
+        // TODO save the note in the database
+        console.log(this.newNote);
+        // TODO redirect to see notes root
     };
     AddNoteComponent.prototype.toggleShowMoreOptions = function () {
         console.log('show more options click');
@@ -33,24 +51,14 @@ var AddNoteComponent = (function () {
             this.showMoreOptions = true;
         }
     };
-    AddNoteComponent.prototype.ngOnInit = function () {
-        var dtExpire = new Date();
-        dtExpire = addDays(dtExpire, 5);
-        this.newNote = {
-            title: '',
-            body: '',
-            expireDate: dtExpire,
-            color: ''
-        };
-        this.showMoreOptions = false;
-    };
     AddNoteComponent = __decorate([
         core_1.Component({
             selector: 'add-note-component',
             templateUrl: './app/components/main/notes/add-note.component.html',
+            providers: [note_service_1.NoteService],
             styles: ["\n        label{\n            display: inline-block;\n            width: 150px;\n        }\n        \n        input   {\n            width: 350px;\n        }\n        textarea   {\n            width: 350px;\n        }\n        \n        .ng-invalid{\n            border: 1px solid red;\n        }\n    "]
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [note_service_1.NoteService, router_1.Router])
     ], AddNoteComponent);
     return AddNoteComponent;
 }());

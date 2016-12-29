@@ -31,6 +31,7 @@ var about_component_1 = require('./components/main/about.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
 var register_component_1 = require('./components/main/register/register.component');
+var notes_service_1 = require("./services/notes.service");
 // import {
 // 	HomeComponent,
 // 	NotesComponent,
@@ -47,7 +48,7 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 topband_component_1.TopbandComponent,
                 home_component_1.HomeComponent,
-                note_component_1.Note,
+                note_component_1.NoteComponent,
                 notes_component_1.NotesComponent,
                 add_note_component_1.AddNoteComponent,
                 //UserComponent,
@@ -59,7 +60,7 @@ var AppModule = (function () {
                 login_component_1.LoginComponent,
                 register_component_1.RegisterComponent
             ],
-            providers: [],
+            providers: [notes_service_1.NotesService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

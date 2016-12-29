@@ -8,42 +8,42 @@ export class Note implements NoteInterface{
     public title: string;
     public body: string;
     public author: User;
-    public state: NoteStatesEnum;
+    public stateIndex: number;
     public postedDate: Date;
 
     public expireDate: Date;
     public color: string;
 
-    private areUnsavedChanges: boolean;
-    private isInEditMode: boolean;
-    private isDeleted: boolean;
+    public areUnsavedChanges: boolean;
+    public isInEditMode: boolean;
+    public isDeleted: boolean;
 
     constructor(
-        // _id: string,
+        _id: string,
 
         _title: string,
         _body: string,
         _author: User,
-        _state: NoteStatesEnum,
-        // _postedDate: Date,
+        _stateIndex: number,
+        _postedDate: Date,
 
-        // _expireDate: Date,
-        // _color: string,
+        _expireDate: Date,
+        _color: string,
 
         _areUnsavedChanges: boolean,
         _isInEditMode: boolean,
         _isDeleted: boolean
     ){
-            // this.id = _id,
+            this.id = _id;
 
             this.title = _title;
             this.body = _body;
             this.author = _author;
-            this.state = NoteStatesEnum.Empty;
+            this.stateIndex = NoteStatesEnum.Empty;
             this.postedDate = new Date();
 
-            // this.expireDate: Date,
-            // this.color: string,
+            this.expireDate = _expireDate;
+            this.color = _color;
 
             this.areUnsavedChanges = false;
             this.isInEditMode = false;

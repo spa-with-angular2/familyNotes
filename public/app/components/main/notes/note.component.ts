@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
-import { NoteComponentInterface } from '../contracts/note-component.contract';
-import { ColorsEnum } from '../../../enumerations/colors.enum';
-import { NoteStatesEnum } from '../../../enumerations/note-states.enum';
-import { EnumUtils } from '../../../enumerations/utilities/enum.utilities';
+import {NoteComponentInterface } from '../contracts/note-component.contract';
+import {ColorsEnum } from '../../../enumerations/colors.enum';
+import {NoteStatesEnum } from '../../../enumerations/note-states.enum';
+import {EnumUtils } from '../../../enumerations/utilities/enum.utilities';
+import {Note} from "../../../models/note.model";
 
 // TODO extract function
 function isNullOrUndefined(obj : any) : obj is null | undefined {
@@ -33,24 +34,9 @@ function isNullOrUndefined(obj : any) : obj is null | undefined {
         }
     `]
 })
-export class Note implements NoteComponentInterface{
+export class NoteComponent implements NoteComponentInterface{
 
-    @Input() notedata = {
-        title: 'Note title',
-        body: 'Note body text.',
-        author: {
-            _id: '123',
-            username: 'anonymous',
-            picture: ''
-        },
-        color: 'gray',
-        status: {
-            index: 0
-        },
-        areUnsavedChanges: false,
-        isInEditMode: false,
-        isDeleted: false
-    };
+    @Input() notedata: Note;
 
     iconsPath:string;
     placeholderImage:string;
@@ -66,17 +52,13 @@ export class Note implements NoteComponentInterface{
         this.status1 = true;
         this.noteColorsIndexes = EnumUtils.indexes(ColorsEnum);
         this.noteColors = EnumUtils.values(ColorsEnum);
-
-        // TODO remove commented logs
-        // console.log('noteColorsIndexes ' + this.noteColorsIndexes);
-        // console.log('noteColorsValues ' + this.noteColors);
     }
 
     getStatusImagePath(): string {
         var imageUrlToReturn:string = this.placeholderImage;
         var currentStateIndex: number = NoteStatesEnum.Empty;
-        if(!isNullOrUndefined(this.notedata.status.index)){
-            currentStateIndex = this.notedata.status.index;
+        if(!isNullOrUndefined(this.notedata.stateIndex)){
+            currentStateIndex = this.notedata.stateIndex;
         }
 
         if(currentStateIndex === NoteStatesEnum.Empty ) {
@@ -94,8 +76,11 @@ export class Note implements NoteComponentInterface{
 
     toggleState():void{
         console.log('state toggled');
-        var currentStateIndex = this.notedata.status.index;
+        var currentStateIndex = this.notedata.stateIndex;
         var statesLen = EnumUtils.values(this.noteState).length;
+
+        console.log('currentStateIndex '+currentStateIndex);
+        console.log('statesLen '+statesLen);
 
         // TODO status to return out of range refactor magic numbers
         if(currentStateIndex < 0 || currentStateIndex >= statesLen){
@@ -110,7 +95,7 @@ export class Note implements NoteComponentInterface{
 
         // TODO remove commented logs
         // console.log('index'+this.notedata.status.index);
-        this.notedata.status.index = currentStateIndex;
+        this.notedata.stateIndex = currentStateIndex;
         this.notedata.areUnsavedChanges = true;
     }
 

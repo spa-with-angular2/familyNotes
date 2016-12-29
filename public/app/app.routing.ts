@@ -51,7 +51,6 @@ const appRoutes: Routes = [
         component: RegisterComponent
     },
 
-
     // {
     //     path: 'detail', loadChildren: () => System.import('./+detail')
     //     .then((comp: any) => comp.default),
