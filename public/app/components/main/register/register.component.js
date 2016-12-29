@@ -9,9 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var countries_enum_1 = require('../../../enumerations/countries.enum');
 var RegisterComponent = (function () {
     function RegisterComponent() {
+        this.AgentStatus = countries_enum_1.CountriesEnum;
     }
+    RegisterComponent.prototype.ngOnInit = function () {
+        var x = countries_enum_1.CountriesEnum;
+        var options = Object.keys(countries_enum_1.CountriesEnum);
+        this.options = options.slice(options.length / 2);
+    };
+    RegisterComponent.prototype.parseValue = function (value) {
+        this.myValue = countries_enum_1.CountriesEnum[value];
+        this.isOffline = this.myValue == countries_enum_1.CountriesEnum.Bulgaria;
+    };
     RegisterComponent = __decorate([
         core_1.Component({
             selector: 'register',
