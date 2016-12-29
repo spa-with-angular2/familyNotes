@@ -25,6 +25,7 @@ var NoteComponent = (function () {
         this.status1 = true;
         this.noteColorsIndexes = enum_utilities_1.EnumUtils.indexes(colors_enum_1.ColorsEnum);
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
+        this.showMoreOptions = false;
     }
     NoteComponent.prototype.getStatusImagePath = function () {
         var imageUrlToReturn = this.placeholderImage;
@@ -90,6 +91,14 @@ var NoteComponent = (function () {
         this.notedata.areUnsavedChanges = true;
     };
     NoteComponent.prototype.toggleColor = function () {
+    };
+    NoteComponent.prototype.toggleShowMoreOptions = function () {
+        if (this.showMoreOptions) {
+            this.showMoreOptions = false;
+        }
+        else {
+            this.showMoreOptions = true;
+        }
     };
     NoteComponent.prototype.save = function () {
         // TODO note save to database

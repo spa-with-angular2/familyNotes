@@ -45,6 +45,8 @@ export class NoteComponent implements NoteComponentInterface{
     noteColors: string[];
     noteColorsIndexes: number[];
 
+    public showMoreOptions: boolean;
+
     constructor(){
         this.iconsPath = './app/assets/images/icons/';
         this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
@@ -52,6 +54,7 @@ export class NoteComponent implements NoteComponentInterface{
         this.status1 = true;
         this.noteColorsIndexes = EnumUtils.indexes(ColorsEnum);
         this.noteColors = EnumUtils.values(ColorsEnum);
+        this.showMoreOptions = false;
     }
 
     getStatusImagePath(): string {
@@ -124,6 +127,14 @@ export class NoteComponent implements NoteComponentInterface{
     }
 
     toggleColor(): void {
+    }
+
+    toggleShowMoreOptions(): void{
+        if(this.showMoreOptions){
+            this.showMoreOptions = false;
+        } else {
+            this.showMoreOptions = true;
+        }
     }
 
     save(): Note {
