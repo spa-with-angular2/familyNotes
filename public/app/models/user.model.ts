@@ -65,7 +65,7 @@ export class User implements UserInterface{
         return mainProfilePictureUrlToReturn;
     }
 
-    public geProfilePicturesUrl(): string[] {
+    public getProfilePicturesUrl(): string[] {
         return undefined;
     }
 

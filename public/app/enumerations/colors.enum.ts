@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
 export enum ColorsEnum {
-    Red = 1,
+    Gray = 0,
     Green,
-    Yellow,
-    Gray
+    Red
 }
 
 @Injectable()

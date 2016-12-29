@@ -1,15 +1,34 @@
 "use strict";
 var note_states_enum_1 = require("../../../enumerations/note-states.enum");
-var someUser;
+var enum_utilities_1 = require("../../../enumerations/utilities/enum.utilities");
+var someUser = {
+    id: '',
+    firstName: 'Alexander',
+    lastName: 'Toplijski',
+    age: 33,
+    gender: '',
+    families: [''],
+    email: 'email@email.com',
+    profilePictures: [''],
+    username: 'alex',
+    passHash: '123',
+    salt: '',
+    role: '',
+    fbId: '',
+    fbToken: ''
+};
 exports.NOTES = [
     {
         id: '',
         title: 'Bank',
         body: 'Go to the bank and take the coins for Toni and Veronic',
         author: someUser,
-        stateIndex: note_states_enum_1.NoteStatesEnum.Empty,
+        state: {
+            index: note_states_enum_1.NoteStatesEnum.Todo,
+            name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,
@@ -20,9 +39,12 @@ exports.NOTES = [
         title: 'Appotheke',
         body: 'Go to the pharmacy and take Nelis pills',
         author: someUser,
-        stateIndex: note_states_enum_1.NoteStatesEnum.Empty,
+        state: {
+            index: note_states_enum_1.NoteStatesEnum.Todo,
+            name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,
@@ -33,9 +55,12 @@ exports.NOTES = [
         title: 'Maxi Cosi',
         body: 'Put the MaxiCosi for sale in OLX',
         author: someUser,
-        stateIndex: note_states_enum_1.NoteStatesEnum.Empty,
+        state: {
+            index: note_states_enum_1.NoteStatesEnum.Todo,
+            name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,
@@ -46,9 +71,12 @@ exports.NOTES = [
         title: 'Toni bd',
         body: 'Take wine and present',
         author: someUser,
-        stateIndex: note_states_enum_1.NoteStatesEnum.Empty,
+        state: {
+            index: note_states_enum_1.NoteStatesEnum.Todo,
+            name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
+        },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,

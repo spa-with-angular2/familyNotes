@@ -8,7 +8,7 @@ export interface UserInterface
 
     getMainProfilePictureUrl(): string;
 
-    geProfilePicturesUrl(): string[];
+    getProfilePicturesUrl(): string[];
 
     getFamilies(): string[];
 

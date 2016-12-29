@@ -1,6 +1,7 @@
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from '@angular/forms';
+import {NgModule } from "@angular/core";
+import {BrowserModule } from "@angular/platform-browser";
+import {FormsModule } from '@angular/forms';
+import {MyDatePickerModule} from 'mydatepicker/dist/my-date-picker.module';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -38,7 +39,7 @@ import {NotesService} from "./services/notes.service";
 // } from './components';
 
 @NgModule({
-	imports:[BrowserModule, FormsModule, routing],
+	imports:[BrowserModule, FormsModule, routing, MyDatePickerModule],
 	declarations:[
 		AppComponent,
 		TopbandComponent,

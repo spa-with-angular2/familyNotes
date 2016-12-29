@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import {NoteComponentInterface } from '../contracts/note-component.contract';
-import {ColorsEnum } from '../../../enumerations/colors.enum';
+import {ColorsEnum} from '../../../enumerations/colors.enum';
 import {NoteStatesEnum } from '../../../enumerations/note-states.enum';
 import {EnumUtils } from '../../../enumerations/utilities/enum.utilities';
 import {Note} from "../../../models/note.model";
@@ -10,6 +10,10 @@ import {Note} from "../../../models/note.model";
 function isNullOrUndefined(obj : any) : obj is null | undefined {
     return typeof obj === "undefined" || obj === null;
 }
+
+// TODO extract consts
+const DEFAULT_COLOR_INDEX: number = ColorsEnum.Gray;
+const DEFAULT_STATE_INDEX: number = NoteStatesEnum.Todo;
 
 @Component ({
     selector: 'single-note',
@@ -34,39 +38,67 @@ function isNullOrUndefined(obj : any) : obj is null | undefined {
         }
     `]
 })
-export class NoteComponent implements NoteComponentInterface{
+export class NoteComponent implements NoteComponentInterface, OnInit{
 
-    @Input() notedata: Note;
+    @Input() public notedata: Note;
 
-    iconsPath:string;
-    placeholderImage:string;
-    noteState:any;
-    status1: boolean;
-    noteColors: string[];
-    noteColorsIndexes: number[];
+    public iconsPath: string;
+    public placeholderImage: string;
+    public stateImageUrl: string;
+
+    public noteStatesEnum: any;
+    public noteStates: string[];
+    public colorsEnum:any;
+    public noteColors: string[];
 
     public showMoreOptions: boolean;
 
     constructor(){
-        this.iconsPath = './app/assets/images/icons/';
-        this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
-        this.noteState = NoteStatesEnum;
-        this.status1 = true;
-        this.noteColorsIndexes = EnumUtils.indexes(ColorsEnum);
-        this.noteColors = EnumUtils.values(ColorsEnum);
-        this.showMoreOptions = false;
     }
 
-    getStatusImagePath(): string {
+    ngOnInit(): void {
+
+        this.iconsPath = './app/assets/images/icons/';
+        this.placeholderImage = this.iconsPath + 'browser-icon-main.png';
+        this.stateImageUrl = this.updateStateImageUrl();
+
+        this.noteStatesEnum = NoteStatesEnum;
+        this.noteStates = EnumUtils.values(NoteStatesEnum);
+        this.notedata.state.index = DEFAULT_STATE_INDEX;
+        this.notedata.state.name = this.noteStates[DEFAULT_STATE_INDEX];
+        this.colorsEnum = ColorsEnum;
+        this.noteColors = EnumUtils.values(ColorsEnum);
+        this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
+
+        this.showMoreOptions = false;
+
+        console.log('expireDate-'+ this.notedata.expireDate)
+
+    }
+
+    changeColor(color: string): void {
+        this.notedata.color = color;
+    }
+
+    onDateChanged(ev: any): void {
+        console.log(ev);
+        this.notedata.expireDate = ev.jsdate;
+    }
+
+    changeNoteState(state: string): void {
+        this.notedata.state.index = this.noteStates.indexOf(state);
+        this.notedata.state.name = state;
+        this.stateImageUrl = this.updateStateImageUrl();
+    }
+
+    updateStateImageUrl(): string {
         var imageUrlToReturn:string = this.placeholderImage;
-        var currentStateIndex: number = NoteStatesEnum.Empty;
-        if(!isNullOrUndefined(this.notedata.stateIndex)){
-            currentStateIndex = this.notedata.stateIndex;
+        var currentStateIndex: number = DEFAULT_STATE_INDEX;
+        if(!isNullOrUndefined(this.notedata.state.index)){
+            currentStateIndex = this.notedata.state.index;
         }
 
-        if(currentStateIndex === NoteStatesEnum.Empty ) {
-            imageUrlToReturn = this.iconsPath + 'note-state-empty.png'
-        } else if(currentStateIndex === NoteStatesEnum.Todo){
+        if(currentStateIndex === NoteStatesEnum.Todo){
             imageUrlToReturn = this.iconsPath + 'note-state-todo.png'
         } else if(currentStateIndex === NoteStatesEnum.Done){
             imageUrlToReturn = this.iconsPath + 'note-state-done.png'
@@ -75,31 +107,6 @@ export class NoteComponent implements NoteComponentInterface{
         }
 
         return imageUrlToReturn;
-    }
-
-    toggleState():void{
-        console.log('state toggled');
-        var currentStateIndex = this.notedata.stateIndex;
-        var statesLen = EnumUtils.values(this.noteState).length;
-
-        console.log('currentStateIndex '+currentStateIndex);
-        console.log('statesLen '+statesLen);
-
-        // TODO status to return out of range refactor magic numbers
-        if(currentStateIndex < 0 || currentStateIndex >= statesLen){
-            throw new Error ('Note status out of range!');
-        }
-
-        if(currentStateIndex == (statesLen - 1)){
-            currentStateIndex = 0
-        } else {
-            currentStateIndex += 1;
-        }
-
-        // TODO remove commented logs
-        // console.log('index'+this.notedata.status.index);
-        this.notedata.stateIndex = currentStateIndex;
-        this.notedata.areUnsavedChanges = true;
     }
 
     toggleEdit():void {
@@ -124,9 +131,6 @@ export class NoteComponent implements NoteComponentInterface{
         }
 
         this.notedata.areUnsavedChanges = true;
-    }
-
-    toggleColor(): void {
     }
 
     toggleShowMoreOptions(): void{
