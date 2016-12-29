@@ -30,6 +30,7 @@ var add_note_component_1 = require('./components/main/notes/add-note.component')
 var about_component_1 = require('./components/main/about.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
+var register_component_1 = require('./components/main/register/register.component');
 var notes_service_1 = require("./services/notes.service");
 // import {
 // 	HomeComponent,
@@ -56,7 +57,8 @@ var AppModule = (function () {
                 no_content_component_1.NoContentComponent,
                 about_component_1.AboutComponent,
                 profile_component_1.ProfileComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                register_component_1.RegisterComponent
             ],
             providers: [notes_service_1.NotesService],
             bootstrap: [app_component_1.AppComponent]
