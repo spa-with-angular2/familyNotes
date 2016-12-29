@@ -9,43 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var notes_service_1 = require("../../../services/notes.service");
 var NotesComponent = (function () {
-    function NotesComponent() {
-        this.notes = [
-            {
-                title: 'Bank',
-                body: 'Go to the bank and take the coins for Toni and Veronic',
-                status: { index: 0 }
-            },
-            {
-                title: 'Appotheke',
-                body: 'Go to the pharmacy and take Nelis pills',
-                status: { index: 1 }
-            },
-            {
-                title: 'Maxi Cosi',
-                body: 'Put the MaxiCosi for sale in OLX',
-                status: { index: 2 }
-            },
-            {
-                title: 'Toni bd',
-                body: 'Tkae wine and present',
-                status: { index: 3 }
-            }
-        ];
+    function NotesComponent(notesService) {
+        this.notesService = notesService;
     }
-    NotesComponent.prototype.addNote = function () {
-        console.log('add a note from notesComponent');
-        // used not to redirect page from the functions call
-        return false;
+    NotesComponent.prototype.ngOnInit = function () {
+        this.getNotes();
+    };
+    NotesComponent.prototype.getNotes = function () {
+        var _this = this;
+        this.notesService.getNotes()
+            .then(function (notes) {
+            _this.notes = notes;
+        });
     };
     NotesComponent = __decorate([
         core_1.Component({
             selector: 'notes-container',
             templateUrl: './app/components/main/notes/notes.component.html',
+            providers: [notes_service_1.NotesService],
             styles: [""]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [notes_service_1.NotesService])
     ], NotesComponent);
     return NotesComponent;
 }());

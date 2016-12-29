@@ -2,10 +2,10 @@
     <div class="panel panel-default">
         <div class="panel-heading"
              [ngClass]="{
-                'bg-lightgrey': notedata.status.index === noteState.Empty,
-                'bg-orange': notedata.status.index == noteState.Todo,
-                'bg-green': notedata.status.index == noteState.Done,
-                'bg-red': notedata.status.index == noteState.NotDone
+                'bg-lightgrey': notedata.stateIndex === noteState.Empty,
+                'bg-orange': notedata.stateIndex == noteState.Todo,
+                'bg-green': notedata.stateIndex == noteState.Done,
+                'bg-red': notedata.stateIndex == noteState.NotDone
                 }"
         >
             <h3 class="panel-title"><strong>{{notedata.title}}</strong></h3>
@@ -16,7 +16,7 @@
             <h4>Edit note</h4>
             <form class="form-horizontal">
                 <div class="control-group">
-                    <label class="control-label">Title: </label>
+                    <label class="control-label">Title:</label>
                     <div class="controls">
                         <input type="text" name="title" [(ngModel)]="notedata.title" />
                     </div>

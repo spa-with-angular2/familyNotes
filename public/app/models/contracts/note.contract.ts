@@ -6,7 +6,7 @@ export interface NoteInterface
     title: string;
     body: string;
     author: User;
-    state: NoteStatesEnum;
+    stateIndex: number;
     postedDate: Date;
 
     expireDate: Date;
