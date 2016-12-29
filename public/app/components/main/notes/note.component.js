@@ -35,9 +35,14 @@ var NoteComponent = (function () {
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
         this.showMoreOptions = false;
+        console.log('expireDate-' + this.notedata.expireDate);
     };
     NoteComponent.prototype.changeColor = function (color) {
         this.notedata.color = color;
+    };
+    NoteComponent.prototype.onDateChanged = function (ev) {
+        console.log(ev);
+        this.notedata.expireDate = ev.jsdate;
     };
     NoteComponent.prototype.changeNoteState = function (state) {
         this.notedata.state.index = this.noteStates.indexOf(state);

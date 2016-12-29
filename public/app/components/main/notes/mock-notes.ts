@@ -36,7 +36,7 @@ export const NOTES: Note[] = [
         },
         postedDate: new Date(),
 
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
 
         areUnsavedChanges: false,
@@ -54,7 +54,7 @@ export const NOTES: Note[] = [
         },
         postedDate: new Date(),
 
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
 
         areUnsavedChanges: false,
@@ -72,7 +72,7 @@ export const NOTES: Note[] = [
         },
         postedDate: new Date(),
 
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
 
         areUnsavedChanges: false,
@@ -90,7 +90,7 @@ export const NOTES: Note[] = [
         },
         postedDate: new Date(),
 
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
 
         areUnsavedChanges: false,

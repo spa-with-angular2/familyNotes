@@ -28,7 +28,7 @@ exports.NOTES = [
             name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
         },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,
@@ -44,7 +44,7 @@ exports.NOTES = [
             name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
         },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,
@@ -60,7 +60,7 @@ exports.NOTES = [
             name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
         },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,
@@ -76,7 +76,7 @@ exports.NOTES = [
             name: enum_utilities_1.EnumUtils.values(note_states_enum_1.NoteStatesEnum.Todo).toString()
         },
         postedDate: new Date(),
-        expireDate: new Date(),
+        expireDate: undefined,
         color: '',
         areUnsavedChanges: false,
         isInEditMode: false,

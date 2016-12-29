@@ -71,12 +71,20 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
 
         this.showMoreOptions = false;
+
+        console.log('expireDate-'+ this.notedata.expireDate)
+
     }
 
     changeColor(color: string): void {
         this.notedata.color = color;
     }
-    
+
+    onDateChanged(ev: any): void {
+        console.log(ev);
+        this.notedata.expireDate = ev.jsdate;
+    }
+
     changeNoteState(state: string): void {
         this.notedata.state.index = this.noteStates.indexOf(state);
         this.notedata.state.name = state;

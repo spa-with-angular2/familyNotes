@@ -22,6 +22,15 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>{{notedata.postedDate}}</strong>
+                </div>
+                <div class="col-md-6">
+                    {{notedata.expireDate}}
+                </div>
+            </div>
+
         </div>
         <div class="panel-body">{{notedata.body}}</div>
 
@@ -54,11 +63,16 @@
 
                 <div *ngIf="showMoreOptions">
                     <label for="input-expire-date">Expire Date</label>
-                    <input type="text" id="input-expire-date" name="input-expire-date"
+                    <input type="date" id="input-expire-date" name="input-expire-date"
                            ngControl="expireDate"
                            [(ngModel)]="notedata.expireDate"
                     >
                 </div>
+
+                <my-date-picker [options]="myDatePickerOptions"
+                                (dateChanged)="onDateChanged($event)"
+                >
+                </my-date-picker>
 
                 <div *ngIf="showMoreOptions">
                     <label for="select-color">Not color</label>
@@ -93,3 +107,6 @@
         </div>
     </div>
 </div><!-- /.col-sm-4 -->
+
+
+
