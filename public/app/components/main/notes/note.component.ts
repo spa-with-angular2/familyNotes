@@ -76,6 +76,7 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
     changeColor(color: string): void {
         this.notedata.color = color;
     }
+    
     changeNoteState(state: string): void {
         this.notedata.state.index = this.noteStates.indexOf(state);
         this.notedata.state.name = state;
