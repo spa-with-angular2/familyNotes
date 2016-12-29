@@ -8,6 +8,7 @@ import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
 import { LoginComponent } from './components/main/login/login.component';
+import { RegisterComponent } from './components/main/register/register.component';
 
 // import {
 //     HomeComponent,
@@ -41,9 +42,13 @@ const appRoutes: Routes = [
         path: 'profile',
         component: ProfileComponent
     },
-     {
+    {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
 
 

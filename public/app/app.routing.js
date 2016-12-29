@@ -7,6 +7,7 @@ var about_component_1 = require('./components/main/about.component');
 var no_content_component_1 = require('./components/error-pages/no-content.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
+var register_component_1 = require('./components/main/register/register.component');
 // import {
 //     HomeComponent,
 //     NotesComponent,
@@ -41,6 +42,10 @@ var appRoutes = [
     {
         path: 'login',
         component: login_component_1.LoginComponent
+    },
+    {
+        path: 'register',
+        component: register_component_1.RegisterComponent
     },
     // {
     //     path: 'detail', loadChildren: () => System.import('./+detail')
