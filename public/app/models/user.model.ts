@@ -20,7 +20,7 @@ export class User implements UserInterface{
     public createdOn: Date;
 
     public username: string;
-    private passHash: string;
+    public passHash: string;
     private role: string;
     private fbId: string;
     private fbToken: string;

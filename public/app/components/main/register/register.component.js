@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var countries_enum_1 = require('../../../enumerations/countries.enum');
 var user_factory_service_1 = require('../../../services/user/user-factory.service');
+var password_service_1 = require("../../../services/password.service");
 var RegisterComponent = (function () {
-    function RegisterComponent(userFactoryService) {
+    function RegisterComponent(userFactoryService, passwordService) {
         this.userFactoryService = userFactoryService;
+        this.passwordService = passwordService;
         this.AgentStatus = countries_enum_1.CountriesEnum;
     }
     RegisterComponent.prototype.ngOnInit = function () {
@@ -45,8 +47,9 @@ var RegisterComponent = (function () {
         this.newUserLikeObject.country = value;
     };
     RegisterComponent.prototype.onSubmit = function () {
+        console.log('password-' + this.newUserLikeObject.password);
+        this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
         console.log('-------------------------');
-        // console.log(this.newUserLikeObject);
         // TODO create user
         this.newUser = this.makeNewUser();
         console.log(this.newUser);
@@ -62,10 +65,10 @@ var RegisterComponent = (function () {
         core_1.Component({
             selector: 'register',
             templateUrl: './app/components/main/register/register.component.html',
-            providers: [user_factory_service_1.UserFactoryService],
+            providers: [user_factory_service_1.UserFactoryService, password_service_1.PasswordService],
             styleUrls: ['./app/components/header/nav-component.css', './app/components/main/register/register-component.css', './app/assets/css/hover.css'],
         }), 
-        __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService])
+        __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService, password_service_1.PasswordService])
     ], RegisterComponent);
     return RegisterComponent;
 }());

@@ -3,12 +3,13 @@ import {Component} from '@angular/core';
 import {CountriesEnum} from '../../../enumerations/countries.enum'
 import {User} from "../../../models/user.model";
 import {UserFactoryService} from '../../../services/user/user-factory.service'
+import {PasswordService} from "../../../services/password.service";
 
 
 @Component({
     selector: 'register',
     templateUrl: './app/components/main/register/register.component.html',
-    providers: [UserFactoryService],
+    providers: [UserFactoryService, PasswordService],
     styleUrls: ['./app/components/header/nav-component.css' ,'./app/components/main/register/register-component.css' , './app/assets/css/hover.css'],
 })
 export class RegisterComponent {
@@ -21,7 +22,10 @@ export class RegisterComponent {
     public newUser: User;
     public newUserLikeObject: any;
 
-    constructor(private userFactoryService: UserFactoryService){
+    constructor(
+        private userFactoryService: UserFactoryService,
+        private passwordService: PasswordService
+    ){
     }
 
     ngOnInit() {
@@ -62,8 +66,11 @@ export class RegisterComponent {
     }
 
     public onSubmit(){
+        console.log('password-'+this.newUserLikeObject.password);
+
+        this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
+        
         console.log('-------------------------');
-        // console.log(this.newUserLikeObject);
 
         // TODO create user
         this.newUser = this.makeNewUser();
