@@ -26,10 +26,15 @@ var AddNoteComponent = (function () {
     AddNoteComponent.prototype.ngOnInit = function () {
         var dtExpire = new Date();
         dtExpire = addDays(dtExpire, 5);
+        var splittedDate = dtExpire.toString().split(" ", 5);
+        var realDate = '';
+        splittedDate.forEach(function (element) {
+            realDate += ' ' + element;
+        });
         this.noteLikeObject = {
             title: '',
             body: '',
-            expireDate: dtExpire,
+            expireDate: realDate,
             color: ''
         };
         this.showMoreOptions = false;
@@ -58,7 +63,7 @@ var AddNoteComponent = (function () {
             selector: 'add-note-component',
             templateUrl: './app/components/main/notes/add-note.component.html',
             providers: [note_service_1.NoteService],
-            styles: ["\n        label{\n            display: inline-block;\n            width: 150px;\n        }\n        \n        input   {\n            width: 350px;\n        }\n        textarea   {\n            width: 350px;\n        }\n        \n        .ng-invalid{\n            border: 1px solid red;\n        }\n    "]
+            styleUrls: ['./app/components/main/notes/add-note-component.css']
         }), 
         __metadata('design:paramtypes', [note_service_1.NoteService, router_1.Router])
     ], AddNoteComponent);

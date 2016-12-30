@@ -20,23 +20,7 @@ function addDays(date: Date, days: number): Date {
     selector: 'add-note-component',
     templateUrl: './app/components/main/notes/add-note.component.html',
     providers: [NoteService],
-    styles: [`
-        label{
-            display: inline-block;
-            width: 150px;
-        }
-        
-        input   {
-            width: 350px;
-        }
-        textarea   {
-            width: 350px;
-        }
-        
-        .ng-invalid{
-            border: 1px solid red;
-        }
-    `]
+    styleUrls: ['./app/components/main/notes/add-note-component.css' ]
 })
 export class AddNoteComponent implements OnInit{
 
@@ -51,11 +35,17 @@ export class AddNoteComponent implements OnInit{
     ngOnInit(): void {
         var dtExpire: Date = new Date();
         dtExpire = addDays(dtExpire, 5);
+        var splittedDate = dtExpire.toString().split(" ", 5);
+        var realDate = '';
+
+        splittedDate.forEach(element => {
+            realDate += ' ' + element;
+        });
 
         this.noteLikeObject = {
             title: '',
             body: '',
-            expireDate: dtExpire,
+            expireDate: realDate ,
             color: ''
 
         };
