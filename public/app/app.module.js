@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
 var my_date_picker_module_1 = require('mydatepicker/dist/my-date-picker.module');
 var app_component_1 = require('./app.component');
 var app_routing_1 = require('./app.routing');
@@ -18,12 +19,6 @@ var topband_component_1 = require('./components/header/topband.component');
 var nav_component_1 = require('./components/header/nav.component');
 var footer_component_1 = require('./components/footer/footer.component');
 var no_content_component_1 = require('./components/error-pages/no-content.component');
-// import {
-// 	TopbandComponent,
-// 	NavComponent,
-// 	FooterComponent,
-// 	NoContentComponent
-// } from './components';
 var home_component_1 = require('./components/main/home.component');
 var note_component_1 = require('./components/main/notes/note.component');
 var notes_component_1 = require('./components/main/notes/notes.component');
@@ -32,19 +27,17 @@ var about_component_1 = require('./components/main/about.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
 var register_component_1 = require('./components/main/register/register.component');
+// import {AboutComponent } from './components/main/about.component';
+// import {ProfileComponent } from './components/main/profile/profile.component';
+// import {LoginComponent } from './components/main/login/login.component';
 var notes_service_1 = require("./services/notes.service");
-// import {
-// 	HomeComponent,
-// 	NotesComponent,
-// 	AboutComponent,
-// 	Note
-// } from './components';
+var http_options_service_1 = require("./services/http-options.service");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, my_date_picker_module_1.MyDatePickerModule],
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule, my_date_picker_module_1.MyDatePickerModule],
             declarations: [
                 app_component_1.AppComponent,
                 topband_component_1.TopbandComponent,
@@ -52,7 +45,6 @@ var AppModule = (function () {
                 note_component_1.NoteComponent,
                 notes_component_1.NotesComponent,
                 add_note_component_1.AddNoteComponent,
-                //UserComponent,
                 nav_component_1.NavComponent,
                 footer_component_1.FooterComponent,
                 no_content_component_1.NoContentComponent,
@@ -61,7 +53,10 @@ var AppModule = (function () {
                 login_component_1.LoginComponent,
                 register_component_1.RegisterComponent
             ],
-            providers: [notes_service_1.NotesService],
+            providers: [
+                notes_service_1.NotesService,
+                http_options_service_1.HttpOptionsService
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

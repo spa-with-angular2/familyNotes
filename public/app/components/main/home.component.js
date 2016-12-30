@@ -9,12 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_component_1 = require('../users/user.component');
 var HomeComponent = (function () {
     function HomeComponent() {
-        this.userCtrl = new user_component_1.UserComponent();
-        this.alex = this.userCtrl.createUser();
-        console.log(this.alex);
     }
     HomeComponent = __decorate([
         core_1.Component({

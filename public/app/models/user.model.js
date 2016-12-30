@@ -16,6 +16,7 @@ var User = (function () {
         this.createdOn = new Date();
         this.username = username;
         this.passHash = passHash;
+        this.salt = 'SALT';
         this.role = role || '';
         this.fbId = fbId || '';
         this.fbToken = fbToken || '';

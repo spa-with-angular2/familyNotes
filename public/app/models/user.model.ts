@@ -13,7 +13,6 @@ export class User implements UserInterface{
     public gender: string;
     public country: string;
 
-
     public email: string;
     public profilePictures: string[];
     public families: string[];
@@ -21,6 +20,7 @@ export class User implements UserInterface{
 
     public username: string;
     public passHash: string;
+    private salt: string;
     private role: string;
     private fbId: string;
     private fbToken: string;
@@ -57,6 +57,7 @@ export class User implements UserInterface{
 
         this.username = username;
         this.passHash = passHash;
+        this.salt = 'SALT';
         this.role = role || '';
         this.fbId = fbId || '';
         this.fbToken = fbToken || '';

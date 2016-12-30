@@ -1,6 +1,4 @@
 "use strict";
-// import { Component, Input } from '@angular/core';
-var user_model_1 = require('../../models/user.model');
 // @Component ({
 //     selector: 'single-user',
 //     templateUrl: `
@@ -21,7 +19,7 @@ var UserComponent = (function () {
     }
     UserComponent.prototype.createUser = function () {
         var userToReturn;
-        userToReturn = new user_model_1.User('123456', 'Alexander', 'Toplijski', 36, 'male');
+        //userToReturn = new User('123456', 'Alexander', 'Toplijski', 36, 'male');
         return userToReturn;
     };
     return UserComponent;

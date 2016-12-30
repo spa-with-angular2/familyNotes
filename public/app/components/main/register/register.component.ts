@@ -1,15 +1,17 @@
 import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 import {CountriesEnum} from '../../../enumerations/countries.enum'
 import {User} from "../../../models/user.model";
 import {UserFactoryService} from '../../../services/user/user-factory.service'
 import {PasswordService} from "../../../services/password.service";
+import {UserAuthService} from "../../../services/user/user-register.service";
 
 
 @Component({
     selector: 'register',
     templateUrl: './app/components/main/register/register.component.html',
-    providers: [UserFactoryService, PasswordService],
+    providers: [UserFactoryService, PasswordService, UserAuthService],
     styleUrls: ['./app/components/header/nav-component.css' ,'./app/components/main/register/register-component.css' , './app/assets/css/hover.css'],
 })
 export class RegisterComponent {
@@ -24,7 +26,9 @@ export class RegisterComponent {
 
     constructor(
         private userFactoryService: UserFactoryService,
-        private passwordService: PasswordService
+        private passwordService: PasswordService,
+        private userAuthService: UserAuthService,
+        private router: Router
     ){
     }
 
@@ -36,18 +40,18 @@ export class RegisterComponent {
         this.options = options.slice(options.length / 2);
 
         this.newUserLikeObject = {
-            firstName: '',
-            lastName: '',
-            age: 1,
-            gender: '',
-            country: '',
+            firstName: 'Alexander',
+            lastName: 'Toplijski',
+            age: 12,
+            gender: 'Male',
+            country: 'Bg',
 
-            email: '',
+            email: 'email@email.com',
             profilePicture: '',
             families: [],
 
-            username: '',
-            password: ''
+            username: 'alex',
+            password: '123'
         };
 
         if(!this.isLoggedIn){
@@ -67,18 +71,44 @@ export class RegisterComponent {
 
     public onSubmit(){
         console.log('password-'+this.newUserLikeObject.password);
-
         this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
-        
+
         console.log('-------------------------');
 
         // TODO create user
         this.newUser = this.makeNewUser();
-        console.log(this.newUser);
 
         // TODO save to database
+        this.userAuthService.register(this.newUser)
+            .map((res) => res.json())
+            .subscribe((responseUser: any) => {
+                const method = 'success';
+                const message = 'You have registered successfully.';
+                const heading = 'Yay!';
+                console.log(message);
+                console.log(responseUser);
+                //const toastrNotificationOptions = this.toastrNotificationOptionsFactoryService
+                //    .createToastrNotificationOptions(method, message, heading);
 
-        // TODO redirect to login;
+                //this.toastrNotificationService.enqueueNotification(toastrNotificationOptions);
+            }, (err) => {
+                //this.isLoading = false;
+
+                const method = 'error';
+                const message = 'Email or username already in use.';
+                const heading = 'Oops!';
+                console.log(err);
+
+                // const toastrNotificationOptions = this.toastrNotificationOptionsFactoryService
+                //     .createToastrNotificationOptions(method, message, heading);
+                //
+                // this.toastrNotificationService.enqueueNotification(toastrNotificationOptions);
+            }, () => {
+                const that = this;
+                setTimeout(function () {
+                    that.router.navigate(['login']);
+                }, 1000);
+            });
     }
 
     private makeNewUser(): User{

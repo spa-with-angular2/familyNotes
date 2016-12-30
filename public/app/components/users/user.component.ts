@@ -23,7 +23,7 @@ export class UserComponent{
     public  createUser(): User{
         var userToReturn: User;
 
-        userToReturn = new User('123456', 'Alexander', 'Toplijski', 36, 'male');
+        //userToReturn = new User('123456', 'Alexander', 'Toplijski', 36, 'male');
 
         return userToReturn
     }
