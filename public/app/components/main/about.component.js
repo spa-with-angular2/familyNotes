@@ -11,11 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var AboutComponent = (function () {
     function AboutComponent() {
+        this.teamMembers = [
+            { gitHub: 'https://github.com/nadejdanicolova', name: "Nadezhda Nikolova", image: 'nadejda' },
+            { gitHub: 'https://github.com/MikeSteiner ', name: "Aleksandar Topliiski", image: 'aleksandur' },
+            { gitHub: 'https://github.com/susanok', name: "Suzana Manova", image: 'suzana' }
+        ];
     }
     AboutComponent = __decorate([
         core_1.Component({
             selector: 'about',
-            template: "<h1>about</h1>"
+            templateUrl: './app/components/main/about.component.html',
+            styleUrls: ['./app/components/main/about-component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);
