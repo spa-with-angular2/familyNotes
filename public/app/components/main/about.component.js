@@ -20,7 +20,7 @@ var AboutComponent = (function () {
     AboutComponent = __decorate([
         core_1.Component({
             selector: 'about',
-            templateUrl: './app/components/main/about.component.html',
+            template: "\n        <div>\n            <h1>Our Team</h1>\n            <hr>\n            <div *ngFor=\"let teamMate of teamMembers\">\n                <img src=\"app/assets/images/{{teamMate.image}}.jpg\" alt=\"\">\n                <h3>{{teamMate.name}}</h3>\n                <a href=\"{{teamMate.gitHub}}\">GitHub Profile</a>\n                <hr>\n            </div>\n        </div>\n    ",
             styleUrls: ['./app/components/main/about-component.css']
         }), 
         __metadata('design:paramtypes', [])
