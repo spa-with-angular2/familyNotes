@@ -15,9 +15,8 @@ var NoContentComponent = (function () {
     NoContentComponent = __decorate([
         core_1.Component({
             selector: 'no-content',
-            templateUrl: './app/components/error-pages/no-content.component.html',
-            styleUrls: ['./app/components/error-pages/error-page-404.css']
-        }), 
+            template: "\n        <div class=\"container\">\n            <div class=\"boo-wrapper\">\n                <h1>Whoops!</h1>\n                <p>\n                    We couldn't find the page you\n                    <br /> were looking for.\n                </p>\n            </div>\n        </div>",
+            styles: ["\n        .container {\n            font-family: 'Varela Round', sans-serif;\n            color: $booFaceColor;\n            position: relative;\n            height: 100vh;\n            text-align: center;\n            font-size: $jaggedDistance / 2;\n            h1 {\n                font-size: $jaggedDistance;\n                margin-top: $jaggedDistance;\n            }\n        }\n        .boo-wrapper {\n            width: 100%;\n            position: absolute;\n            top: 50%;\n            left: 50%;\n            transform: translate(-50%, -50%);\n            padding-top: $jaggedDistance * 2;\n            padding-bottom: $jaggedDistance * 2;"] }), 
         __metadata('design:paramtypes', [])
     ], NoContentComponent);
     return NoContentComponent;
