@@ -1,107 +1,78 @@
 import { UserInterface } from './contracts/user.contract';
 
-const noProfilePictureUrl: string = '../assets/images/default-user.png';
-const mainProfilePictureIndex: number = 0;
+// TODO extract constants
+const noProfilePictureUrl: string = '/app/assets/images/default-user.jpg';
+
 
 export class User implements UserInterface{
-    private id: string;
+    public id: string;
 
     public firstName: string;
     public lastName: string;
     public age: number;
     public gender: string;
-    public families: string[];
+    public country: string;
 
-    private email: string;
-    private profilePictures: string[];
+
+    public email: string;
+    public profilePictures: string[];
+    public families: string[];
+    public createdOn: Date;
 
     public username: string;
     private passHash: string;
-    private salt: string;
     private role: string;
     private fbId: string;
     private fbToken: string;
 
     constructor(
-        _id: string,
+        firstName: string,
+        lastName: string,
+        age: number,
+        gender: string,
+        country: string,
 
-        _firstName: string,
-        _lastName: string,
-        _age: number,
-        _gender: string,
+        email: string,
+        profilePicture: string,
 
-        // _email: string,
-        // _profilePictures: string[],
-
-        _username: string,
-        // _passHash: string,
-        // _salt: string,
-        // _role: string,
-        // _fbId: string,
-        // _fbToken: string,
+        username: string,
+        passHash: string,
+        role: string,
+        fbId: string,
+        fbToken: string,
     ){
-        this.id = _id;
+        this.id = '';
 
-        this.firstName = _firstName;
-        this.lastName = _lastName;
-        this.age = _age;
-        this.gender = _gender;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.country = country;
+
+        this.email = email;
+        this.profilePictures = [];
+        this.profilePictures = this.initProfilePictures(profilePicture);
         this.families = [];
+        this.createdOn = new Date();
 
-        // this.email = _email;
-        // this.profilePictures = this.initProfilePictures(_profilePictures);
-        //
-        this.username = _username;
-        // this.passHash = _passHash;
-        // this.fbId = _fbId;
-        // this.fbToken = _fbToken;
+        this.username = username;
+        this.passHash = passHash;
+        this.role = role || '';
+        this.fbId = fbId || '';
+        this.fbToken = fbToken || '';
     }
 
-    public getMainProfilePictureUrl(): string {
-        var mainProfilePictureUrlToReturn:string = '';
 
-        mainProfilePictureUrlToReturn = this.profilePictures[mainProfilePictureIndex];
 
-        return mainProfilePictureUrlToReturn;
-    }
+    private initProfilePictures(profilePictureUrl: string){
+        var profilePicturesCollectionToReturn: string[] = [];
 
-    public getProfilePicturesUrl(): string[] {
-        return undefined;
-    }
-
-    public hasFamily():boolean {
-        if(this.families == null || this.families == undefined){
-            return false;
-        }
-        if(this.families.length == 0){
-            return false;
-        }
-
-        return true;
-    }
-
-    public  getFamilies(): string[] {
-        var familiesToReturn: string[];
-
-        familiesToReturn = [];
-
-        console.log('getFamilies call-'+familiesToReturn);
-        return familiesToReturn;
-    }
-
-    private initProfilePictures(_profilePictures: string[]){
-        var profilePicturesCollectionToReturn: string[];
-        profilePicturesCollectionToReturn = [];
-
-        if ((_profilePictures == null) || (_profilePictures == undefined)){
+        if ((profilePictureUrl == null) || (profilePictureUrl == undefined)){
             profilePicturesCollectionToReturn.push(noProfilePictureUrl);
-        }
-        if (_profilePictures.length == 0){
+        } else  if (profilePictureUrl == ''){
             profilePicturesCollectionToReturn.push(noProfilePictureUrl);
-        }
-
-        for (var pictureSrc of _profilePictures){
-            profilePicturesCollectionToReturn.push(pictureSrc);
+        } else {
+            profilePicturesCollectionToReturn.push(profilePictureUrl);
         }
 
         return profilePicturesCollectionToReturn;

@@ -1,16 +1,19 @@
 export interface UserInterface
 {
+    id: string;
+
     firstName: string;
     lastName: string;
     age: number;
     gender: string;
+    country: string;
+
+
+    email: string;
+    profilePictures: string[];
     families: string[];
+    createdOn: Date;
 
-    getMainProfilePictureUrl(): string;
+    username: string;
 
-    getProfilePicturesUrl(): string[];
-
-    getFamilies(): string[];
-
-    hasFamily():boolean;
 }

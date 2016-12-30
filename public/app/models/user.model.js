@@ -1,60 +1,35 @@
 "use strict";
-var noProfilePictureUrl = '../assets/images/default-user.png';
-var mainProfilePictureIndex = 0;
+// TODO extract constants
+var noProfilePictureUrl = '/app/assets/images/default-user.jpg';
 var User = (function () {
-    function User(_id, _firstName, _lastName, _age, _gender, 
-        // _email: string,
-        // _profilePictures: string[],
-        _username) {
-        this.id = _id;
-        this.firstName = _firstName;
-        this.lastName = _lastName;
-        this.age = _age;
-        this.gender = _gender;
+    function User(firstName, lastName, age, gender, country, email, profilePicture, username, passHash, role, fbId, fbToken) {
+        this.id = '';
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.country = country;
+        this.email = email;
+        this.profilePictures = [];
+        this.profilePictures = this.initProfilePictures(profilePicture);
         this.families = [];
-        // this.email = _email;
-        // this.profilePictures = this.initProfilePictures(_profilePictures);
-        //
-        this.username = _username;
-        // this.passHash = _passHash;
-        // this.fbId = _fbId;
-        // this.fbToken = _fbToken;
+        this.createdOn = new Date();
+        this.username = username;
+        this.passHash = passHash;
+        this.role = role || '';
+        this.fbId = fbId || '';
+        this.fbToken = fbToken || '';
     }
-    User.prototype.getMainProfilePictureUrl = function () {
-        var mainProfilePictureUrlToReturn = '';
-        mainProfilePictureUrlToReturn = this.profilePictures[mainProfilePictureIndex];
-        return mainProfilePictureUrlToReturn;
-    };
-    User.prototype.getProfilePicturesUrl = function () {
-        return undefined;
-    };
-    User.prototype.hasFamily = function () {
-        if (this.families == null || this.families == undefined) {
-            return false;
-        }
-        if (this.families.length == 0) {
-            return false;
-        }
-        return true;
-    };
-    User.prototype.getFamilies = function () {
-        var familiesToReturn;
-        familiesToReturn = [];
-        console.log('getFamilies call-' + familiesToReturn);
-        return familiesToReturn;
-    };
-    User.prototype.initProfilePictures = function (_profilePictures) {
-        var profilePicturesCollectionToReturn;
-        profilePicturesCollectionToReturn = [];
-        if ((_profilePictures == null) || (_profilePictures == undefined)) {
+    User.prototype.initProfilePictures = function (profilePictureUrl) {
+        var profilePicturesCollectionToReturn = [];
+        if ((profilePictureUrl == null) || (profilePictureUrl == undefined)) {
             profilePicturesCollectionToReturn.push(noProfilePictureUrl);
         }
-        if (_profilePictures.length == 0) {
+        else if (profilePictureUrl == '') {
             profilePicturesCollectionToReturn.push(noProfilePictureUrl);
         }
-        for (var _i = 0, _profilePictures_1 = _profilePictures; _i < _profilePictures_1.length; _i++) {
-            var pictureSrc = _profilePictures_1[_i];
-            profilePicturesCollectionToReturn.push(pictureSrc);
+        else {
+            profilePicturesCollectionToReturn.push(profilePictureUrl);
         }
         return profilePicturesCollectionToReturn;
     };
