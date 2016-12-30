@@ -11,6 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ProfileComponent = (function () {
     function ProfileComponent() {
+        this.user = {
+            username: 'ivan.ivanov',
+            email: 'ivan.ivanov@abv.bg',
+            name: 'Ivan Ivanov',
+            age: '20',
+            country: 'Bulgaria',
+            imageUrl: 'app/assets/images/cover-photo.jpg'
+        };
+        this.doneNotes = [
+            { noteUrl: '#', name: "Clean House" },
+            { noteUrl: '#', name: "Cook Dinner" },
+            { noteUrl: '#', name: "Feed the cat" },
+            { noteUrl: '#', name: "Brush teeth" }
+        ];
+        this.activeNotes = [
+            { noteUrl: '#', name: "Finish homework" },
+            { noteUrl: '#', name: "Study for exam" }
+        ];
     }
     ProfileComponent = __decorate([
         core_1.Component({

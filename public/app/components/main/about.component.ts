@@ -24,5 +24,4 @@ export class AboutComponent {
         { gitHub: 'https://github.com/MikeSteiner ', name: "Aleksandar Topliiski", image: 'aleksandur' },
         { gitHub: 'https://github.com/susanok', name: "Suzana Manova", image: 'suzana' }
     ];
-
 }

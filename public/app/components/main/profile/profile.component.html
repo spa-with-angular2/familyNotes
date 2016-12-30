@@ -2,13 +2,13 @@
     <div class="col-lg-6 col-sm-6 content">
         <div class="card hovercard">
             <div class="card-background">
-                <img class="card-bkimg" alt="" src="app/assets/images/cover-photo.jpg">
+                <img class="card-bkimg" alt="" src="{{user.imageUrl}}">
             </div>
             <div class="useravatar">
-                <img alt="" src="app/assets/images/default-user.jpg">
+                <img alt="" src="{{user.imageUrl}}">
             </div>
-            <div class="card-info"> <span class="card-title">Ivan Ivanov</span>
-
+            <div class="card-info">
+                <span class="card-title">{{user.name}}</span>
             </div>
         </div>
         <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
@@ -22,14 +22,36 @@
                     <div class="hidden-xs">Active notes</div>
                 </button>
             </div>
+            <div class="btn-group" role="group">
+                <button type="button" id="favorites" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    <div class="hidden-xs">User Information</div>
+                </button>
+            </div>
         </div>
         <div class="well">
             <div class="tab-content">
                 <div class="tab-pane fade in" id="tab1">
-                    <h3>This is tab 1</h3>
+                    <ul *ngFor="let activeNote of activeNotes">
+                        <li>
+                            <a href="{{activeNote.noteUrl}}">{{activeNote.name}}</a>
+                            <hr>
+                        </li>
+                    </ul>
                 </div>
                 <div class="tab-pane fade in" id="tab2">
-                    <h3>This is tab 2</h3>
+                    <ul *ngFor="let doneNote of doneNotes">
+                        <li>
+                            <a href="{{doneNote.noteUrl}}">{{doneNote.name}}</a>
+                            <hr>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade in" id="tab3">
+                    <p><strong>Username: </strong> {{user.username}}</p>
+                    <p><strong>Email: </strong> {{user.email}} </p>
+                    <p><strong>Name: </strong> {{user.name}} </p>
+                    <p><strong>Age: </strong> {{user.age}}</p>
+                    <p><strong>Country: </strong> {{user.country}}</p>
                 </div>
             </div>
         </div>

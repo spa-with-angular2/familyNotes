@@ -96,6 +96,40 @@
     margin-bottom: 17px;
 }
 
+p {
+    text-align: center;
+}
+
+@media only screen and (max-width: 780px) {
+    p {
+        font-size: 17px;
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+ul li a {
+    color: #3E3F3A;
+    font-size: 19px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+ul li:hover a {
+    color: #31322e;
+    text-shadow: 2px 2px 9px rgba(150, 150, 150, 0.55);
+}
+
 .btn-pref .btn {
     -webkit-border-radius: 0 !important;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #3E3F3A;
+    background-image: linear-gradient(to right, #ccc, #3E3F3A, #ccc);
 }
