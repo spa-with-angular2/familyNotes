@@ -27,9 +27,17 @@ import { RegisterComponent } from './components/main/register/register.component
 
 import {NotesService} from "./services/notes.service";
 import {HttpOptionsService} from "./services/http-options.service";
+import {ToastrModule} from "toastr-ng2";
 
 @NgModule({
-	imports:[BrowserModule, FormsModule, routing, HttpModule, MyDatePickerModule],
+	imports:[
+		BrowserModule,
+		FormsModule,
+		routing,
+		HttpModule,
+		MyDatePickerModule,
+		ToastrModule.forRoot()
+	],
 	declarations:[
 		AppComponent,
 		TopbandComponent,

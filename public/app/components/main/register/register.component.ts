@@ -6,6 +6,7 @@ import {User} from "../../../models/user.model";
 import {UserFactoryService} from '../../../services/user/user-factory.service'
 import {PasswordService} from "../../../services/password.service";
 import {UserAuthService} from "../../../services/user/user-register.service";
+import {ToastrService} from "toastr-ng2";
 
 
 @Component({
@@ -28,7 +29,8 @@ export class RegisterComponent {
         private userFactoryService: UserFactoryService,
         private passwordService: PasswordService,
         private userAuthService: UserAuthService,
-        private router: Router
+        private router: Router,
+        private toastrService: ToastrService
     ){
     }
 
@@ -82,15 +84,13 @@ export class RegisterComponent {
         this.userAuthService.register(this.newUser)
             .map((res) => res.json())
             .subscribe((responseUser: any) => {
-                const method = 'success';
+
                 const message = 'You have registered successfully.';
                 const heading = 'Yay!';
-                console.log(message);
-                console.log(responseUser);
-                //const toastrNotificationOptions = this.toastrNotificationOptionsFactoryService
-                //    .createToastrNotificationOptions(method, message, heading);
+                this.toastrService.success(message, heading);
 
-                //this.toastrNotificationService.enqueueNotification(toastrNotificationOptions);
+                console.log(responseUser);
+
             }, (err) => {
                 //this.isLoading = false;
 
@@ -107,7 +107,7 @@ export class RegisterComponent {
                 const that = this;
                 setTimeout(function () {
                     that.router.navigate(['login']);
-                }, 1000);
+                }, 6000);
             });
     }
 

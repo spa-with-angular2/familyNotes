@@ -32,12 +32,20 @@ var register_component_1 = require('./components/main/register/register.componen
 // import {LoginComponent } from './components/main/login/login.component';
 var notes_service_1 = require("./services/notes.service");
 var http_options_service_1 = require("./services/http-options.service");
+var toastr_ng2_1 = require("toastr-ng2");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule, my_date_picker_module_1.MyDatePickerModule],
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                app_routing_1.routing,
+                http_1.HttpModule,
+                my_date_picker_module_1.MyDatePickerModule,
+                toastr_ng2_1.ToastrModule.forRoot()
+            ],
             declarations: [
                 app_component_1.AppComponent,
                 topband_component_1.TopbandComponent,

@@ -14,12 +14,14 @@ var countries_enum_1 = require('../../../enumerations/countries.enum');
 var user_factory_service_1 = require('../../../services/user/user-factory.service');
 var password_service_1 = require("../../../services/password.service");
 var user_register_service_1 = require("../../../services/user/user-register.service");
+var toastr_ng2_1 = require("toastr-ng2");
 var RegisterComponent = (function () {
-    function RegisterComponent(userFactoryService, passwordService, userAuthService, router) {
+    function RegisterComponent(userFactoryService, passwordService, userAuthService, router, toastrService) {
         this.userFactoryService = userFactoryService;
         this.passwordService = passwordService;
         this.userAuthService = userAuthService;
         this.router = router;
+        this.toastrService = toastrService;
         this.AgentStatus = countries_enum_1.CountriesEnum;
     }
     RegisterComponent.prototype.ngOnInit = function () {
@@ -61,14 +63,10 @@ var RegisterComponent = (function () {
         this.userAuthService.register(this.newUser)
             .map(function (res) { return res.json(); })
             .subscribe(function (responseUser) {
-            var method = 'success';
             var message = 'You have registered successfully.';
             var heading = 'Yay!';
-            console.log(message);
+            _this.toastrService.success(message, heading);
             console.log(responseUser);
-            //const toastrNotificationOptions = this.toastrNotificationOptionsFactoryService
-            //    .createToastrNotificationOptions(method, message, heading);
-            //this.toastrNotificationService.enqueueNotification(toastrNotificationOptions);
         }, function (err) {
             //this.isLoading = false;
             var method = 'error';
@@ -83,7 +81,7 @@ var RegisterComponent = (function () {
             var that = _this;
             setTimeout(function () {
                 that.router.navigate(['login']);
-            }, 1000);
+            }, 6000);
         });
     };
     RegisterComponent.prototype.makeNewUser = function () {
@@ -98,7 +96,7 @@ var RegisterComponent = (function () {
             providers: [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_register_service_1.UserAuthService],
             styleUrls: ['./app/components/header/nav-component.css', './app/components/main/register/register-component.css', './app/assets/css/hover.css'],
         }), 
-        __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_register_service_1.UserAuthService, router_1.Router])
+        __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_register_service_1.UserAuthService, router_1.Router, toastr_ng2_1.ToastrService])
     ], RegisterComponent);
     return RegisterComponent;
 }());
