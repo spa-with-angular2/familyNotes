@@ -35,7 +35,7 @@ export class ProfileComponent {
     ];
 
     constructor(private userDataService: UserDateService){
-        this.localUser = JSON.parse(localStorage.getItem('user')).result;
+        this.localUser = JSON.parse(localStorage.getItem('user'));
         console.log('localUsaerData');
         console.log(this.localUser);
     }

@@ -13,13 +13,14 @@ var http_1 = require('@angular/http');
 // Import RxJx required methods
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
+var http_options_service_1 = require("../http-options.service");
 // @Component(){
 //     providers: [HttpOptionsService]
 // }
 var UserDateService = (function () {
-    function UserDateService(http //,
-        ) {
+    function UserDateService(http, httpOptionsService) {
         this.http = http;
+        this.httpOptionsService = httpOptionsService;
     }
     UserDateService.prototype.ngOnInit = function () {
         this.headerOptions = { 'Content-Type': 'application/json' };
@@ -38,12 +39,19 @@ var UserDateService = (function () {
             .map(function (response) { return response.json(); });
         return allUsersDataToReturn;
     };
+    UserDateService.prototype.updateUserData = function (updatedUser) {
+        var respToReturn;
+        var requestOptions = this.httpOptionsService.getRequestOptions(true);
+        console.log(updatedUser);
+        respToReturn = this.http.post(UserDateService.SINGLE_USER_DATA_URL + updatedUser._id, JSON.stringify(updatedUser), requestOptions);
+        return respToReturn;
+    };
     UserDateService.BASE_DOMAIN_URL = 'http://localhost:3003/api/';
     UserDateService.SINGLE_USER_DATA_URL = UserDateService.BASE_DOMAIN_URL + 'users/';
     UserDateService.ALL_USERS_DATA_URL = UserDateService.BASE_DOMAIN_URL + 'users/all';
     UserDateService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, http_options_service_1.HttpOptionsService])
     ], UserDateService);
     return UserDateService;
 }());
