@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 			padding: 0;
 		}
 		main {
-			min-height: 550px;
+			min-height: 600px;
 		}	
 	`]
 

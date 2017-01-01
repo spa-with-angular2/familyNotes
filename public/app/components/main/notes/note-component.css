@@ -1,0 +1,98 @@
+label {
+    display: block;
+    text-align: center;
+}
+
+.btn-right {
+    display: inline-block;
+    float: right;
+}
+
+@media only screen and (max-width: 780px) {
+    .wrapper {
+        margin: 10px 10px 10px;
+    }
+}
+
+.title {
+    text-decoration: none;
+}
+
+.span-options {
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.color-selector {
+    display: block;
+    margin: auto;
+}
+
+.input-title {
+    display: block;
+    margin: auto;
+}
+
+textarea {
+    display: block;
+    margin: auto;
+}
+
+h4 {
+    text-align: center;
+}
+
+.status-image {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.bg-lightgrey {
+    background-color: lightgrey;
+}
+
+.bg-orange {
+    background-color: orange;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.image-state {
+    padding-right: 2px;
+}
+
+.author-link {
+    text-decoration: none;
+    color: #3E3F3A;
+    font-size: 16px;
+}
+
+.author-link:hover {
+    color: #1f1f1d
+}
+
+@media only screen and (max-width: 780px) {
+    .image-state {
+        display: inline-block;
+    }
+}
+
+.title-state {
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 780px) {
+    .title-state {
+        display: inline-block;
+    }
+}

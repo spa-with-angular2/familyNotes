@@ -18,25 +18,8 @@ const DEFAULT_STATE_INDEX: number = NoteStatesEnum.Todo;
 @Component ({
     selector: 'single-note',
     templateUrl: './app/components/main/notes/note.component.html',
-    styles: [`
-        .status-image{
-            min-width: 16px;
-            max-width: 20px;
-            cursor: pointer;
-        }
-        .bg-lightgrey {
-            background-color: lightgrey;
-        }
-        .bg-orange {
-            background-color: orange;
-        }
-        .bg-green {
-            background-color: green;
-        }
-        .bg-red {
-            background-color: red;
-        }
-    `]
+    styleUrls: ['./app/components/main/notes/note-component.css' , './app/assets/css/hover.css']
+    
 })
 export class NoteComponent implements NoteComponentInterface, OnInit{
 

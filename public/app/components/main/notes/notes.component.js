@@ -29,7 +29,7 @@ var NotesComponent = (function () {
             selector: 'notes-container',
             templateUrl: './app/components/main/notes/notes.component.html',
             providers: [notes_service_1.NotesService],
-            styles: [""]
+            styles: ["\n    h2 {\n        text-align: center;\n    }\n    "]
         }), 
         __metadata('design:paramtypes', [notes_service_1.NotesService])
     ], NotesComponent);

@@ -16,7 +16,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'family-notes-app',
             templateUrl: './app/app.component.html',
-            styles: ["\n\t\theader{\n\t\t\tfont-family: Arial, Helvetica, sans-serif;\n\t\t\t\n\t\t\tmargin: 0;\n\t\t\tpadding: 0;\n\t\t}\n\t\tmain {\n\t\t\tmin-height: 550px;\n\t\t}\t\n\t"]
+            styles: ["\n\t\theader{\n\t\t\tfont-family: Arial, Helvetica, sans-serif;\n\t\t\t\n\t\t\tmargin: 0;\n\t\t\tpadding: 0;\n\t\t}\n\t\tmain {\n\t\t\tmin-height: 600px;\n\t\t}\t\n\t"]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

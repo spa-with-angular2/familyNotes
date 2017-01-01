@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h2>See your notes.</h2>
+            <h2>See All Notes</h2>
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -10,13 +10,11 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <div class="row">
-                <single-note
-                        *ngFor="let note of notes"
-                        [notedata]="note"
-                >
+                <single-note *ngFor="let note of notes" [notedata]="note">
                 </single-note>
             </div>
-        </div><!-- /.col-md-8 -->
+        </div>
+        <!-- /.col-md-8 -->
         <div class="col-md-2"></div>
     </div>
 </div>

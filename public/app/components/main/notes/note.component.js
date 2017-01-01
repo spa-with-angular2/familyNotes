@@ -115,7 +115,7 @@ var NoteComponent = (function () {
         core_1.Component({
             selector: 'single-note',
             templateUrl: './app/components/main/notes/note.component.html',
-            styles: ["\n        .status-image{\n            min-width: 16px;\n            max-width: 20px;\n            cursor: pointer;\n        }\n        .bg-lightgrey {\n            background-color: lightgrey;\n        }\n        .bg-orange {\n            background-color: orange;\n        }\n        .bg-green {\n            background-color: green;\n        }\n        .bg-red {\n            background-color: red;\n        }\n    "]
+            styleUrls: ['./app/components/main/notes/note-component.css', './app/assets/css/hover.css']
         }), 
         __metadata('design:paramtypes', [])
     ], NoteComponent);

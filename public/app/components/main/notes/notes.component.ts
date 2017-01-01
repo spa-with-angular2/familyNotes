@@ -6,7 +6,11 @@ import {NotesService} from "../../../services/notes.service";
     selector: 'notes-container',
     templateUrl: './app/components/main/notes/notes.component.html',
     providers: [NotesService],
-    styles: [``]
+    styles: [`
+    h2 {
+        text-align: center;
+    }
+    `]
 })
 export class NotesComponent{
 
