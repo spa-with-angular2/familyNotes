@@ -35,7 +35,6 @@ var NoteComponent = (function () {
         this.noteColors = enum_utilities_1.EnumUtils.values(colors_enum_1.ColorsEnum);
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
         this.showMoreOptions = false;
-        console.log('expireDate-' + this.notedata.expireDate);
     };
     NoteComponent.prototype.changeColor = function (color) {
         this.notedata.color = color;
@@ -97,8 +96,6 @@ var NoteComponent = (function () {
         }
     };
     NoteComponent.prototype.save = function () {
-        // TODO note save to database
-        // TODO Reload new note data
         this.notedata.areUnsavedChanges = false;
         console.log('Note changes saved to database!');
         return undefined;
