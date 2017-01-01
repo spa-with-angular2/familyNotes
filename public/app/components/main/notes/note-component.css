@@ -6,12 +6,17 @@ label {
 .btn-right {
     display: inline-block;
     float: right;
+    margin-left: 5px;
 }
 
 @media only screen and (max-width: 780px) {
     .wrapper {
         margin: 10px 10px 10px;
     }
+}
+
+.panel-body {
+    word-wrap: break-word;
 }
 
 .title {
