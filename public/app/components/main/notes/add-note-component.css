@@ -17,6 +17,10 @@
     }
 }
 
+.text {
+    word-wrap: break-word;
+}
+
 button {
     margin-left: 10px;
     margin-bottom: 5px;
