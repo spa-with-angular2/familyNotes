@@ -1,9 +1,18 @@
 <div class="wrapper">
     <div class="container">
         <h1>Log in</h1>
-        <form class="form">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+        <!--<form class="form">-->
+        <form #loginUserForm="ngForm" (ngSubmit)="onSubmit()">
+            <input type="text" id="inputUsername" name="inputUsername" placeholder="Username"
+                   ngControl="username"
+                   [(ngModel)]="newLoginObject.username" hidden
+            />
+            <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password"
+                   ngControl="password"
+                   [(ngModel)]="newLoginObject.password"
+            />
+            <!--<input type="text" placeholder="Username">-->
+            <!--<input type="password" placeholder="Password">-->
             <button type="submit" id="login-button">Login</button>
         </form>
     </div>

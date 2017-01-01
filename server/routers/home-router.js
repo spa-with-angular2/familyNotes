@@ -5,5 +5,4 @@ module.exports = ({ app, controllers }) => {
 
     app.get("/", homeController.loadHomePage);
     app.get("/test", homeController.test);
-    app.get("/api/test", homeController.test);
 };

@@ -1,13 +1,12 @@
 export interface UserInterface
 {
-    id: string;
+    _id: string;
 
     firstName: string;
     lastName: string;
     age: number;
     gender: string;
     country: string;
-
 
     email: string;
     profilePictures: string[];

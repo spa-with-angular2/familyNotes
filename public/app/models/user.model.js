@@ -3,7 +3,7 @@
 var noProfilePictureUrl = '/app/assets/images/default-user.jpg';
 var User = (function () {
     function User(firstName, lastName, age, gender, country, email, profilePicture, username, passHash, role, fbId, fbToken) {
-        this.id = '';
+        this._id = '';
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

@@ -9,10 +9,6 @@ module.exports = () => {
         test(req, res) {
             console.log(req.user);
             res.json(req.user);
-        },
-        authtest(req, res) {
-            console.log(req.user);
-            res.json(JSON.stringify({ "array": "authtest response" }));
         }
     };
 };

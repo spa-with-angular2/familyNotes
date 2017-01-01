@@ -9,16 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var user_data_service_1 = require("../../../services/user/user-data.service");
 var ProfileComponent = (function () {
-    function ProfileComponent() {
-        this.user = {
-            username: 'ivan.ivanov',
-            email: 'ivan.ivanov@abv.bg',
-            name: 'Ivan Ivanov',
-            age: '20',
-            country: 'Bulgaria',
-            imageUrl: 'app/assets/images/cover-photo.jpg'
-        };
+    function ProfileComponent(userDataService) {
+        this.userDataService = userDataService;
         this.doneNotes = [
             { noteUrl: '#', name: "Clean House" },
             { noteUrl: '#', name: "Cook Dinner" },
@@ -29,14 +23,31 @@ var ProfileComponent = (function () {
             { noteUrl: '#', name: "Finish homework" },
             { noteUrl: '#', name: "Study for exam" }
         ];
+        this.localUser = JSON.parse(localStorage.getItem('user')).result;
+        console.log('localUsaerData');
+        console.log(this.localUser);
     }
+    ProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log(this.localUser._id);
+        this.userDataService
+            .getUserData(this.localUser._id)
+            .subscribe(function (resultDbUser) {
+            _this.dbUser = resultDbUser;
+            console.log(resultDbUser);
+        });
+        this.user = this.localUser;
+        this.profilePictureUrl = this.localUser.profilePictures[0];
+        //this.user = this.dbUser;
+    };
     ProfileComponent = __decorate([
         core_1.Component({
             selector: 'profile',
+            providers: [user_data_service_1.UserDateService],
             templateUrl: './app/components/main/profile/profile.component.html',
             styleUrls: ['./app/components/main/profile/profile-component.css'],
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [user_data_service_1.UserDateService])
     ], ProfileComponent);
     return ProfileComponent;
 }());

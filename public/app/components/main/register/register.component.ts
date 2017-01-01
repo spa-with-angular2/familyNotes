@@ -5,7 +5,7 @@ import {CountriesEnum} from '../../../enumerations/countries.enum'
 import {User} from "../../../models/user.model";
 import {UserFactoryService} from '../../../services/user/user-factory.service'
 import {PasswordService} from "../../../services/password.service";
-import {UserAuthService} from "../../../services/user/user-register.service";
+import {UserAuthService} from "../../../services/user/user-auth.service";
 import {ToastrService} from "toastr-ng2";
 
 
@@ -31,10 +31,9 @@ export class RegisterComponent {
         private userAuthService: UserAuthService,
         private router: Router,
         private toastrService: ToastrService
-    ){
-    }
+    ){}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isLoggedIn = false;
 
         var x = CountriesEnum;
@@ -72,49 +71,19 @@ export class RegisterComponent {
     }
 
     public onSubmit(){
-        console.log('password-'+this.newUserLikeObject.password);
-        this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
+        // TODO make password encryption on client side
+        // console.log('password-'+this.newUserLikeObject.password);
+        // this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
 
         console.log('-------------------------');
-
-        // TODO create user
-        this.newUser = this.makeNewUser();
-
-        // TODO save to database
-        this.userAuthService.register(this.newUser)
-            .map((res) => res.json())
-            .subscribe((responseUser: any) => {
-
-                const message = 'You have registered successfully.';
-                const heading = 'Yay!';
-                this.toastrService.success(message, heading);
-
-                console.log(responseUser);
-
-            }, (err) => {
-                //this.isLoading = false;
-
-                const method = 'error';
-                const message = 'Email or username already in use.';
-                const heading = 'Oops!';
-                console.log(err);
-
-                // const toastrNotificationOptions = this.toastrNotificationOptionsFactoryService
-                //     .createToastrNotificationOptions(method, message, heading);
-                //
-                // this.toastrNotificationService.enqueueNotification(toastrNotificationOptions);
-            }, () => {
-                const that = this;
-                setTimeout(function () {
-                    that.router.navigate(['login']);
-                }, 6000);
-            });
+        this.makeNewUser();
+        this.registerNewUser();
     }
 
-    private makeNewUser(): User{
-        var newUserToReturn: User;
+    private makeNewUser(): void{
+        //var newUserToReturn: User;
 
-        newUserToReturn = this.userFactoryService.createUser(
+        this.newUser = this.userFactoryService.createUser(
             '',
             this.newUserLikeObject.firstName,
             this.newUserLikeObject.lastName,
@@ -132,7 +101,38 @@ export class RegisterComponent {
             ''
         );
 
-        return newUserToReturn;
+        //return newUserToReturn;
+    }
+
+    private registerNewUser(): void {
+        this.userAuthService
+            .register(this.newUser)
+            .map((res) => res.json())
+            .subscribe((responseUser: any) => {
+
+                const message = 'You have registered successfully.';
+                const heading = 'Yay! ';
+                this.toastrService.success(message, heading);
+
+                console.log(heading + message);
+                console.log(responseUser);
+
+            }, (err) => {
+                //this.isLoading = false;
+
+                const method = 'error';
+                const message = 'Email or username already in use.';
+                const heading = 'Oops!';
+
+                console.log(heading + message);
+                console.log(err);
+
+            }, () => {
+                const that = this;
+                setTimeout(function () {
+                    that.router.navigate(['login']);
+                }, 4000);
+            });
     }
 
 }

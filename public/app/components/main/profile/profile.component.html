@@ -2,13 +2,13 @@
     <div class="col-lg-6 col-sm-6 content">
         <div class="card hovercard">
             <div class="card-background">
-                <img class="card-bkimg" alt="" src="{{user.imageUrl}}">
+                <img class="card-bkimg" alt="" src="{{profilePictureUrl}}">
             </div>
             <div class="useravatar">
-                <img alt="" src="{{user.imageUrl}}">
+                <img alt="" src="{{profilePictureUrl}}">
             </div>
             <div class="card-info">
-                <span class="card-title">{{user.name}}</span>
+                <span class="card-title">{{user.firstName}}</span>
             </div>
         </div>
         <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
@@ -18,12 +18,12 @@
                 </button>
             </div>
             <div class="btn-group" role="group">
-                <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                <button type="button" id="active-notes" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                     <div class="hidden-xs">Active notes</div>
                 </button>
             </div>
             <div class="btn-group" role="group">
-                <button type="button" id="favorites" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <button type="button" id="user-information" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     <div class="hidden-xs">User Information</div>
                 </button>
             </div>
@@ -49,7 +49,8 @@
                 <div class="tab-pane fade in" id="tab3">
                     <p><strong>Username: </strong> {{user.username}}</p>
                     <p><strong>Email: </strong> {{user.email}} </p>
-                    <p><strong>Name: </strong> {{user.name}} </p>
+                    <p><strong>First name: </strong> {{user.firstName}} </p>
+                    <p><strong>Last name: </strong> {{user.lastName}} </p>
                     <p><strong>Age: </strong> {{user.age}}</p>
                     <p><strong>Country: </strong> {{user.country}}</p>
                 </div>

@@ -13,7 +13,7 @@ var router_1 = require("@angular/router");
 var countries_enum_1 = require('../../../enumerations/countries.enum');
 var user_factory_service_1 = require('../../../services/user/user-factory.service');
 var password_service_1 = require("../../../services/password.service");
-var user_register_service_1 = require("../../../services/user/user-register.service");
+var user_auth_service_1 = require("../../../services/user/user-auth.service");
 var toastr_ng2_1 = require("toastr-ng2");
 var RegisterComponent = (function () {
     function RegisterComponent(userFactoryService, passwordService, userAuthService, router, toastrService) {
@@ -53,50 +53,51 @@ var RegisterComponent = (function () {
         this.newUserLikeObject.country = value;
     };
     RegisterComponent.prototype.onSubmit = function () {
-        var _this = this;
-        console.log('password-' + this.newUserLikeObject.password);
-        this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
+        // TODO make password encryption on client side
+        // console.log('password-'+this.newUserLikeObject.password);
+        // this.newUserLikeObject.password = this.passwordService.hashPassword(this.newUserLikeObject.password);
         console.log('-------------------------');
-        // TODO create user
-        this.newUser = this.makeNewUser();
-        // TODO save to database
-        this.userAuthService.register(this.newUser)
+        this.makeNewUser();
+        this.registerNewUser();
+    };
+    RegisterComponent.prototype.makeNewUser = function () {
+        //var newUserToReturn: User;
+        this.newUser = this.userFactoryService.createUser('', this.newUserLikeObject.firstName, this.newUserLikeObject.lastName, this.newUserLikeObject.age, this.newUserLikeObject.gender, this.newUserLikeObject.country, this.newUserLikeObject.email, this.newUserLikeObject.profilePicture, this.newUserLikeObject.username, this.newUserLikeObject.password, '', '', '');
+        //return newUserToReturn;
+    };
+    RegisterComponent.prototype.registerNewUser = function () {
+        var _this = this;
+        this.userAuthService
+            .register(this.newUser)
             .map(function (res) { return res.json(); })
             .subscribe(function (responseUser) {
             var message = 'You have registered successfully.';
-            var heading = 'Yay!';
+            var heading = 'Yay! ';
             _this.toastrService.success(message, heading);
+            console.log(heading + message);
             console.log(responseUser);
         }, function (err) {
             //this.isLoading = false;
             var method = 'error';
             var message = 'Email or username already in use.';
             var heading = 'Oops!';
+            console.log(heading + message);
             console.log(err);
-            // const toastrNotificationOptions = this.toastrNotificationOptionsFactoryService
-            //     .createToastrNotificationOptions(method, message, heading);
-            //
-            // this.toastrNotificationService.enqueueNotification(toastrNotificationOptions);
         }, function () {
             var that = _this;
             setTimeout(function () {
                 that.router.navigate(['login']);
-            }, 6000);
+            }, 4000);
         });
-    };
-    RegisterComponent.prototype.makeNewUser = function () {
-        var newUserToReturn;
-        newUserToReturn = this.userFactoryService.createUser('', this.newUserLikeObject.firstName, this.newUserLikeObject.lastName, this.newUserLikeObject.age, this.newUserLikeObject.gender, this.newUserLikeObject.country, this.newUserLikeObject.email, this.newUserLikeObject.profilePicture, this.newUserLikeObject.username, this.newUserLikeObject.password, '', '', '');
-        return newUserToReturn;
     };
     RegisterComponent = __decorate([
         core_1.Component({
             selector: 'register',
             templateUrl: './app/components/main/register/register.component.html',
-            providers: [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_register_service_1.UserAuthService],
+            providers: [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_auth_service_1.UserAuthService],
             styleUrls: ['./app/components/header/nav-component.css', './app/components/main/register/register-component.css', './app/assets/css/hover.css'],
         }), 
-        __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_register_service_1.UserAuthService, router_1.Router, toastr_ng2_1.ToastrService])
+        __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_auth_service_1.UserAuthService, router_1.Router, toastr_ng2_1.ToastrService])
     ], RegisterComponent);
     return RegisterComponent;
 }());

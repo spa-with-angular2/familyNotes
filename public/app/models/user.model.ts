@@ -5,7 +5,7 @@ const noProfilePictureUrl: string = '/app/assets/images/default-user.jpg';
 
 
 export class User implements UserInterface{
-    public id: string;
+    public _id: string;
 
     public firstName: string;
     public lastName: string;
@@ -41,7 +41,7 @@ export class User implements UserInterface{
         fbId: string,
         fbToken: string,
     ){
-        this.id = '';
+        this._id = '';
 
         this.firstName = firstName;
         this.lastName = lastName;

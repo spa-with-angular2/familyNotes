@@ -3,6 +3,7 @@ import {BrowserModule } from "@angular/platform-browser";
 import {FormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MyDatePickerModule} from 'mydatepicker/dist/my-date-picker.module';
+import {ToastrModule} from "toastr-ng2";
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -27,7 +28,8 @@ import { RegisterComponent } from './components/main/register/register.component
 
 import {NotesService} from "./services/notes.service";
 import {HttpOptionsService} from "./services/http-options.service";
-import {ToastrModule} from "toastr-ng2";
+import {ToastrService} from "toastr-ng2";
+
 
 @NgModule({
 	imports:[
@@ -56,7 +58,8 @@ import {ToastrModule} from "toastr-ng2";
 	],
 	providers:[
 		NotesService,
-		HttpOptionsService
+		HttpOptionsService,
+		ToastrService
 	],
 	bootstrap:[AppComponent]
 })

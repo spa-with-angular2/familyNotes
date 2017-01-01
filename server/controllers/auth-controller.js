@@ -35,9 +35,9 @@ module.exports = () => {
                     return;
                 }
 
+                let salt = encryption.generateSalt();
+                let passHash = encryption.getPassHash(salt, body.passHash);
                 let userLikeObject = {
-                    //id: body.id,
-
                     firstName: body.firstName,
                     lastName: body.lastName,
                     age: body.age,
@@ -50,13 +50,15 @@ module.exports = () => {
                     createdOn: body.createdOn,
 
                     username: body.username,
-                    salt: body.salt,
-                    passHash: body.passHash,
+                    salt: salt,
+                    passHash: passHash,
 
                     role: body.role,
                     fbId: body.fbId,
                     fbToken: body.fbToken,
                 };
+
+
                 console.log(userLikeObject);
                 var newUser = new User(userLikeObject);
 
@@ -109,8 +111,11 @@ module.exports = () => {
                 // });
             })
         },
+
         loginUser(req, res, next) {
-            User.findOne({ username: req.body.username }, (err, user) => {
+            let body = req.body;
+
+            User.findOne({ username: body.username }, (err, user) => {
                 if (err) {
                     throw err;
                 }
@@ -118,18 +123,20 @@ module.exports = () => {
                 if (!user) {
                     res.json("{\"error\": \"Invalid username or password.\"}");
                 } else {
-                    if (user.isValidPassword(req.body.password)) {
+                    if (user.isValidPassword(body.password)) {
                         let token = 'JWT ' + jwt.encode(user, config.jwtSecret);
-                        let result = {
-                            token,
-                            username: user.username,
-                            firstname: user.firstname,
-                            lastname: user.lastname,
-                            _id: user._id,
-                            about: user.about,
-                            signature: user.signature,
-                            imageDataUrl: user.imageDataUrl
-                        };
+                        let result = user;
+                        result['token'] = token;
+                        // let result = {
+                        //     token,
+                        //     username: user.username,
+                        //     firstname: user.firstname,
+                        //     lastname: user.lastname,
+                        //     _id: user._id,
+                        //     about: user.about,
+                        //     signature: user.signature,
+                        //     imageDataUrl: user.imageDataUrl
+                        // };
 
                         return res.json({ result });
                     }

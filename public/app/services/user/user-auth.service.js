@@ -15,7 +15,7 @@ require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 var http_options_service_1 = require("../http-options.service");
 {
-    providers: [http_1.Http];
+    providers: [http_1.Http, http_options_service_1.HttpOptionsService];
 }
 var UserAuthService = (function () {
     function UserAuthService(http, httpOptionsService) {
@@ -25,13 +25,6 @@ var UserAuthService = (function () {
     UserAuthService.prototype.ngOnInit = function () {
         this.headerOptions = { 'Content-Type': 'application/json' };
     };
-    // public registerUser(data: Object): Observable<any> {
-    //     let userToCreate: string = JSON.stringify(data);
-    //     let options: RequestOptions = this._httpOptionsService.getRequestOptions(true);
-    //     return this._http
-    //         .post(REGISTER_URL, userToCreate, options)
-    //         .map((res: Response) => res.json());
-    // }
     UserAuthService.prototype.register = function (user) {
         var respToReturn;
         var requestOptions = this.httpOptionsService.getRequestOptions(true);
@@ -40,20 +33,36 @@ var UserAuthService = (function () {
         respToReturn = this.http.post(UserAuthService.REGISTER_USER_URL, JSON.stringify(user), requestOptions);
         return respToReturn;
     };
-    UserAuthService.prototype.login = function (user) {
+    UserAuthService.prototype.login = function (loginObject) {
         var respToReturn;
-        var headers = new http_1.Headers(this.headerOptions);
-        respToReturn = this.http.post(UserAuthService.LOGIN_USER_URL, JSON.stringify(user), headers);
+        var requestOptions = this.httpOptionsService.getRequestOptions(true);
+        respToReturn = this.http.post(UserAuthService.LOGIN_USER_URL, JSON.stringify(loginObject), requestOptions);
         return respToReturn;
     };
     UserAuthService.prototype.logout = function () {
-        var respToReturn;
-        respToReturn = this.http.get(UserAuthService.LOGOUT_USER_URL);
-        return respToReturn;
+        localStorage.clear();
     };
-    UserAuthService.REGISTER_USER_URL = 'http://localhost:3003/api/auth/register';
-    UserAuthService.LOGIN_USER_URL = '/api/users';
-    UserAuthService.LOGOUT_USER_URL = '/api/logout';
+    UserAuthService.prototype.isLoggedIn = function () {
+        var userDataString = localStorage.getItem('user');
+        if (!userDataString) {
+            return false;
+        }
+        var token = JSON.parse(userDataString).result.token;
+        var requestOptions = this.httpOptionsService.getRequestOptions(true, token);
+        return this.http.post(UserAuthService.VERIFY_LOGIN_URL, '', requestOptions)
+            .map(function (response) {
+            var result = JSON.parse(response.text());
+            if (result.success) {
+                return true;
+            }
+            return false;
+        });
+    };
+    UserAuthService.BASE_DOMAIN_URL = 'http://localhost:3003/api/';
+    UserAuthService.REGISTER_USER_URL = UserAuthService.BASE_DOMAIN_URL + 'auth/register';
+    UserAuthService.LOGIN_USER_URL = UserAuthService.BASE_DOMAIN_URL + 'auth/login';
+    UserAuthService.LOGOUT_USER_URL = UserAuthService.BASE_DOMAIN_URL + 'auth/logout';
+    UserAuthService.VERIFY_LOGIN_URL = UserAuthService.BASE_DOMAIN_URL + 'auth/verify';
     UserAuthService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http, http_options_service_1.HttpOptionsService])
@@ -61,4 +70,4 @@ var UserAuthService = (function () {
     return UserAuthService;
 }());
 exports.UserAuthService = UserAuthService;
-//# sourceMappingURL=user-register.service.js.map
+//# sourceMappingURL=user-auth.service.js.map

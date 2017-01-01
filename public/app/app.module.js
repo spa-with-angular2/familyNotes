@@ -13,6 +13,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var my_date_picker_module_1 = require('mydatepicker/dist/my-date-picker.module');
+var toastr_ng2_1 = require("toastr-ng2");
 var app_component_1 = require('./app.component');
 var app_routing_1 = require('./app.routing');
 var topband_component_1 = require('./components/header/topband.component');
@@ -32,7 +33,7 @@ var register_component_1 = require('./components/main/register/register.componen
 // import {LoginComponent } from './components/main/login/login.component';
 var notes_service_1 = require("./services/notes.service");
 var http_options_service_1 = require("./services/http-options.service");
-var toastr_ng2_1 = require("toastr-ng2");
+var toastr_ng2_2 = require("toastr-ng2");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -63,7 +64,8 @@ var AppModule = (function () {
             ],
             providers: [
                 notes_service_1.NotesService,
-                http_options_service_1.HttpOptionsService
+                http_options_service_1.HttpOptionsService,
+                toastr_ng2_2.ToastrService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

@@ -9,20 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_model_1 = require("../../models/user.model");
-var UserFactoryService = (function () {
-    function UserFactoryService() {
+var user_auth_service_1 = require('../services/user/user-auth.service');
+var IsLoggedUserGuard = (function () {
+    function IsLoggedUserGuard(userAuthService) {
+        this.userAuthService = userAuthService;
     }
-    UserFactoryService.prototype.createUser = function (_id, firstName, lastName, age, gender, country, email, profilePicture, username, passHash, role, fbId, fbToken) {
-        var newUserToReturn;
-        newUserToReturn = new user_model_1.User(firstName, lastName, age, gender, country, email, profilePicture, username, passHash, role, fbId, fbToken);
-        return newUserToReturn;
+    IsLoggedUserGuard.prototype.canActivate = function () {
+        return this.userAuthService.isLoggedIn();
     };
-    UserFactoryService = __decorate([
+    IsLoggedUserGuard = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], UserFactoryService);
-    return UserFactoryService;
+        __metadata('design:paramtypes', [user_auth_service_1.UserAuthService])
+    ], IsLoggedUserGuard);
+    return IsLoggedUserGuard;
 }());
-exports.UserFactoryService = UserFactoryService;
-//# sourceMappingURL=user-factory.service.js.map
+exports.IsLoggedUserGuard = IsLoggedUserGuard;
+//# sourceMappingURL=is-logged.guard.js.map

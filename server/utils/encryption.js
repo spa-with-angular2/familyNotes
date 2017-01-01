@@ -3,7 +3,7 @@
 const crypto = require("crypto");
 
 module.exports = {
-    getSalt() {
+    generateSalt() {
         let salt = crypto.randomBytes(128).toString("base64");
         return salt;
     },

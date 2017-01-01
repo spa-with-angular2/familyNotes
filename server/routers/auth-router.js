@@ -11,7 +11,6 @@ function facebookCallback(req, res) {
 
 module.exports = ({ app, controllers }) => {
     app.post("/api/auth/register", controllers.auth.registerUser);
-    app.get("/api/auth/register", controllers.home.authtest);
     app.post("/api/auth/login", controllers.auth.loginUser);
     app.post("/api/auth/logout", controllers.auth.logoutUser);
     app.post("/api/auth/verify", controllers.auth.verifyLogin);
