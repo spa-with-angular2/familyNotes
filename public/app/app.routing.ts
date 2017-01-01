@@ -10,12 +10,7 @@ import { ProfileComponent } from './components/main/profile/profile.component';
 import { LoginComponent } from './components/main/login/login.component';
 import { RegisterComponent } from './components/main/register/register.component';
 
-// import {
-//     HomeComponent,
-//     NotesComponent,
-//     AboutComponent,
-//     NoContentComponent
-// } from './components';
+import {IsLoggedUserGuard} from "./route-guards/is-logged.guard";
 
 const appRoutes: Routes = [
     {
@@ -40,7 +35,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent//,
+        // canActivate: [IsLoggedUserGuard],
     },
     {
         path: 'login',
@@ -50,11 +46,6 @@ const appRoutes: Routes = [
         path: 'register',
         component: RegisterComponent
     },
-
-    // {
-    //     path: 'detail', loadChildren: () => System.import('./+detail')
-    //     .then((comp: any) => comp.default),
-    // },
     {
         path: '**',
         component: NoContentComponent

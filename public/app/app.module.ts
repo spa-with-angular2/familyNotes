@@ -12,24 +12,24 @@ import { NavComponent } from './components/header/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
 
-import {HomeComponent } from './components/main/home.component';
-import {NoteComponent } from './components/main/notes/note.component';
-import {NotesComponent } from './components/main/notes/notes.component';
-import {AddNoteComponent } from './components/main/notes/add-note.component';
+import {HomeComponent} from './components/main/home.component';
+import {AboutComponent} from './components/main/about.component';
+import {NoteComponent} from './components/main/notes/note.component';
+import {NotesComponent} from './components/main/notes/notes.component';
+import {AddNoteComponent} from './components/main/notes/add-note.component';
 
-import { AboutComponent } from './components/main/about.component';
-import { ProfileComponent } from './components/main/profile/profile.component'; 
-import { LoginComponent } from './components/main/login/login.component';
-import { RegisterComponent } from './components/main/register/register.component';
- 
-// import {AboutComponent } from './components/main/about.component';
-// import {ProfileComponent } from './components/main/profile/profile.component';
-// import {LoginComponent } from './components/main/login/login.component';
+import {ProfileComponent } from './components/main/profile/profile.component';
+import {LoginComponent } from './components/main/login/login.component';
+import {RegisterComponent } from './components/main/register/register.component';
+import {UserInfoComponent} from "./components/main/profile/user-info/user-info.component";
 
 import {NotesService} from "./services/notes.service";
+
 import {HttpOptionsService} from "./services/http-options.service";
 import {ToastrService} from "toastr-ng2";
-
+import {IsLoggedUserGuard} from './route-guards/is-logged.guard';
+import {UserAuthService} from "./services/user/user-auth.service";
+import {UserMainService} from "./services/user/user-main.service";
 
 @NgModule({
 	imports:[
@@ -53,13 +53,15 @@ import {ToastrService} from "toastr-ng2";
 		AboutComponent,
 		ProfileComponent,
 		LoginComponent,
-		RegisterComponent
-
+		RegisterComponent,
+		UserInfoComponent
 	],
 	providers:[
 		NotesService,
+		UserAuthService,
 		HttpOptionsService,
-		ToastrService
+		ToastrService,
+		IsLoggedUserGuard
 	],
 	bootstrap:[AppComponent]
 })

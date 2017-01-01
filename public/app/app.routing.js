@@ -8,12 +8,6 @@ var no_content_component_1 = require('./components/error-pages/no-content.compon
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
 var register_component_1 = require('./components/main/register/register.component');
-// import {
-//     HomeComponent,
-//     NotesComponent,
-//     AboutComponent,
-//     NoContentComponent
-// } from './components';
 var appRoutes = [
     {
         path: '',
@@ -37,7 +31,7 @@ var appRoutes = [
     },
     {
         path: 'profile',
-        component: profile_component_1.ProfileComponent
+        component: profile_component_1.ProfileComponent //,
     },
     {
         path: 'login',
@@ -47,10 +41,6 @@ var appRoutes = [
         path: 'register',
         component: register_component_1.RegisterComponent
     },
-    // {
-    //     path: 'detail', loadChildren: () => System.import('./+detail')
-    //     .then((comp: any) => comp.default),
-    // },
     {
         path: '**',
         component: no_content_component_1.NoContentComponent

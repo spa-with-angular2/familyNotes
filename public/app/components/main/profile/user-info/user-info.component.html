@@ -1,0 +1,19 @@
+<div id="user-info-main-container">
+    <button type="button" class="btn btn-xs btn-default" (click)="toggleEditMode()"><i class="icon-pencil"></i>
+        <span *ngIf="isInEditMode">Hide edit user info</span>
+        <span *ngIf="!isInEditMode">Show edit user info</span>
+    </button>
+
+    <div *ngIf="!isInEditMode" id="user-info-container">
+        <p><strong>Username: </strong> {{userdata.username}}</p>
+        <p><strong>Email: </strong> {{userdata.email}} </p>
+        <p><strong>First name: </strong> {{userdata.firstName}} </p>
+        <p><strong>Last name: </strong> {{userdata.lastName}} </p>
+        <p><strong>Age: </strong> {{userdata.age}}</p>
+        <p><strong>Country: </strong> {{userdata.country}}</p>
+    </div>
+
+    <div *ngIf="isInEditMode" id="user-info-edit">
+
+    </div>
+</div>
