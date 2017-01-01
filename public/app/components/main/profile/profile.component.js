@@ -23,7 +23,7 @@ var ProfileComponent = (function () {
             { noteUrl: '#', name: "Finish homework" },
             { noteUrl: '#', name: "Study for exam" }
         ];
-        this.localUser = JSON.parse(localStorage.getItem('user')).result;
+        this.localUser = JSON.parse(localStorage.getItem('user'));
         console.log('localUsaerData');
         console.log(this.localUser);
     }

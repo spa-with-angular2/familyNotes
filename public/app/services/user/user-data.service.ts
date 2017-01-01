@@ -21,8 +21,8 @@ export class UserDateService{
     private headerOptions: {};
 
     constructor(
-        private http: Http//,
-        // private httpOptionsService: HttpOptionsService
+        private http: Http,
+        private httpOptionsService: HttpOptionsService
     ){}
 
     ngOnInit(): void {
@@ -47,5 +47,16 @@ export class UserDateService{
             .map((response: Response) => response.json());
 
         return allUsersDataToReturn;
+    }
+
+    public updateUserData(updatedUser: User): Observable<Response> {
+        var respToReturn: Observable<Response>;
+        var requestOptions: RequestOptions = this.httpOptionsService.getRequestOptions(true);
+
+        console.log(updatedUser)
+
+        respToReturn = this.http.post(UserDateService.SINGLE_USER_DATA_URL + updatedUser._id, JSON.stringify(updatedUser), requestOptions);
+
+        return respToReturn;
     }
 }
