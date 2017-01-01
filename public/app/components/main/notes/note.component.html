@@ -50,11 +50,16 @@
 
                 <div *ngIf="showMoreOptions">
                     <label for="input-expire-date">Expire Date</label>
-                    <input class="input-title" type="date" id="input-expire-date" name="input-expire-date" ngControl="expireDate" [(ngModel)]="notedata.expireDate">
+                    <!--<input class="input-title" type="date" id="input-expire-date" name="input-expire-date" ngControl="expireDate" [(ngModel)]="notedata.expireDate">-->
+                    <my-date-picker id="input-expire-date" name="input-expire-date"
+                            ngControl="expireDate"
+                            [(ngModel)]="notedata.expireDate"
+                            [options]="myDatePickerOptions"
+                            (dateChanged)="onDateChanged($event)">
+                    </my-date-picker>
+
                 </div>
 
-                <my-date-picker [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)">
-                </my-date-picker>
 
                 <div *ngIf="showMoreOptions">
                     <label for="select-color">Note color</label>

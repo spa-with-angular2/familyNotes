@@ -35,6 +35,7 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
     public noteColors: string[];
 
     public showMoreOptions: boolean;
+    public myDatePickerOptions: any;
 
     constructor(){
     }
@@ -54,9 +55,6 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
         this.notedata.color = this.noteColors[DEFAULT_COLOR_INDEX];
 
         this.showMoreOptions = false;
-
-        console.log('expireDate-'+ this.notedata.expireDate)
-
     }
 
     changeColor(color: string): void {
@@ -125,10 +123,6 @@ export class NoteComponent implements NoteComponentInterface, OnInit{
     }
 
     save(): Note {
-        // TODO note save to database
-
-        // TODO Reload new note data
-
         this.notedata.areUnsavedChanges = false;
 
         console.log('Note changes saved to database!');
