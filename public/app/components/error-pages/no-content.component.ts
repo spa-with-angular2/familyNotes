@@ -32,6 +32,7 @@ import { Component } from '@angular/core';
             left: 50%;
             transform: translate(-50%, -50%);
             padding-top: $jaggedDistance * 2;
-            padding-bottom: $jaggedDistance * 2;`]})
+            padding-bottom: $jaggedDistance * 2;`]
+})
 export class NoContentComponent{
 }

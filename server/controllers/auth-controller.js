@@ -24,13 +24,12 @@ module.exports = () => {
         registerUser(req, res) {
             let body = req.body;
 
-            User.findOne({ username: body.username }, (err, user) => {
+            User.findOne({ username: body.username }, (err, dbUser) => {
                 if (err) {
                     res.json(err);
                     return;
                 }
-
-                if (user) {
+                if (dbUser) {
                     res.json({ message: `User with username "${body.username}" already exists.` });
                     return;
                 }
@@ -62,118 +61,123 @@ module.exports = () => {
                 console.log(userLikeObject);
                 var newUser = new User(userLikeObject);
 
-                //return new Promise(function(resolve, reject) {
-                    newUser.save(function(error, dbUser) {
-                        if (error) {
-                            res.json(error);
-                        }
+                newUser.save(function(error, dbUser) {
+                    if (error) {
+                        res.json(error);
+                    }
 
-                        res.json(dbUser);
-                    });
-                //});
-
-                // TODO is done on the client
-                // let salt = encryption.getSalt();
-                // let passHash = encryption.getPassHash(salt, body.password);
-                // body.salt = salt;
-                // body.passHash = passHash;
-
-                // User.create(body, (error, result) => {
-                //     if (error) {
-                //         // res.json(error);
-                //         res.json("Hope this is the error");
-                //         return;
-                //     }
-                //
-                //     res.json({
-                //         id: result._id,
-                //
-                //         firstName: result.firstName,
-                //         lastName: result.lastName,
-                //         age: result.age,
-                //         gender: result.gender,
-                //         country: result.country,
-                //
-                //         email: result.email,
-                //         profilePictures: result.profilePictures,
-                //         families: result.families,
-                //         createdOn: result.createdOn,
-                //
-                //         username: result.username,
-                //         salt: result.salt,
-                //         passHash: result.passHash,
-                //
-                //         role: result.role,
-                //         fbId: result.fbId,
-                //         fbToken: result.fbToken,
-                //
-                //     });
-                // });
+                    res.json(dbUser);
+                });
             })
         },
 
         loginUser(req, res, next) {
             let body = req.body;
 
-            User.findOne({ username: body.username }, (err, user) => {
+            User.findOne({ username: body.username }, (err, dbUser) => {
                 if (err) {
                     throw err;
                 }
 
-                if (!user) {
+                if (!dbUser) {
                     res.json("{\"error\": \"Invalid username or password.\"}");
                 } else {
-                    if (user.isValidPassword(body.password)) {
-                        let token = 'JWT ' + jwt.encode(user, config.jwtSecret);
-                        let result = user;
-                        result['token'] = token;
-                        // let result = {
-                        //     token,
-                        //     username: user.username,
-                        //     firstname: user.firstname,
-                        //     lastname: user.lastname,
-                        //     _id: user._id,
-                        //     about: user.about,
-                        //     signature: user.signature,
-                        //     imageDataUrl: user.imageDataUrl
-                        // };
+                    if (dbUser.isValidPassword(body.password)) {
+                        let token = 'JWT ' + jwt.encode(dbUser, config.jwtSecret);
 
-                        return res.json({ result });
+                        let result = {
+                            token: token,
+
+                            firstName: dbUser.firstName,
+                            lastName: dbUser.lastName,
+                            age: dbUser.age,
+                            gender: dbUser.gender,
+                            country: dbUser.country,
+
+                            email: dbUser.email,
+                            profilePictures: dbUser.profilePictures,
+                            families: dbUser.families,
+                            createdOn: dbUser.createdOn,
+
+                            username: dbUser.username,
+                            salt: dbUser.salt,
+                            passHash: dbUser.passHash,
+
+                            role: dbUser.role,
+                            fbId: dbUser.fbId,
+                            fbToken: dbUser.fbToken,
+                        };
+
+                        return res.json({result});
                     }
 
                     return res.json("{\"error\": \"Invalid username or password.\"}");
                 }
             });
         },
+
         logoutUser(req, res) {
             req.logout();
             res.sendStatus(200);
         },
+
         verifyLogin(req, res) {
             var token = getToken(req.headers);
             if (token) {
                 let decoded = jwt.decode(token, config.jwtSecret);
+                console.log('decoded' + JSON.stringify(decoded));
+                console.log('decoded.username' + decoded.username);
                 User.findOne({
                     username: decoded.username
-                }, function (err, user) {
-                    if (err) throw err;
-
-                    if (!user) {
-                        return res.json({ success: false, message: 'User not found.' });
-                    } else {
-                        res.json({
-                            success: true, user: {
-                                token,
-                                username: user.username,
-                                firstname: user.firstname,
-                                lastname: user.lastname,
-                                _id: user._id,
-                                about: user.about,
-                                signature: user.signature,
-                                imageDataUrl: user.imageDataUrl
-                            }
-                        });
+                }, function (err, dbUser) {
+                    if (err) {
+                        throw err;
                     }
+
+                    if (!dbUser) {
+                        res.json("{\"error\": \"User login verification failed. User not found. Please logout and login again.\"}");
+                    } else {
+                        // if (dbUser.isValidPassword(body.password)) {
+                            let token = 'JWT ' + jwt.encode(dbUser, config.jwtSecret);
+
+                            let result = {
+                                token: token,
+
+                                firstName: dbUser.firstName,
+                                lastName: dbUser.lastName,
+                                age: dbUser.age,
+                                gender: dbUser.gender,
+                                country: dbUser.country,
+
+                                email: dbUser.email,
+                                profilePictures: dbUser.profilePictures,
+                                families: dbUser.families,
+                                createdOn: dbUser.createdOn,
+
+                                username: dbUser.username,
+                                salt: dbUser.salt,
+                                passHash: dbUser.passHash,
+
+                                role: dbUser.role,
+                                fbId: dbUser.fbId,
+                                fbToken: dbUser.fbToken,
+                            };
+                            console.log('result' + JSON.stringify(result));
+
+                            return res.json({result});
+                        //}
+
+                        return res.json("{\"error\": \"User login verification failed.\"}");
+                    }
+                    // if (!dbUser) {
+                    //     return res.json({ success: false, message: 'User not found.' });
+                    // } else {
+                    //     console.log('dbUser' + dbUser);
+                    //     return res.json({
+                    //         success: true,
+                    //         user: dbUser
+                    //     });
+                    // }
                 });
             } else {
                 return res.json({ success: false, message: "No token provided" });

@@ -8,9 +8,11 @@ import { AboutComponent } from './components/main/about.component';
 import { NoContentComponent } from './components/error-pages/no-content.component';
 import { ProfileComponent } from './components/main/profile/profile.component';
 import { LoginComponent } from './components/main/login/login.component';
+import { LogoutComponent} from "./components/main/logout/logout.component";
 import { RegisterComponent } from './components/main/register/register.component';
 
 import {IsLoggedUserGuard} from "./route-guards/is-logged.guard";
+
 
 const appRoutes: Routes = [
     {
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'add-note',
-        component: AddNoteComponent
+        component: AddNoteComponent,
+        canActivate: [IsLoggedUserGuard]
     },
     {
         path: 'about',
@@ -35,16 +38,20 @@ const appRoutes: Routes = [
     },
     {
         path: 'profile',
-        component: ProfileComponent//,
-        // canActivate: [IsLoggedUserGuard],
+        component: ProfileComponent,
+        canActivate: [IsLoggedUserGuard],
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
     {
         path: 'login',
         component: LoginComponent
     },
     {
-        path: 'register',
-        component: RegisterComponent
+        path: 'logout',
+        component: LogoutComponent
     },
     {
         path: '**',

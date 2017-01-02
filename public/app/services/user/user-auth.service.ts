@@ -1,10 +1,12 @@
 import { Component ,Injectable, OnInit } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
-import {Observable} from "rxjs";
+// import {Observable} from 'rxjs';
+import {Observable, Observer } from 'rxjs/Rx'
 // Import RxJx required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
 
 import {User} from "../../models/user.model";
 import {HttpOptionsService} from "../http-options.service";
@@ -52,26 +54,86 @@ export class UserAuthService{
     }
 
     logout(): void{
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem('user');
     }
 
-    isLoggedIn(): Observable<boolean> | boolean {
-        let userDataString: string = localStorage.getItem('user');
-        if (!userDataString) {
-            return false;
-        }
+    isLoggedIn(): Promise {
+        return new Promise((resolve, reject) => {
+            this.localLoginExists()
+                .then((exist)=>{
+                    return this.getRemoteToken();
+                })
+                .then((remoteToken) => {
+                    let localToken = this.getLocalToken();
+                    //console.log('remote token-' + remoteToken);
+                    //console.log('local token-' + localToken);
 
-        let token: string = JSON.parse(userDataString).result.token;
-        let requestOptions = this.httpOptionsService.getRequestOptions(true, token);
+                    return this.compareLocalAndRemoteTokens(localToken, remoteToken);
+                })
+                .then((areSame) => {
+                    return resolve(true);
+                })
+                .catch(() => {
+                    return reject(false);
+                });
+        })
+    }
 
-        return this.http.post(UserAuthService.VERIFY_LOGIN_URL, '', requestOptions)
-            .map((response: Response) => {
-                let result = JSON.parse(response.text());
-                if (result.success) {
-                    return true;
+    private verifyRemoteLogin(): Observable<Response>{
+        var respToReturn: Observable<Response>;
+
+        var userDataStringLocal: string = localStorage.getItem('user');
+        var token: string = JSON.parse(userDataStringLocal).token;
+        var requestOptions = this.httpOptionsService.getRequestOptions(true, token);
+
+        respToReturn =  this.http.post(UserAuthService.VERIFY_LOGIN_URL, '', requestOptions)
+
+        return respToReturn;
+    }
+
+    private localLoginExists(): Promise {
+        return new Promise((resolve, reject) => {
+            var userDataString: string = localStorage.getItem('user');
+                if (!userDataString) {
+                    return reject(false);
                 }
 
-                return false;
-            });
+                return resolve(true);
+        });
+    }
+
+    private getRemoteToken(): Promise {
+        return new Promise((resolve, reject) => {
+            this.verifyRemoteLogin()
+                .map(res => res.json())
+                .subscribe((response) => {
+                    let remoteToken = response.result.token;
+
+                    if(!remoteToken){
+                        return reject(false);
+                    }
+
+                    return resolve(remoteToken);
+                });
+        });
+    }
+
+    private getLocalToken(): string {
+        var userDataStringLocal: string = localStorage.getItem('user');
+        var localToken: string = JSON.parse(userDataStringLocal).token;
+
+        return localToken;
+    }
+
+    private compareLocalAndRemoteTokens(localToken: string, remoteToken: string): Promise {
+        return new Promise((resolve, reject) => {
+            var areSame: boolean = localToken === remoteToken;
+            if (!areSame) {
+                return reject(false);
+            }
+
+            return resolve(true);
+        });
     }
 }

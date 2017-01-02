@@ -41,19 +41,19 @@ export class LoginComponent{
             .map((res) => res.json())
             .subscribe((response: any) => {
                 //let dbUser: any = (typeof (response) === 'string') ? JSON.parse(response) : response;
-                let dbUser: any = response;
 
-                if (dbUser.error) {
+                if (response.error) {
                     const message = 'Login failed! Please try again.';
                     const heading = 'Oops!';
                     //this.toastrService.success(message, heading);
 
                     console.log(heading + message);
-                    console.log(dbUser.error);
+                    console.log(response.error);
                 } else {
 
-
-                    console.log(dbUser);
+                    console.log('--------------------------');
+                    let dbUser: any = response.result;
+                    console.log(response);
                     localStorage.setItem('user', JSON.stringify(dbUser));
                     this.userMainService.setIsUserLogged();
 

@@ -1,11 +1,15 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormControl } from '@angular/forms';
 import {Router} from "@angular/router";
+// import {ROUTER_DIRECTIVES, CanActivate, OnActivate} from '@angular2/router';
 
 import {User} from "../../../../models/user.model";
 import {UserDateService} from "../../../../services/user/user-data.service";
 import {CountriesEnum} from "../../../../enumerations/countries.enum";
 import {EnumUtils} from "../../../../enumerations/utilities/enum.utilities";
+
+import {UserAuthService} from "../../../../services/user/user-auth.service";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'user-info',
@@ -17,15 +21,27 @@ export class UserInfoComponent {
 
     public isInEditMode: boolean;
     private countries: string[];
+    private isLoggedIn: boolean;
+    private ObsB: Observable<boolean>;
 
     constructor(
         private userDataService: UserDateService,
-        private router: Router
+        private router: Router,
+        private userAuthService: UserAuthService
     ){}
 
     ngOnInit(): void{
         this.isInEditMode = false;
         this.countries = EnumUtils.values(CountriesEnum);
+
+        this.userAuthService.isLoggedIn()
+            .then((isLogged) => {
+                this.isLoggedIn = isLogged;
+                console.log('isLoggedIn-'+this.isLoggedIn);
+            }).catch((isNotLogged) => {
+                this.isLoggedIn = isNotLogged;
+                console.log('isLoggedIn-'+this.isLoggedIn);
+            });
     }
 
     public toggleEditMode(): void {
@@ -34,6 +50,7 @@ export class UserInfoComponent {
         } else {
             this.isInEditMode = true;
         }
+        console.log('is logged in final res-' + this.isLoggedIn);
     }
 
     changeGender(gender: string){
@@ -53,8 +70,6 @@ export class UserInfoComponent {
             .updateUserData(this.userdata)
             .map((res) => res.json())
             .subscribe((response: any) => {
-
-
                 if (response.error) {
                     const message = 'Error during updating user data failed! Change data and try again.';
                     const heading = 'Oops!';

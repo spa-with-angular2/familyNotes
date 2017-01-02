@@ -20,11 +20,11 @@ import {AddNoteComponent} from './components/main/notes/add-note.component';
 
 import {ProfileComponent } from './components/main/profile/profile.component';
 import {LoginComponent } from './components/main/login/login.component';
+import {LogoutComponent} from "./components/main/logout/logout.component";
 import {RegisterComponent } from './components/main/register/register.component';
 import {UserInfoComponent} from "./components/main/profile/user-info/user-info.component";
 
 import {NotesService} from "./services/notes.service";
-
 import {HttpOptionsService} from "./services/http-options.service";
 import {ToastrService} from "toastr-ng2";
 import {IsLoggedUserGuard} from './route-guards/is-logged.guard';
@@ -53,12 +53,14 @@ import {UserMainService} from "./services/user/user-main.service";
 		AboutComponent,
 		ProfileComponent,
 		LoginComponent,
+		LogoutComponent,
 		RegisterComponent,
 		UserInfoComponent
 	],
 	providers:[
 		NotesService,
 		UserAuthService,
+		UserMainService,
 		HttpOptionsService,
 		ToastrService,
 		IsLoggedUserGuard,

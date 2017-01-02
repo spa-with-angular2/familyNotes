@@ -9,17 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var user_auth_service_1 = require('../services/user/user-auth.service');
 var IsLoggedUserGuard = (function () {
-    function IsLoggedUserGuard(userAuthService) {
+    function IsLoggedUserGuard(router, userAuthService) {
+        this.router = router;
         this.userAuthService = userAuthService;
     }
-    IsLoggedUserGuard.prototype.canActivate = function () {
-        return this.userAuthService.isLoggedIn();
+    IsLoggedUserGuard.prototype.canActivate = function (route, state) {
+        // this.userAuthService.isLoggedIn()
+        //     .then((isLogged) => {
+        //         console.log('isLoggedIn auth-guard-'+isLogged);
+        //
+        //         return true;
+        //     }).catch((isNotLogged) => {
+        //         console.log('isLoggedIn auth-guard-'+isNotLogged);
+        //         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        //
+        //         return false;
+        // });
+        if (localStorage.getItem('user')) {
+            return true;
+        }
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        return false;
     };
     IsLoggedUserGuard = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [user_auth_service_1.UserAuthService])
+        __metadata('design:paramtypes', [router_1.Router, user_auth_service_1.UserAuthService])
     ], IsLoggedUserGuard);
     return IsLoggedUserGuard;
 }());

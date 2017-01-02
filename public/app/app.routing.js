@@ -7,7 +7,9 @@ var about_component_1 = require('./components/main/about.component');
 var no_content_component_1 = require('./components/error-pages/no-content.component');
 var profile_component_1 = require('./components/main/profile/profile.component');
 var login_component_1 = require('./components/main/login/login.component');
+var logout_component_1 = require("./components/main/logout/logout.component");
 var register_component_1 = require('./components/main/register/register.component');
+var is_logged_guard_1 = require("./route-guards/is-logged.guard");
 var appRoutes = [
     {
         path: '',
@@ -23,7 +25,8 @@ var appRoutes = [
     },
     {
         path: 'add-note',
-        component: add_note_component_1.AddNoteComponent
+        component: add_note_component_1.AddNoteComponent,
+        canActivate: [is_logged_guard_1.IsLoggedUserGuard]
     },
     {
         path: 'about',
@@ -31,15 +34,20 @@ var appRoutes = [
     },
     {
         path: 'profile',
-        component: profile_component_1.ProfileComponent //,
+        component: profile_component_1.ProfileComponent,
+        canActivate: [is_logged_guard_1.IsLoggedUserGuard],
+    },
+    {
+        path: 'register',
+        component: register_component_1.RegisterComponent
     },
     {
         path: 'login',
         component: login_component_1.LoginComponent
     },
     {
-        path: 'register',
-        component: register_component_1.RegisterComponent
+        path: 'logout',
+        component: logout_component_1.LogoutComponent
     },
     {
         path: '**',

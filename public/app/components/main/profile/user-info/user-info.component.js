@@ -10,18 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require("@angular/router");
+// import {ROUTER_DIRECTIVES, CanActivate, OnActivate} from '@angular2/router';
 var user_model_1 = require("../../../../models/user.model");
 var user_data_service_1 = require("../../../../services/user/user-data.service");
 var countries_enum_1 = require("../../../../enumerations/countries.enum");
 var enum_utilities_1 = require("../../../../enumerations/utilities/enum.utilities");
+var user_auth_service_1 = require("../../../../services/user/user-auth.service");
 var UserInfoComponent = (function () {
-    function UserInfoComponent(userDataService, router) {
+    function UserInfoComponent(userDataService, router, userAuthService) {
         this.userDataService = userDataService;
         this.router = router;
+        this.userAuthService = userAuthService;
     }
     UserInfoComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.isInEditMode = false;
         this.countries = enum_utilities_1.EnumUtils.values(countries_enum_1.CountriesEnum);
+        this.userAuthService.isLoggedIn()
+            .then(function (isLogged) {
+            _this.isLoggedIn = isLogged;
+            console.log('isLoggedIn-' + _this.isLoggedIn);
+        }).catch(function (isNotLogged) {
+            _this.isLoggedIn = isNotLogged;
+            console.log('isLoggedIn-' + _this.isLoggedIn);
+        });
     };
     UserInfoComponent.prototype.toggleEditMode = function () {
         if (this.isInEditMode) {
@@ -30,6 +42,7 @@ var UserInfoComponent = (function () {
         else {
             this.isInEditMode = true;
         }
+        console.log('is logged in final res-' + this.isLoggedIn);
     };
     UserInfoComponent.prototype.changeGender = function (gender) {
         this.userdata.gender = gender;
@@ -84,7 +97,7 @@ var UserInfoComponent = (function () {
             templateUrl: './app/components/main/profile/user-info/user-info.component.html',
             styleUrls: ['./app/components/main/profile/user-info/user-info.component.css']
         }), 
-        __metadata('design:paramtypes', [user_data_service_1.UserDateService, router_1.Router])
+        __metadata('design:paramtypes', [user_data_service_1.UserDateService, router_1.Router, user_auth_service_1.UserAuthService])
     ], UserInfoComponent);
     return UserInfoComponent;
 }());

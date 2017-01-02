@@ -13,6 +13,7 @@ var http_1 = require('@angular/http');
 // Import RxJx required methods
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
+require('rxjs/add/operator/mergeMap');
 var http_options_service_1 = require("../http-options.service");
 {
     providers: [http_1.Http, http_options_service_1.HttpOptionsService];
@@ -40,22 +41,73 @@ var UserAuthService = (function () {
         return respToReturn;
     };
     UserAuthService.prototype.logout = function () {
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem('user');
     };
     UserAuthService.prototype.isLoggedIn = function () {
-        var userDataString = localStorage.getItem('user');
-        if (!userDataString) {
-            return false;
-        }
-        var token = JSON.parse(userDataString).result.token;
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.localLoginExists()
+                .then(function (exist) {
+                return _this.getRemoteToken();
+            })
+                .then(function (remoteToken) {
+                var localToken = _this.getLocalToken();
+                //console.log('remote token-' + remoteToken);
+                //console.log('local token-' + localToken);
+                return _this.compareLocalAndRemoteTokens(localToken, remoteToken);
+            })
+                .then(function (areSame) {
+                return resolve(true);
+            })
+                .catch(function () {
+                return reject(false);
+            });
+        });
+    };
+    UserAuthService.prototype.verifyRemoteLogin = function () {
+        var respToReturn;
+        var userDataStringLocal = localStorage.getItem('user');
+        var token = JSON.parse(userDataStringLocal).token;
         var requestOptions = this.httpOptionsService.getRequestOptions(true, token);
-        return this.http.post(UserAuthService.VERIFY_LOGIN_URL, '', requestOptions)
-            .map(function (response) {
-            var result = JSON.parse(response.text());
-            if (result.success) {
-                return true;
+        respToReturn = this.http.post(UserAuthService.VERIFY_LOGIN_URL, '', requestOptions);
+        return respToReturn;
+    };
+    UserAuthService.prototype.localLoginExists = function () {
+        return new Promise(function (resolve, reject) {
+            var userDataString = localStorage.getItem('user');
+            if (!userDataString) {
+                return reject(false);
             }
-            return false;
+            return resolve(true);
+        });
+    };
+    UserAuthService.prototype.getRemoteToken = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.verifyRemoteLogin()
+                .map(function (res) { return res.json(); })
+                .subscribe(function (response) {
+                var remoteToken = response.result.token;
+                if (!remoteToken) {
+                    return reject(false);
+                }
+                return resolve(remoteToken);
+            });
+        });
+    };
+    UserAuthService.prototype.getLocalToken = function () {
+        var userDataStringLocal = localStorage.getItem('user');
+        var localToken = JSON.parse(userDataStringLocal).token;
+        return localToken;
+    };
+    UserAuthService.prototype.compareLocalAndRemoteTokens = function (localToken, remoteToken) {
+        return new Promise(function (resolve, reject) {
+            var areSame = localToken === remoteToken;
+            if (!areSame) {
+                return reject(false);
+            }
+            return resolve(true);
         });
     };
     UserAuthService.BASE_DOMAIN_URL = 'http://localhost:3003/api/';

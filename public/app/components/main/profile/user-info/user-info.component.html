@@ -1,96 +1,103 @@
 <div id="user-info-container">
 
-    <p><strong>Username: </strong> {{userdata.username}}</p>
-    <p><strong>Email: </strong> {{userdata.email}} </p>
+    <div *ngIf="!isLoggedIn">You are not authorised to see this page! Please, login first.</div>
+    <div *ngIf="isLoggedIn">
 
-    <p><strong>First name: </strong> {{userdata.firstName}} </p>
-    <p><strong>Last name: </strong> {{userdata.lastName}} </p>
-    <p><strong>Gender: </strong> {{userdata.gender}} </p>
-    <p><strong>Age: </strong> {{userdata.age}}</p>
-    <p><strong>Country: </strong> {{userdata.country}}</p>
+        <p><strong>Username: </strong> {{userdata.username}}</p>
+        <p><strong>Email: </strong> {{userdata.email}} </p>
 
-    <button type="button" class="btn btn-xs btn-default" (click)="toggleEditMode()"><i class="icon-pencil"></i>
-        <span *ngIf="isInEditMode">Hide edit user options</span>
-        <span *ngIf="!isInEditMode">Show edit user options</span>
-    </button>
+        <p><strong>First name: </strong> {{userdata.firstName}} </p>
+        <p><strong>Last name: </strong> {{userdata.lastName}} </p>
+        <p><strong>Gender: </strong> {{userdata.gender}} </p>
+        <p><strong>Age: </strong> {{userdata.age}}</p>
+        <p><strong>Country: </strong> {{userdata.country}}</p>
 
-    <div *ngIf="isInEditMode" id="user-info-edit">
+        <button type="button" class="btn btn-xs btn-default" (click)="toggleEditMode()"><i class="icon-pencil"></i>
+            <span *ngIf="isInEditMode">Hide edit user options</span>
+            <span *ngIf="!isInEditMode">Show edit user options</span>
+        </button>
 
-        <form #editUserDataForm="ngForm" class="form-horizontal" (ngSubmit)="onSubmit()">
-            <fieldset>
-                <legend>Edit user data :</legend>
+        <div *ngIf="isInEditMode" id="user-info-edit">
 
-                <div class="form-group">
-                    <label for="inputFirstName" class="col-lg-2 control-label">FirstName</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="FirstName"
-                               ngControl="firstname"
-                               [(ngModel)]="userdata.firstName"
-                        >
-                        <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputLastName" class="col-lg-2 control-label">LastName</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="LastName"
-                               ngControl="lastName"
-                               [(ngModel)]="userdata.lastName"
-                        >
-                        <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="selectGender" class="col-lg-2 control-label">Gender</label>
-                    <div class="col-lg-10">
-                        <select class="form-control" id="selectGender" name="selectGender"
-                                [(ngModel)]="userdata.gender"
-                                (change)="changeGender($event.target.value)"
-                        >
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputAge" class="col-lg-2 control-label">Age</label>
-                    <div class="col-lg-10">
-                        <input type="number" class="form-control" id="inputAge" name="inputAge" placeholder="Age" min=12
-                               ngControl="age"
-                               [(ngModel)]="userdata.age"
-                        >
-                        <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="selectCountry" class="col-lg-2 control-label">Country</label>
-                    <div class="col-lg-10">
-                        <select class="form-control" id="selectCountry" name="selectCountry"
-                                [(ngModel)]="userdata.country"
-                                (change)="changeCountry($event.target.value)">
-                            <option *ngFor="let uCountry of countries"[value]="uCountry">{{uCountry}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPictureUrl" class="col-lg-2 control-label">Picture URL</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputPictureUrl" name="inputPictureUrl" placeholder="Image Url"
-                               ngControl="profilePicture"
-                               [(ngModel)]="userdata.main"
-                        >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default ">Reset data</button>
-                        <button type="submit" class="btn btn-primary">Update data</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+            <form #editUserDataForm="ngForm" class="form-horizontal" (ngSubmit)="onSubmit()">
+                <fieldset>
+                    <legend>Edit user data :</legend>
 
-
+                    <div class="form-group">
+                        <label for="inputFirstName" class="col-lg-2 control-label">FirstName</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="FirstName"
+                                   ngControl="firstname"
+                                   [(ngModel)]="userdata.firstName"
+                            >
+                            <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName" class="col-lg-2 control-label">LastName</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="LastName"
+                                   ngControl="lastName"
+                                   [(ngModel)]="userdata.lastName"
+                            >
+                            <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectGender" class="col-lg-2 control-label">Gender</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" id="selectGender" name="selectGender"
+                                    [(ngModel)]="userdata.gender"
+                                    (change)="changeGender($event.target.value)"
+                            >
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAge" class="col-lg-2 control-label">Age</label>
+                        <div class="col-lg-10">
+                            <input type="number" class="form-control" id="inputAge" name="inputAge" placeholder="Age" min=12
+                                   ngControl="age"
+                                   [(ngModel)]="userdata.age"
+                            >
+                            <span class="help-block">This should appear when we have incorrect input(I'll do this function soon)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCountry" class="col-lg-2 control-label">Country</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" id="selectCountry" name="selectCountry"
+                                    [(ngModel)]="userdata.country"
+                                    (change)="changeCountry($event.target.value)">
+                                <option *ngFor="let uCountry of countries"[value]="uCountry">{{uCountry}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPictureUrl" class="col-lg-2 control-label">Picture URL</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputPictureUrl" name="inputPictureUrl" placeholder="Image Url"
+                                   ngControl="profilePicture"
+                                   [(ngModel)]="userdata.main"
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default ">Reset data</button>
+                            <button type="submit" class="btn btn-primary">Update data</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
+
+
+
+
+
 </div>

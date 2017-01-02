@@ -36,16 +36,17 @@ var LoginComponent = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (response) {
             //let dbUser: any = (typeof (response) === 'string') ? JSON.parse(response) : response;
-            var dbUser = response;
-            if (dbUser.error) {
+            if (response.error) {
                 var message = 'Login failed! Please try again.';
                 var heading = 'Oops!';
                 //this.toastrService.success(message, heading);
                 console.log(heading + message);
-                console.log(dbUser.error);
+                console.log(response.error);
             }
             else {
-                console.log(dbUser);
+                console.log('--------------------------');
+                var dbUser = response.result;
+                console.log(response);
                 localStorage.setItem('user', JSON.stringify(dbUser));
                 _this.userMainService.setIsUserLogged();
                 var message = 'You have logged in successfully.';

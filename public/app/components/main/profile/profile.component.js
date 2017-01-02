@@ -24,17 +24,17 @@ var ProfileComponent = (function () {
             { noteUrl: '#', name: "Study for exam" }
         ];
         this.localUser = JSON.parse(localStorage.getItem('user'));
-        console.log('localUsaerData');
-        console.log(this.localUser);
+        //console.log('localUsaerData');
+        //console.log(this.localUser);
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log(this.localUser._id);
+        //console.log(this.localUser._id);
         this.userDataService
             .getUserData(this.localUser._id)
             .subscribe(function (resultDbUser) {
             _this.dbUser = resultDbUser;
-            console.log(resultDbUser);
+            //console.log(resultDbUser);
         });
         this.user = this.localUser;
         this.profilePictureUrl = this.localUser.profilePictures[0];

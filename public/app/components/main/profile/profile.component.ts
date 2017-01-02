@@ -36,17 +36,17 @@ export class ProfileComponent {
 
     constructor(private userDataService: UserDateService){
         this.localUser = JSON.parse(localStorage.getItem('user'));
-        console.log('localUsaerData');
-        console.log(this.localUser);
+        //console.log('localUsaerData');
+        //console.log(this.localUser);
     }
 
     ngOnInit(): void {
-        console.log(this.localUser._id);
+        //console.log(this.localUser._id);
         this.userDataService
             .getUserData(this.localUser._id)
             .subscribe((resultDbUser) => {
                 this.dbUser = resultDbUser;
-                console.log(resultDbUser);
+                //console.log(resultDbUser);
 
             });
         this.user = this.localUser;
