@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+// import {Observable} from 'rxjs';
+var Rx_1 = require('rxjs/Rx');
 // Import RxJx required methods
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
@@ -22,10 +24,26 @@ var UserAuthService = (function () {
     function UserAuthService(http, httpOptionsService) {
         this.http = http;
         this.httpOptionsService = httpOptionsService;
+        this.authenticated = new Rx_1.BehaviorSubject(null);
     }
     UserAuthService.prototype.ngOnInit = function () {
         this.headerOptions = { 'Content-Type': 'application/json' };
     };
+    Object.defineProperty(UserAuthService.prototype, "isLoggedInBoolean", {
+        get: function () {
+            var _this = this;
+            this.isLoggedIn()
+                .then(function (isLogged) {
+                _this.authenticated.next(true);
+                return true;
+            }).catch(function (isNotLogged) {
+                _this.authenticated.next(false);
+                return false;
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
     UserAuthService.prototype.register = function (user) {
         var respToReturn;
         var requestOptions = this.httpOptionsService.getRequestOptions(true);

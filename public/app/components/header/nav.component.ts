@@ -21,20 +21,20 @@ export class NavComponent{
     ) {}
 
     ngOnInit(): void{
-        this.userAuthService.isLoggedIn()
-            .then((isLogged) => {
-                this.isLoggedIn = isLogged;
-                console.log('isLoggedIn nav-'+this.isLoggedIn);
-            }).catch((isNotLogged) => {
-                this.isLoggedIn = isNotLogged;
-                console.log('isLoggedIn nav-'+this.isLoggedIn);
-        });
-    }
+        // this.userAuthService.isLoggedIn()
+        //     .then((isLogged) => {
+        //         this.isLoggedIn = isLogged;
+        //         console.log('isLoggedIn nav-'+this.isLoggedIn);
+        //     }).catch((isNotLogged) => {
+        //         this.isLoggedIn = isNotLogged;
+        //         console.log('isLoggedIn nav-'+this.isLoggedIn);
+        // });
+        // Only check once even if component is
+        // destroyed and constructed again
+        if (this.userAuthService.authenticated.value === null)
+            this.userAuthService.isLoggedInBoolean;
 
-    public logout() {
-        console.log('logout')
-        this.userAuthService.logout();
-        this.userMainService.setIsUserLogged();
-        this.router.navigate(['home']);
-    }
+        this.isLoggedIn = this.userAuthService.authenticated.value;
+        console.log('isLoggedIn nav-'+this.isLoggedIn);
+}
 }

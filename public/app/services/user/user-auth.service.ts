@@ -2,7 +2,7 @@ import { Component ,Injectable, OnInit } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
 // import {Observable} from 'rxjs';
-import {Observable, Observer } from 'rxjs/Rx'
+import {Observable, Observer, BehaviorSubject} from 'rxjs/Rx'
 // Import RxJx required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -22,6 +22,8 @@ export class UserAuthService{
     public static LOGOUT_USER_URL: string = UserAuthService.BASE_DOMAIN_URL + 'auth/logout';
     public static VERIFY_LOGIN_URL: string = UserAuthService.BASE_DOMAIN_URL + 'auth/verify';
 
+    public authenticated = new BehaviorSubject(null);
+
     private headerOptions: {};
 
     constructor(
@@ -33,6 +35,16 @@ export class UserAuthService{
         this.headerOptions = { 'Content-Type': 'application/json' };
     }
 
+    get isLoggedInBoolean(): boolean {
+        this.isLoggedIn()
+            .then((isLogged) => {
+                this.authenticated.next(true);
+                return true;
+            }).catch((isNotLogged) => {
+                this.authenticated.next(false);
+                return false;
+            });
+    }
     register(user: User): Observable<Response> {
         var respToReturn: Observable<Response>;
         var requestOptions: RequestOptions = this.httpOptionsService.getRequestOptions(true);

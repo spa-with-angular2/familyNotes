@@ -19,21 +19,20 @@ var NavComponent = (function () {
         this.userAuthService = userAuthService;
     }
     NavComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.userAuthService.isLoggedIn()
-            .then(function (isLogged) {
-            _this.isLoggedIn = isLogged;
-            console.log('isLoggedIn nav-' + _this.isLoggedIn);
-        }).catch(function (isNotLogged) {
-            _this.isLoggedIn = isNotLogged;
-            console.log('isLoggedIn nav-' + _this.isLoggedIn);
-        });
-    };
-    NavComponent.prototype.logout = function () {
-        console.log('logout');
-        this.userAuthService.logout();
-        this.userMainService.setIsUserLogged();
-        this.router.navigate(['home']);
+        // this.userAuthService.isLoggedIn()
+        //     .then((isLogged) => {
+        //         this.isLoggedIn = isLogged;
+        //         console.log('isLoggedIn nav-'+this.isLoggedIn);
+        //     }).catch((isNotLogged) => {
+        //         this.isLoggedIn = isNotLogged;
+        //         console.log('isLoggedIn nav-'+this.isLoggedIn);
+        // });
+        // Only check once even if component is
+        // destroyed and constructed again
+        if (this.userAuthService.authenticated.value === null)
+            this.userAuthService.isLoggedInBoolean;
+        this.isLoggedIn = this.userAuthService.authenticated.value;
+        console.log('isLoggedIn nav-' + this.isLoggedIn);
     };
     NavComponent = __decorate([
         core_1.Component({
