@@ -1,38 +1,35 @@
 <div class="wrapper">
     <form #addNoteForm="ngForm" (ngSubmit)="onSubmit()">
-        <!--<form (ngSubmit)="onSubmit()" #addNoteForm="ngForm">-->
-        <div>
-            <label for="input-title">Title</label>
-            <input type="text" id="input-title" name="input-title" ngControl="title" [(ngModel)]="noteLikeObject.title" required>
+        <h2>Create node</h2>
+        <div class="title">
+            <label class="title-label" for="input-title">Title</label>
+            <input type="text" #ngTitle="ngModel" id="input-title" name="input-title" ngControl="title" [(ngModel)]="noteLikeObject.title" required minlength="5" maxlength="30" pattern="[a-zA-Z0-9\- _]*">
+            <div class="invalid" [hidden]="ngTitle.valid || ngTitle.untouched">Title must be between 5 and 30 symbols long.</div>
         </div>
-
         <div>
-            <label for="input-body">Body Text</label>
-            <textarea rows="5" type="text" id="input-body" name="input-body" ngControl="body" [(ngModel)]="noteLikeObject.body" required></textarea>
+            <label class="descr-label" for="input-body">Description</label>
+            <textarea rows="5" #ngDescr="ngModel" type="text" id="input-body" name="input-body" ngControl="body" [(ngModel)]="noteLikeObject.body" required minlength="5" maxlength="200" pattern="[a-zA-Z0-9\- .,!?_]*"></textarea>
+            <div class="invalid" [hidden]="ngDescr.valid || ngDescr.untouched">Description must be between 5 and 200 symbols long.</div>
         </div>
-
-        <div>
+        <div class="option-btn">
             <button type="button" class="btn btn-xs btn-default btn-special" (click)="toggleShowMoreOptions()"><i class="icon-pencil"></i>
                 <span *ngIf="showMoreOptions">Hide more options</span>
                 <span *ngIf="!showMoreOptions">Show more options</span>
             </button>
         </div>
-
         <div *ngIf="showMoreOptions">
-            <label for="input-expire-date">Expire Date</label>
+            <label class="descr-label" for="input-expire-date">Expire Date</label>
             <input type="text" id="input-expire-date" name="input-expire-date" ngControl="expireDate" [(ngModel)]="noteLikeObject.expireDate">
         </div>
-
         <div *ngIf="showMoreOptions">
-            <label for="input-color">Note Color</label>
+            <label class="descr-label" for="input-color">Note Color</label>
             <input type="text" id="input-color" name="input-color" ngControl="color" [(ngModel)]="noteLikeObject.color">
         </div>
-
-        <button type="submit" class="btn btn-default" [disabled]="!addNoteForm.form.valid">Create Note</button>
-        <button type="reset" class="btn btn-default">Reset Note</button>
-
+        <div class="buttons">
+            <button type="submit" class="btn btn-default create-btn" [disabled]="!addNoteForm.form.valid">Create Note</button>
+            <button type="reset" class="btn btn-default create-btn">Reset Note</button>
+        </div>
     </form>
-
     <hr>
     <h1>Appearance:</h1>
     <div class="panel panel-default">
