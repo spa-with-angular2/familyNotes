@@ -1,6 +1,6 @@
 import {NgModule } from "@angular/core";
 import {BrowserModule } from "@angular/platform-browser";
-import {FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MyDatePickerModule} from 'mydatepicker/dist/my-date-picker.module';
 import {ToastrModule} from "toastr-ng2";
@@ -61,7 +61,8 @@ import {UserMainService} from "./services/user/user-main.service";
 		UserAuthService,
 		HttpOptionsService,
 		ToastrService,
-		IsLoggedUserGuard
+		IsLoggedUserGuard,
+		FormBuilder
 	],
 	bootstrap:[AppComponent]
 })

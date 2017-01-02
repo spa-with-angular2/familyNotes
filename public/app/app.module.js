@@ -68,7 +68,8 @@ var AppModule = (function () {
                 user_auth_service_1.UserAuthService,
                 http_options_service_1.HttpOptionsService,
                 toastr_ng2_2.ToastrService,
-                is_logged_guard_1.IsLoggedUserGuard
+                is_logged_guard_1.IsLoggedUserGuard,
+                forms_1.FormBuilder
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
