@@ -10,6 +10,7 @@ var login_component_1 = require('./components/main/login/login.component');
 var logout_component_1 = require("./components/main/logout/logout.component");
 var register_component_1 = require('./components/main/register/register.component');
 var is_logged_guard_1 = require("./route-guards/is-logged.guard");
+var contacts_component_1 = require('./components/main/contacts/contacts.component');
 var appRoutes = [
     {
         path: '',
@@ -48,6 +49,10 @@ var appRoutes = [
     {
         path: 'logout',
         component: logout_component_1.LogoutComponent
+    },
+    {
+        path: 'contacts',
+        component: contacts_component_1.ContactsComponent
     },
     {
         path: '**',

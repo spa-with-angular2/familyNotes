@@ -30,6 +30,7 @@ import {ToastrService} from "toastr-ng2";
 import {IsLoggedUserGuard} from './route-guards/is-logged.guard';
 import {UserAuthService} from "./services/user/user-auth.service";
 import {UserMainService} from "./services/user/user-main.service";
+import { ContactsComponent } from './components/main/contacts/contacts.component';
 
 @NgModule({
 	imports:[
@@ -55,7 +56,8 @@ import {UserMainService} from "./services/user/user-main.service";
 		LoginComponent,
 		LogoutComponent,
 		RegisterComponent,
-		UserInfoComponent
+		UserInfoComponent,
+		ContactsComponent
 	],
 	providers:[
 		NotesService,

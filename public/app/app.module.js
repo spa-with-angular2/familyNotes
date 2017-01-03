@@ -36,6 +36,7 @@ var toastr_ng2_2 = require("toastr-ng2");
 var is_logged_guard_1 = require('./route-guards/is-logged.guard');
 var user_auth_service_1 = require("./services/user/user-auth.service");
 var user_main_service_1 = require("./services/user/user-main.service");
+var contacts_component_1 = require('./components/main/contacts/contacts.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -64,7 +65,8 @@ var AppModule = (function () {
                 login_component_1.LoginComponent,
                 logout_component_1.LogoutComponent,
                 register_component_1.RegisterComponent,
-                user_info_component_1.UserInfoComponent
+                user_info_component_1.UserInfoComponent,
+                contacts_component_1.ContactsComponent
             ],
             providers: [
                 notes_service_1.NotesService,
