@@ -1,6 +1,4 @@
-# familyNotes
-
-# [KillerApp](https://team-heat-killer-app.herokuapp.com/)
+# Family Notes
 
 ![image](./public/app/assets/images/screenshots/screenshot-home.png)
 
