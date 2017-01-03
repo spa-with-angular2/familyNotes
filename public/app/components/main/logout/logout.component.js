@@ -23,22 +23,19 @@ var LogoutComponent = (function () {
         this.userAuthService.isLoggedIn()
             .then(function (isLogged) {
             _this.isLoggedIn = isLogged;
-            setTimeout(function () {
-                //that.router.navigate(['home']);
-            }, 5000);
             _this.logout();
         }).catch(function (isNotLogged) {
             _this.isLoggedIn = isNotLogged;
-            setTimeout(function () {
-                //that.router.navigate(['home']);
-            }, 5000);
             _this.redirectToLogin();
         });
     };
     LogoutComponent.prototype.logout = function () {
         this.userAuthService.logout();
-        this.userMainService.setIsUserLogged();
-        this.router.navigate(['home']);
+        this.userAuthService.authenticated = false;
+        var that = this;
+        setTimeout(function () {
+            that.router.navigate(['home']);
+        }, 5000);
     };
     LogoutComponent.prototype.redirectToLogin = function () {
         this.router.navigate(['login']);

@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="isLoggedIn">
     <div class="col-lg-6 col-sm-6 content">
         <div class="card hovercard">
             <div class="card-background">
@@ -8,7 +8,7 @@
                 <img alt="" src="{{profilePictureUrl}}">
             </div>
             <div class="card-info">
-                <span class="card-title">{{user.firstName}}</span>
+                <span class="card-title">{{firstName}}</span>
             </div>
         </div>
         <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
@@ -47,19 +47,6 @@
                     </ul>
                 </div>
                 <div class="tab-pane fade in" id="tab3">
-                    <!--<p><strong>Username: </strong> {{user.username}}</p>-->
-                    <!--<p><strong>Email: </strong> {{user.email}} </p>-->
-                    <!--<p><strong>First name: </strong> {{user.firstName}} </p>-->
-                    <!--<p><strong>Last name: </strong> {{user.lastName}} </p>-->
-                    <!--<p><strong>Age: </strong> {{user.age}}</p>-->
-                    <!--<p><strong>Country: </strong> {{user.country}}</p>-->
-
-                    <!--<single-note-->
-                            <!--*ngFor="let note of notes"-->
-                            <!--[notedata]="note"-->
-                    <!--&gt;-->
-                    <!--</single-note>-->
-
                     <user-info
                         [userdata]="user"
                     >

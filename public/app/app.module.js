@@ -30,13 +30,14 @@ var login_component_1 = require('./components/main/login/login.component');
 var logout_component_1 = require("./components/main/logout/logout.component");
 var register_component_1 = require('./components/main/register/register.component');
 var user_info_component_1 = require("./components/main/profile/user-info/user-info.component");
+var contacts_component_1 = require('./components/main/contacts/contacts.component');
 var notes_service_1 = require("./services/notes.service");
 var http_options_service_1 = require("./services/http-options.service");
 var toastr_ng2_2 = require("toastr-ng2");
 var is_logged_guard_1 = require('./route-guards/is-logged.guard');
 var user_auth_service_1 = require("./services/user/user-auth.service");
 var user_main_service_1 = require("./services/user/user-main.service");
-var contacts_component_1 = require('./components/main/contacts/contacts.component');
+var user_data_service_1 = require("./services/user/user-data.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -72,6 +73,7 @@ var AppModule = (function () {
                 notes_service_1.NotesService,
                 user_auth_service_1.UserAuthService,
                 user_main_service_1.UserMainService,
+                user_data_service_1.UserDateService,
                 http_options_service_1.HttpOptionsService,
                 toastr_ng2_2.ToastrService,
                 is_logged_guard_1.IsLoggedUserGuard,

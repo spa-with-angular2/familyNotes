@@ -23,6 +23,7 @@ import {LoginComponent } from './components/main/login/login.component';
 import {LogoutComponent} from "./components/main/logout/logout.component";
 import {RegisterComponent } from './components/main/register/register.component';
 import {UserInfoComponent} from "./components/main/profile/user-info/user-info.component";
+import {ContactsComponent } from './components/main/contacts/contacts.component';
 
 import {NotesService} from "./services/notes.service";
 import {HttpOptionsService} from "./services/http-options.service";
@@ -30,7 +31,7 @@ import {ToastrService} from "toastr-ng2";
 import {IsLoggedUserGuard} from './route-guards/is-logged.guard';
 import {UserAuthService} from "./services/user/user-auth.service";
 import {UserMainService} from "./services/user/user-main.service";
-import { ContactsComponent } from './components/main/contacts/contacts.component';
+import {UserDateService} from "./services/user/user-data.service";
 
 @NgModule({
 	imports:[
@@ -63,6 +64,7 @@ import { ContactsComponent } from './components/main/contacts/contacts.component
 		NotesService,
 		UserAuthService,
 		UserMainService,
+		UserDateService,
 		HttpOptionsService,
 		ToastrService,
 		IsLoggedUserGuard,

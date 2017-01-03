@@ -1,7 +1,6 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormControl } from '@angular/forms';
 import {Router} from "@angular/router";
-// import {ROUTER_DIRECTIVES, CanActivate, OnActivate} from '@angular2/router';
 
 import {User} from "../../../../models/user.model";
 import {UserDateService} from "../../../../services/user/user-data.service";
@@ -9,7 +8,6 @@ import {CountriesEnum} from "../../../../enumerations/countries.enum";
 import {EnumUtils} from "../../../../enumerations/utilities/enum.utilities";
 
 import {UserAuthService} from "../../../../services/user/user-auth.service";
-import {Observable} from "rxjs";
 
 @Component({
     selector: 'user-info',
@@ -17,12 +15,12 @@ import {Observable} from "rxjs";
     styleUrls: ['./app/components/main/profile/user-info/user-info.component.css']
 })
 export class UserInfoComponent {
-    @Input() public userdata: User;
+    @Input() userdata: User;
 
-    public isInEditMode: boolean;
-    private countries: string[];
     private isLoggedIn: boolean;
-    private ObsB: Observable<boolean>;
+    private isInEditMode: boolean;
+    private countries: string[];
+
 
     constructor(
         private userDataService: UserDateService,
@@ -31,17 +29,12 @@ export class UserInfoComponent {
     ){}
 
     ngOnInit(): void{
+        this.isLoggedIn = this.userAuthService.authenticated;
         this.isInEditMode = false;
         this.countries = EnumUtils.values(CountriesEnum);
 
-        this.userAuthService.isLoggedIn()
-            .then((isLogged) => {
-                this.isLoggedIn = isLogged;
-                console.log('isLoggedIn-'+this.isLoggedIn);
-            }).catch((isNotLogged) => {
-                this.isLoggedIn = isNotLogged;
-                console.log('isLoggedIn-'+this.isLoggedIn);
-            });
+
+        console.log('is logged in user info-' + this.isLoggedIn);
     }
 
     public toggleEditMode(): void {
@@ -50,7 +43,6 @@ export class UserInfoComponent {
         } else {
             this.isInEditMode = true;
         }
-        console.log('is logged in final res-' + this.isLoggedIn);
     }
 
     changeGender(gender: string){

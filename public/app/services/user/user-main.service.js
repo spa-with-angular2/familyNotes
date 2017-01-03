@@ -10,33 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var Subject_1 = require('rxjs/Subject');
 var http_options_service_1 = require('../http-options.service');
 var mainProfilePictureIndex = 0;
 var UserMainService = (function () {
     function UserMainService(http, httpOptionsService) {
         this.http = http;
         this.httpOptionsService = httpOptionsService;
-        this.isLoggedSubject = new Subject_1.Subject();
-        this.isUserObjectUpdatedSubject = new Subject_1.Subject();
-        this.isUserObjectUpdated = false;
     }
     UserMainService.prototype.ngOnInit = function () {
-    };
-    UserMainService.prototype.setIsUserLogged = function () {
-        this.isLogged = !!localStorage.getItem('user');
-        this.isLoggedSubject.next(this.isLogged);
-    };
-    UserMainService.prototype.getIsUserLoggedIn = function () {
-        return this.isLoggedSubject.asObservable();
-    };
-    UserMainService.prototype.setIsUserObjectUpdated = function () {
-        this.isUserObjectUpdated = true;
-        this.isUserObjectUpdatedSubject.next(this.isUserObjectUpdated);
-        this.isUserObjectUpdated = false;
-    };
-    UserMainService.prototype.getIsUserObjectUpdated = function () {
-        return this.isUserObjectUpdatedSubject.asObservable();
     };
     UserMainService.prototype.getMainProfilePictureUrl = function () {
         var mainProfilePictureUrlToReturn = '';

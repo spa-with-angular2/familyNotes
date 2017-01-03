@@ -1,27 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 import {User} from "../../../models/user.model";
 import {UserDateService} from "../../../services/user/user-data.service";
+import {UserAuthService} from "../../../services/user/user-auth.service";
 
 @Component({
     selector: 'profile',
-    providers: [UserDateService],
     templateUrl: './app/components/main/profile/profile.component.html',
     styleUrls: ['./app/components/main/profile/profile-component.css'],
 })
 export class ProfileComponent {
-    // user = {
-    //     username: 'ivan.ivanov',
-    //     email: 'ivan.ivanov@abv.bg',
-    //     name: 'Ivan Ivanov',
-    //     age: '20',
-    //     country: 'Bulgaria',
-    //     imageUrl: 'app/assets/images/cover-photo.jpg'
-    // }
     public user: User;
-    public localUser: User;
-    public dbUser: any;
-    public profilePictureUrl: string;
+    private profilePictureUrl: string;
+    private firstName: string;
 
     doneNotes = [
         { noteUrl: '#', name: "Clean House"},
@@ -34,24 +26,50 @@ export class ProfileComponent {
         { noteUrl: '#', name: "Study for exam" }
     ];
 
-    constructor(private userDataService: UserDateService){
-        this.localUser = JSON.parse(localStorage.getItem('user'));
-        //console.log('localUsaerData');
-        //console.log(this.localUser);
+    public isLoggedIn: boolean;
+    public isLoggedInSubscription: any;
+
+    constructor(
+        private userDataService: UserDateService,
+        private userAuthService: UserAuthService,
+        private router: Router
+    ){
+        this.isLoggedInSubscription = this.userAuthService.subscribe((newValue) => this.onLoggedInUpdated(newValue));
+    }
+
+    onLoggedInUpdated(changedValue: any) {
+        console.log('isLoggedIn value changed!', changedValue);
+        this.isLoggedIn = changedValue;
+    }
+    ngOnDestroy() {
+        this.isLoggedInSubscription.unsubscribe();
     }
 
     ngOnInit(): void {
-        //console.log(this.localUser._id);
-        this.userDataService
-            .getUserData(this.localUser._id)
-            .subscribe((resultDbUser) => {
-                this.dbUser = resultDbUser;
-                //console.log(resultDbUser);
+        this.isLoggedIn = this.userAuthService.authenticated;
+        this.profilePictureUrl = '';
+        this.firstName = '';
+        console.log('isLoggedIn profile-'+this.isLoggedIn);
 
-            });
-        this.user = this.localUser;
-        this.profilePictureUrl = this.localUser.profilePictures[0];
-        //this.user = this.dbUser;
+        if(this.isLoggedIn){
+            var userDataStringLocal: string = localStorage.getItem('user');
+            var id: string = JSON.parse(userDataStringLocal)._id;
+
+            //let localUser: User = localStorage.getItem('user');
+            console.log('localUser _id-' + id);
+            this.userDataService
+                .getUserData(id)
+                .subscribe((resultDbUser) => {
+                    this.user = resultDbUser.result;
+                    console.log(this.user);
+
+                    this.profilePictureUrl = this.user.profilePictures[0];
+                    this.firstName = this.user.firstName;
+
+                });
+
+        } else {
+            this.router.navigate(['home']);
+        }
     }
-
 }

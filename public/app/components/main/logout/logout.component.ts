@@ -59,25 +59,21 @@ export class LogoutComponent{
         this.userAuthService.isLoggedIn()
             .then((isLogged) => {
                 this.isLoggedIn = isLogged;
-                setTimeout(function () {
-                    //that.router.navigate(['home']);
-                }, 5000);
-
                 this.logout();
             }).catch((isNotLogged) => {
                 this.isLoggedIn = isNotLogged;
-                setTimeout(function () {
-                    //that.router.navigate(['home']);
-                }, 5000);
-
                 this.redirectToLogin();
         });
     }
 
     public logout() {
         this.userAuthService.logout();
-        this.userMainService.setIsUserLogged();
-        this.router.navigate(['home']);
+        this.userAuthService.authenticated = false;
+
+        const that = this;
+        setTimeout(function () {
+            that.router.navigate(['home']);
+        }, 5000);
     }
 
     public redirectToLogin(): void {

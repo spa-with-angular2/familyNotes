@@ -3,14 +3,15 @@
     <div *ngIf="!isLoggedIn">You are not authorised to see this page! Please, login first.</div>
     <div *ngIf="isLoggedIn">
 
-        <p><strong>Username: </strong> {{userdata.username}}</p>
-        <p><strong>Email: </strong> {{userdata.email}} </p>
 
-        <p><strong>First name: </strong> {{userdata.firstName}} </p>
-        <p><strong>Last name: </strong> {{userdata.lastName}} </p>
-        <p><strong>Gender: </strong> {{userdata.gender}} </p>
-        <p><strong>Age: </strong> {{userdata.age}}</p>
-        <p><strong>Country: </strong> {{userdata.country}}</p>
+        <p><strong>Username: </strong> {{userdata?.username}}</p>
+        <p><strong>Email: </strong> {{userdata?.email}} </p>
+
+        <p><strong>First name: </strong> {{userdata?.firstName}} </p>
+        <p><strong>Last name: </strong> {{userdata?.lastName}} </p>
+        <p><strong>Gender: </strong> {{userdata?.gender}} </p>
+        <p><strong>Age: </strong> {{userdata?.age}}</p>
+        <p><strong>Country: </strong> {{userdata?.country}}</p>
 
         <button type="button" class="btn btn-xs btn-default" (click)="toggleEditMode()"><i class="icon-pencil"></i>
             <span *ngIf="isInEditMode">Hide edit user options</span>

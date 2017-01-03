@@ -9,7 +9,6 @@ import {UserMainService} from "../../../services/user/user-main.service";
 @Component ({
     selector: 'login',
     templateUrl: './app/components/main/login/login.component.html',
-    // providers: [UserAuthService, UserMainService],
     styleUrls: ['./app/components/main/login/login-component.css'],
 })
 export class LoginComponent{
@@ -55,7 +54,7 @@ export class LoginComponent{
                     let dbUser: any = response.result;
                     console.log(response);
                     localStorage.setItem('user', JSON.stringify(dbUser));
-                    this.userMainService.setIsUserLogged();
+                    this.userAuthService.authenticated = true;
 
                     const message = 'You have logged in successfully.';
                     const heading = 'Bay! ';

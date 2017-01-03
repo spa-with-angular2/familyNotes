@@ -48,7 +48,7 @@ var LoginComponent = (function () {
                 var dbUser = response.result;
                 console.log(response);
                 localStorage.setItem('user', JSON.stringify(dbUser));
-                _this.userMainService.setIsUserLogged();
+                _this.userAuthService.authenticated = true;
                 var message = 'You have logged in successfully.';
                 var heading = 'Bay! ';
                 //this.toastrService.success(message, heading);
@@ -70,7 +70,6 @@ var LoginComponent = (function () {
         core_1.Component({
             selector: 'login',
             templateUrl: './app/components/main/login/login.component.html',
-            // providers: [UserAuthService, UserMainService],
             styleUrls: ['./app/components/main/login/login-component.css'],
         }), 
         __metadata('design:paramtypes', [user_auth_service_1.UserAuthService, user_main_service_1.UserMainService, router_1.Router])

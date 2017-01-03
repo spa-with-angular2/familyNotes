@@ -87,6 +87,7 @@ module.exports = () => {
 
                         let result = {
                             token: token,
+                            _id: dbUser._id,
 
                             firstName: dbUser.firstName,
                             lastName: dbUser.lastName,
@@ -125,8 +126,7 @@ module.exports = () => {
             var token = getToken(req.headers);
             if (token) {
                 let decoded = jwt.decode(token, config.jwtSecret);
-                console.log('decoded' + JSON.stringify(decoded));
-                console.log('decoded.username' + decoded.username);
+
                 User.findOne({
                     username: decoded.username
                 }, function (err, dbUser) {
@@ -137,47 +137,35 @@ module.exports = () => {
                     if (!dbUser) {
                         res.json("{\"error\": \"User login verification failed. User not found. Please logout and login again.\"}");
                     } else {
-                        // if (dbUser.isValidPassword(body.password)) {
-                            let token = 'JWT ' + jwt.encode(dbUser, config.jwtSecret);
+                        let token = 'JWT ' + jwt.encode(dbUser, config.jwtSecret);
 
-                            let result = {
-                                token: token,
+                        let result = {
+                            token: token,
+                            _id: dbUser._id,
 
-                                firstName: dbUser.firstName,
-                                lastName: dbUser.lastName,
-                                age: dbUser.age,
-                                gender: dbUser.gender,
-                                country: dbUser.country,
+                            firstName: dbUser.firstName,
+                            lastName: dbUser.lastName,
+                            age: dbUser.age,
+                            gender: dbUser.gender,
+                            country: dbUser.country,
 
-                                email: dbUser.email,
-                                profilePictures: dbUser.profilePictures,
-                                families: dbUser.families,
-                                createdOn: dbUser.createdOn,
+                            email: dbUser.email,
+                            profilePictures: dbUser.profilePictures,
+                            families: dbUser.families,
+                            createdOn: dbUser.createdOn,
 
-                                username: dbUser.username,
-                                salt: dbUser.salt,
-                                passHash: dbUser.passHash,
+                            username: dbUser.username,
+                            salt: dbUser.salt,
+                            passHash: dbUser.passHash,
 
-                                role: dbUser.role,
-                                fbId: dbUser.fbId,
-                                fbToken: dbUser.fbToken,
-                            };
-                            console.log('result' + JSON.stringify(result));
+                            role: dbUser.role,
+                            fbId: dbUser.fbId,
+                            fbToken: dbUser.fbToken,
+                        };
+                        console.log('result' + JSON.stringify(result));
 
-                            return res.json({result});
-                        //}
-
-                        return res.json("{\"error\": \"User login verification failed.\"}");
+                        return res.json({result});
                     }
-                    // if (!dbUser) {
-                    //     return res.json({ success: false, message: 'User not found.' });
-                    // } else {
-                    //     console.log('dbUser' + dbUser);
-                    //     return res.json({
-                    //         success: true,
-                    //         user: dbUser
-                    //     });
-                    // }
                 });
             } else {
                 return res.json({ success: false, message: "No token provided" });

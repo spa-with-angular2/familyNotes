@@ -53,21 +53,17 @@ var UserAuthService = (function () {
         this.headerOptions = { 'Content-Type': 'application/json' };
         //this.authenticatedChange = new Subject();
     };
-    Object.defineProperty(UserAuthService.prototype, "isLoggedInBoolean", {
-        get: function () {
-            var _this = this;
-            this.isLoggedIn()
-                .then(function (isLogged) {
-                _this.authenticated = true;
-                return true;
-            }).catch(function (isNotLogged) {
-                _this.authenticated = true;
-                return false;
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
+    UserAuthService.prototype.isLoggedInBoolean = function () {
+        var _this = this;
+        this.isLoggedIn()
+            .then(function (isLogged) {
+            _this.authenticated = true;
+            return true;
+        }).catch(function (isNotLogged) {
+            _this.authenticated = true;
+            return false;
+        });
+    };
     UserAuthService.prototype.register = function (user) {
         var respToReturn;
         var requestOptions = this.httpOptionsService.getRequestOptions(true);
@@ -83,9 +79,9 @@ var UserAuthService = (function () {
         return respToReturn;
     };
     UserAuthService.prototype.logout = function () {
-        // localStorage.clear();
+        //localStorage.clear();
         localStorage.removeItem('user');
-        this.isLoggedIn();
+        //this.isLoggedIn();
     };
     UserAuthService.prototype.isLoggedIn = function () {
         var _this = this;

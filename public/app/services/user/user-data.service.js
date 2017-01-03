@@ -29,7 +29,7 @@ var UserDateService = (function () {
         var userDataToReturn;
         userDataToReturn = this.http
             .get(UserDateService.SINGLE_USER_DATA_URL + userId)
-            .map(function (response) { return response.json().result; });
+            .map(function (response) { return response.json(); });
         return userDataToReturn;
     };
     UserDateService.prototype.getAllUsersData = function () {
@@ -42,7 +42,7 @@ var UserDateService = (function () {
     UserDateService.prototype.updateUserData = function (updatedUser) {
         var respToReturn;
         var requestOptions = this.httpOptionsService.getRequestOptions(true);
-        console.log(updatedUser);
+        //console.log(updatedUser)
         respToReturn = this.http.post(UserDateService.SINGLE_USER_DATA_URL + updatedUser._id, JSON.stringify(updatedUser), requestOptions);
         return respToReturn;
     };

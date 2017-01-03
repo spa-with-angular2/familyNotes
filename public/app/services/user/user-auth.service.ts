@@ -57,9 +57,7 @@ export class UserAuthService{
         //this.authenticatedChange = new Subject();
     }
 
-
-
-    get isLoggedInBoolean(): boolean {
+    isLoggedInBoolean(): boolean {
         this.isLoggedIn()
             .then((isLogged) => {
                 this.authenticated = true;
@@ -90,9 +88,9 @@ export class UserAuthService{
     }
 
     logout(): void{
-        // localStorage.clear();
+        //localStorage.clear();
         localStorage.removeItem('user');
-        this.isLoggedIn();
+        //this.isLoggedIn();
     }
 
     isLoggedIn(): Promise {
