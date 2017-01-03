@@ -21,7 +21,7 @@ exports.NOTES = [
     {
         id: '',
         title: 'Bank',
-        body: 'Go to the bank and take the coins for Toni and Veronic',
+        body: "\n            - go to the bank and withdraw some money\n\n            - transfer some to the Sister\n\n            ",
         author: someUser,
         state: {
             index: note_states_enum_1.NoteStatesEnum.Todo,
@@ -36,8 +36,8 @@ exports.NOTES = [
     },
     {
         id: '',
-        title: 'Appotheke',
-        body: 'Go to the pharmacy and take Nelis pills',
+        title: 'Pharmacy',
+        body: 'Go to the pharmacy but Mukosolvan, Ginkoprimmax, Ospamox',
         author: someUser,
         state: {
             index: note_states_enum_1.NoteStatesEnum.Todo,
@@ -52,8 +52,8 @@ exports.NOTES = [
     },
     {
         id: '',
-        title: 'Maxi Cosi',
-        body: 'Put the MaxiCosi for sale in OLX',
+        title: 'Saturday Ski',
+        body: 'make ski service for the ski, prepare the boots, put ski rack on the car',
         author: someUser,
         state: {
             index: note_states_enum_1.NoteStatesEnum.Todo,
@@ -68,8 +68,8 @@ exports.NOTES = [
     },
     {
         id: '',
-        title: 'Toni bd',
-        body: 'Take wine and present',
+        title: 'Wife birthday',
+        body: 'DO NOT forget, by present, buy flowers',
         author: someUser,
         state: {
             index: note_states_enum_1.NoteStatesEnum.Todo,

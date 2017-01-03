@@ -28,7 +28,10 @@ export const NOTES: Note[] = [
     {
         id: '',
         title: 'Bank',
-        body: 'Go to the bank and take the coins for Toni and Veronic',
+        body: `
+            - go to the bank and withdraw some money\n
+            - transfer some to the Sister\n
+            `,
         author: someUser,
         state: {
             index: NoteStatesEnum.Todo,
@@ -45,8 +48,8 @@ export const NOTES: Note[] = [
     },
     {
         id: '',
-        title: 'Appotheke',
-        body: 'Go to the pharmacy and take Nelis pills',
+        title: 'Pharmacy',
+        body: 'Go to the pharmacy but Mukosolvan, Ginkoprimmax, Ospamox',
         author: someUser,
         state: {
             index: NoteStatesEnum.Todo,
@@ -63,8 +66,8 @@ export const NOTES: Note[] = [
     },
     {
         id: '',
-        title: 'Maxi Cosi',
-        body: 'Put the MaxiCosi for sale in OLX',
+        title: 'Saturday Ski',
+        body: 'make ski service for the ski, prepare the boots, put ski rack on the car',
         author: someUser,
         state: {
             index: NoteStatesEnum.Todo,
@@ -81,8 +84,8 @@ export const NOTES: Note[] = [
     },
     {
         id: '',
-        title: 'Toni bd',
-        body: 'Take wine and present',
+        title: 'Wife birthday',
+        body: 'DO NOT forget, by present, buy flowers',
         author: someUser,
         state: {
             index: NoteStatesEnum.Todo,
