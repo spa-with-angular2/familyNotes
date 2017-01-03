@@ -2,7 +2,7 @@ import { Component ,Injectable, OnInit } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
 // import {Observable} from 'rxjs';
-import {Observable, Observer, BehaviorSubject} from 'rxjs/Rx'
+import {Observable, Observer, Subject} from 'rxjs/Rx'
 // Import RxJx required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -22,7 +22,16 @@ export class UserAuthService{
     public static LOGOUT_USER_URL: string = UserAuthService.BASE_DOMAIN_URL + 'auth/logout';
     public static VERIFY_LOGIN_URL: string = UserAuthService.BASE_DOMAIN_URL + 'auth/verify';
 
-    public authenticated = new BehaviorSubject(null);
+    public authenticatedChange: Subject<boolean> = new Subject();
+
+    private _authenticated: boolean = false;
+    get authenticated(): boolean {
+        return this._authenticated ;
+    }
+    set authenticated ( authenticated: boolean) {
+        // Plugin some processing here
+        this._authenticated = authenticated;
+    }
 
     private headerOptions: {};
 
@@ -35,13 +44,24 @@ export class UserAuthService{
         this.headerOptions = { 'Content-Type': 'application/json' };
     }
 
+    emit(authenticated) {
+        this.authenticatedChange.next(authenticated);
+    }
+
+    subscribe(component, callback) {
+        // set 'this' to component when callback is called
+        return this.authenticatedChange.subscribe(data => {
+            callback(component, data);
+        });
+    }
+
     get isLoggedInBoolean(): boolean {
         this.isLoggedIn()
             .then((isLogged) => {
-                this.authenticated.next(true);
+                this.authenticated = true;
                 return true;
             }).catch((isNotLogged) => {
-                this.authenticated.next(false);
+                this.authenticated = true;
                 return false;
             });
     }
@@ -68,6 +88,7 @@ export class UserAuthService{
     logout(): void{
         // localStorage.clear();
         localStorage.removeItem('user');
+        this.isLoggedIn();
     }
 
     isLoggedIn(): Promise {
@@ -84,9 +105,11 @@ export class UserAuthService{
                     return this.compareLocalAndRemoteTokens(localToken, remoteToken);
                 })
                 .then((areSame) => {
+                    this.authenticated = true;
                     return resolve(true);
                 })
                 .catch(() => {
+                    this.authenticated = false;
                     return reject(false);
                 });
         })

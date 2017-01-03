@@ -17,7 +17,18 @@ var NavComponent = (function () {
         this.userMainService = userMainService;
         this.router = router;
         this.userAuthService = userAuthService;
+        this.subscription = this.userAuthService.subscribe(this, this.selectedNavItem);
     }
+    // constructor(private navService:NavService) {
+    //     this.subscription = this.navService.subscribe(this, this.selectedNavItem);
+    // }
+    NavComponent.prototype.selectedNavItem = function (item) {
+        console.log('item index changed!', item);
+        this.item = item;
+    };
+    NavComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
     NavComponent.prototype.ngOnInit = function () {
         // this.userAuthService.isLoggedIn()
         //     .then((isLogged) => {
@@ -29,10 +40,9 @@ var NavComponent = (function () {
         // });
         // Only check once even if component is
         // destroyed and constructed again
-        if (this.userAuthService.authenticated.value === null)
-            this.userAuthService.isLoggedInBoolean;
-        this.isLoggedIn = this.userAuthService.authenticated.value;
+        this.isLoggedIn = this.userAuthService.authenticated;
         console.log('isLoggedIn nav-' + this.isLoggedIn);
+        console.log('item tested nav-' + this.item);
     };
     NavComponent = __decorate([
         core_1.Component({

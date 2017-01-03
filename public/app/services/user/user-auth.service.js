@@ -24,20 +24,41 @@ var UserAuthService = (function () {
     function UserAuthService(http, httpOptionsService) {
         this.http = http;
         this.httpOptionsService = httpOptionsService;
-        this.authenticated = new Rx_1.BehaviorSubject(null);
+        this.authenticatedChange = new Rx_1.Subject();
+        this._authenticated = false;
     }
+    Object.defineProperty(UserAuthService.prototype, "authenticated", {
+        get: function () {
+            return this._authenticated;
+        },
+        set: function (authenticated) {
+            // Plugin some processing here
+            this._authenticated = authenticated;
+        },
+        enumerable: true,
+        configurable: true
+    });
     UserAuthService.prototype.ngOnInit = function () {
         this.headerOptions = { 'Content-Type': 'application/json' };
+    };
+    UserAuthService.prototype.emit = function (authenticated) {
+        this.authenticatedChange.next(authenticated);
+    };
+    UserAuthService.prototype.subscribe = function (component, callback) {
+        // set 'this' to component when callback is called
+        return this.authenticatedChange.subscribe(function (data) {
+            callback(component, data);
+        });
     };
     Object.defineProperty(UserAuthService.prototype, "isLoggedInBoolean", {
         get: function () {
             var _this = this;
             this.isLoggedIn()
                 .then(function (isLogged) {
-                _this.authenticated.next(true);
+                _this.authenticated = true;
                 return true;
             }).catch(function (isNotLogged) {
-                _this.authenticated.next(false);
+                _this.authenticated = true;
                 return false;
             });
         },
@@ -61,6 +82,7 @@ var UserAuthService = (function () {
     UserAuthService.prototype.logout = function () {
         // localStorage.clear();
         localStorage.removeItem('user');
+        this.isLoggedIn();
     };
     UserAuthService.prototype.isLoggedIn = function () {
         var _this = this;
@@ -76,9 +98,11 @@ var UserAuthService = (function () {
                 return _this.compareLocalAndRemoteTokens(localToken, remoteToken);
             })
                 .then(function (areSame) {
+                _this.authenticated = true;
                 return resolve(true);
             })
                 .catch(function () {
+                _this.authenticated = false;
                 return reject(false);
             });
         });
