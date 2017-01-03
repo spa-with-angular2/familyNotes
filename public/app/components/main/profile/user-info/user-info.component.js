@@ -15,6 +15,7 @@ var user_data_service_1 = require("../../../../services/user/user-data.service")
 var countries_enum_1 = require("../../../../enumerations/countries.enum");
 var enum_utilities_1 = require("../../../../enumerations/utilities/enum.utilities");
 var user_auth_service_1 = require("../../../../services/user/user-auth.service");
+var noProfilePictureUrl = '/app/assets/images/default-user.jpg';
 var UserInfoComponent = (function () {
     function UserInfoComponent(userDataService, router, userAuthService) {
         this.userDataService = userDataService;
@@ -25,6 +26,7 @@ var UserInfoComponent = (function () {
         this.isLoggedIn = this.userAuthService.authenticated;
         this.isInEditMode = false;
         this.countries = enum_utilities_1.EnumUtils.values(countries_enum_1.CountriesEnum);
+        this.profilePicture = noProfilePictureUrl;
         console.log('is logged in user info-' + this.isLoggedIn);
     };
     UserInfoComponent.prototype.toggleEditMode = function () {
@@ -42,10 +44,12 @@ var UserInfoComponent = (function () {
         this.userdata.country = country;
     };
     UserInfoComponent.prototype.onSubmit = function () {
+        this.userdata.profilePictures[0] = this.profilePicture;
         this.updateUserInfo();
     };
     UserInfoComponent.prototype.updateUserInfo = function () {
         var _this = this;
+        console.log(this.userdata);
         this.userDataService
             .updateUserData(this.userdata)
             .map(function (res) { return res.json(); })
@@ -64,7 +68,7 @@ var UserInfoComponent = (function () {
                 var heading = 'Day! ';
                 //this.toastrService.success(message, heading);
                 console.log(heading + message);
-                console.log(dbUser);
+                //console.log(dbUser);
                 _this.toggleEditMode();
                 var that_1 = _this;
                 setTimeout(function () {

@@ -53,7 +53,7 @@ export class UserDateService{
         var respToReturn: Observable<Response>;
         var requestOptions: RequestOptions = this.httpOptionsService.getRequestOptions(true);
 
-        //console.log(updatedUser)
+        console.log(updatedUser)
 
         respToReturn = this.http.post(UserDateService.SINGLE_USER_DATA_URL + updatedUser._id, JSON.stringify(updatedUser), requestOptions);
 

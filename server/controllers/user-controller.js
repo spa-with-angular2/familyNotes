@@ -53,8 +53,6 @@ module.exports = () => {
         },
 
         updateUserData(req, res) {
-            console.log('-------------------------');
-
             let user = req.body;
             let id = user._id;
 
@@ -66,25 +64,18 @@ module.exports = () => {
                     return res.json({ success: false, message: "Error updating user data. User not found." });
                 }
 
-
                 User.findById(id, (err, dbUser) => {
                     if (err) {
                         console.log(err);
                     }
                     if (!dbUser) return res.json({ success: false, message: "User not found." });
 
-                    console.log(dbUser);
                     return res.json({
                         success: true,
                         result: dbUser
                     });
                 });
-                // return res.json({
-                //     success: true,
-                //     result: user
-                // });
             });
-
         }
     };
 };

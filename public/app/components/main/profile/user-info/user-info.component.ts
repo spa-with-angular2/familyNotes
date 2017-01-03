@@ -9,6 +9,8 @@ import {EnumUtils} from "../../../../enumerations/utilities/enum.utilities";
 
 import {UserAuthService} from "../../../../services/user/user-auth.service";
 
+const noProfilePictureUrl: string = '/app/assets/images/default-user.jpg';
+
 @Component({
     selector: 'user-info',
     templateUrl: './app/components/main/profile/user-info/user-info.component.html',
@@ -20,7 +22,7 @@ export class UserInfoComponent {
     private isLoggedIn: boolean;
     private isInEditMode: boolean;
     private countries: string[];
-
+    private profilePicture: string;
 
     constructor(
         private userDataService: UserDateService,
@@ -32,7 +34,7 @@ export class UserInfoComponent {
         this.isLoggedIn = this.userAuthService.authenticated;
         this.isInEditMode = false;
         this.countries = EnumUtils.values(CountriesEnum);
-
+        this.profilePicture = noProfilePictureUrl;
 
         console.log('is logged in user info-' + this.isLoggedIn);
     }
@@ -54,10 +56,12 @@ export class UserInfoComponent {
     }
 
     onSubmit(): void{
+        this.userdata.profilePictures[0] = this.profilePicture;
         this.updateUserInfo();
     }
 
     private updateUserInfo(): void {
+        console.log(this.userdata);
         this.userDataService
             .updateUserData(this.userdata)
             .map((res) => res.json())
@@ -78,7 +82,7 @@ export class UserInfoComponent {
                     //this.toastrService.success(message, heading);
 
                     console.log(heading + message);
-                    console.log(dbUser);
+                    //console.log(dbUser);
 
                     this.toggleEditMode();
 
