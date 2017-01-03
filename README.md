@@ -1,4 +1,4 @@
-# familyNotes
+# Family Notes
 
 ![image](./public/app/assets/images/screenshots/screenshot-home.png)
 
