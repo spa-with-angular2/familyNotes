@@ -94,7 +94,7 @@ var RegisterComponent = (function () {
         core_1.Component({
             selector: 'register',
             templateUrl: './app/components/main/register/register.component.html',
-            providers: [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_auth_service_1.UserAuthService],
+            providers: [user_factory_service_1.UserFactoryService, password_service_1.PasswordService],
             styleUrls: ['./app/components/header/nav-component.css', './app/components/main/register/register-component.css', './app/assets/css/hover.css'],
         }), 
         __metadata('design:paramtypes', [user_factory_service_1.UserFactoryService, password_service_1.PasswordService, user_auth_service_1.UserAuthService, router_1.Router, toastr_ng2_1.ToastrService])

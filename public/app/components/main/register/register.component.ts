@@ -12,7 +12,7 @@ import {ToastrService} from "toastr-ng2";
 @Component({
     selector: 'register',
     templateUrl: './app/components/main/register/register.component.html',
-    providers: [UserFactoryService, PasswordService, UserAuthService],
+    providers: [UserFactoryService, PasswordService],
     styleUrls: ['./app/components/header/nav-component.css' ,'./app/components/main/register/register-component.css' , './app/assets/css/hover.css'],
 })
 export class RegisterComponent {

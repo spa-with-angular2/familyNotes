@@ -1,4 +1,4 @@
-import { Component ,Injectable, OnInit } from '@angular/core';
+import {Component ,Injectable, OnInit, EventEmitter } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
 // import {Observable} from 'rxjs';
@@ -12,7 +12,7 @@ import {User} from "../../models/user.model";
 import {HttpOptionsService} from "../http-options.service";
 
 @Component(){
-    providers: [Http, HttpOptionsService]
+    providers: [HttpOptionsService]
 }
 @Injectable()
 export class UserAuthService{
@@ -28,9 +28,21 @@ export class UserAuthService{
     get authenticated(): boolean {
         return this._authenticated ;
     }
-    set authenticated ( authenticated: boolean) {
+    set authenticated (authenticated: boolean) {
         // Plugin some processing here
         this._authenticated = authenticated;
+        this.authenticatedChange.next(this._authenticated);
+
+    }
+    emit(authenticated) {
+        this.authenticatedChange.next(authenticated);
+    }
+    subscribe(callback) {
+        // set 'this' to component when callback is called
+        // return this.authenticatedChange.subscribe(data => {
+        //     callback(component, data);
+        // });
+        return this.authenticatedChange.subscribe(callback);
     }
 
     private headerOptions: {};
@@ -42,18 +54,10 @@ export class UserAuthService{
 
     ngOnInit(): void {
         this.headerOptions = { 'Content-Type': 'application/json' };
+        //this.authenticatedChange = new Subject();
     }
 
-    emit(authenticated) {
-        this.authenticatedChange.next(authenticated);
-    }
 
-    subscribe(component, callback) {
-        // set 'this' to component when callback is called
-        return this.authenticatedChange.subscribe(data => {
-            callback(component, data);
-        });
-    }
 
     get isLoggedInBoolean(): boolean {
         this.isLoggedIn()

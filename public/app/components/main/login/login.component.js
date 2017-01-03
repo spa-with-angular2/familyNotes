@@ -70,7 +70,7 @@ var LoginComponent = (function () {
         core_1.Component({
             selector: 'login',
             templateUrl: './app/components/main/login/login.component.html',
-            providers: [user_auth_service_1.UserAuthService, user_main_service_1.UserMainService],
+            // providers: [UserAuthService, UserMainService],
             styleUrls: ['./app/components/main/login/login-component.css'],
         }), 
         __metadata('design:paramtypes', [user_auth_service_1.UserAuthService, user_main_service_1.UserMainService, router_1.Router])

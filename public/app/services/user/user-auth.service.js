@@ -18,7 +18,7 @@ require('rxjs/add/operator/catch');
 require('rxjs/add/operator/mergeMap');
 var http_options_service_1 = require("../http-options.service");
 {
-    providers: [http_1.Http, http_options_service_1.HttpOptionsService];
+    providers: [http_options_service_1.HttpOptionsService];
 }
 var UserAuthService = (function () {
     function UserAuthService(http, httpOptionsService) {
@@ -34,21 +34,24 @@ var UserAuthService = (function () {
         set: function (authenticated) {
             // Plugin some processing here
             this._authenticated = authenticated;
+            this.authenticatedChange.next(this._authenticated);
         },
         enumerable: true,
         configurable: true
     });
-    UserAuthService.prototype.ngOnInit = function () {
-        this.headerOptions = { 'Content-Type': 'application/json' };
-    };
     UserAuthService.prototype.emit = function (authenticated) {
         this.authenticatedChange.next(authenticated);
     };
-    UserAuthService.prototype.subscribe = function (component, callback) {
+    UserAuthService.prototype.subscribe = function (callback) {
         // set 'this' to component when callback is called
-        return this.authenticatedChange.subscribe(function (data) {
-            callback(component, data);
-        });
+        // return this.authenticatedChange.subscribe(data => {
+        //     callback(component, data);
+        // });
+        return this.authenticatedChange.subscribe(callback);
+    };
+    UserAuthService.prototype.ngOnInit = function () {
+        this.headerOptions = { 'Content-Type': 'application/json' };
+        //this.authenticatedChange = new Subject();
     };
     Object.defineProperty(UserAuthService.prototype, "isLoggedInBoolean", {
         get: function () {

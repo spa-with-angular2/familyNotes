@@ -14,17 +14,19 @@ var user_main_service_1 = require("../../services/user/user-main.service");
 var user_auth_service_1 = require("../../services/user/user-auth.service");
 var NavComponent = (function () {
     function NavComponent(userMainService, router, userAuthService) {
+        //this.subscription = this.userAuthService.subscribe(this, this.selectedNavItem);
+        var _this = this;
         this.userMainService = userMainService;
         this.router = router;
         this.userAuthService = userAuthService;
-        this.subscription = this.userAuthService.subscribe(this, this.selectedNavItem);
+        this.subscription = this.userAuthService.subscribe(function (newValue) { return _this.selectedNavItem(newValue); });
     }
     // constructor(private navService:NavService) {
     //     this.subscription = this.navService.subscribe(this, this.selectedNavItem);
     // }
-    NavComponent.prototype.selectedNavItem = function (item) {
-        console.log('item index changed!', item);
-        this.item = item;
+    NavComponent.prototype.selectedNavItem = function (changedValue) {
+        console.log('item index changed!', changedValue);
+        this.isLoggedIn = changedValue;
     };
     NavComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
@@ -40,9 +42,17 @@ var NavComponent = (function () {
         // });
         // Only check once even if component is
         // destroyed and constructed again
+        // this.userAuthService
+        //     .authenticatedChange
+        //     .subscribe((isLogged: boolean) => this.isLoggedIn = isLogged);
         this.isLoggedIn = this.userAuthService.authenticated;
         console.log('isLoggedIn nav-' + this.isLoggedIn);
         console.log('item tested nav-' + this.item);
+    };
+    NavComponent.prototype.toggleLoginTest = function () {
+        this.userAuthService.authenticated = !this.userAuthService.authenticated;
+        //this.isLoggedIn = this.userAuthService.authenticated;
+        console.log('isLoggedIn from userAuthService -' + this.isLoggedIn);
     };
     NavComponent = __decorate([
         core_1.Component({

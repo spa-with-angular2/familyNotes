@@ -19,17 +19,19 @@ export class NavComponent{
         private router: Router,
         private userAuthService: UserAuthService
     ) {
-        this.subscription = this.userAuthService.subscribe(this, this.selectedNavItem);
+        //this.subscription = this.userAuthService.subscribe(this, this.selectedNavItem);
+
+        this.subscription = this.userAuthService.subscribe((newValue) => this.selectedNavItem(newValue));
     }
 
-    item: number;
+    item: boolean;
     subscription: any;
     // constructor(private navService:NavService) {
     //     this.subscription = this.navService.subscribe(this, this.selectedNavItem);
     // }
-    selectedNavItem(item: number) {
-        console.log('item index changed!', item);
-        this.item = item;
+    selectedNavItem(changedValue: any) {
+        console.log('item index changed!', changedValue);
+        this.isLoggedIn = changedValue;
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
@@ -47,9 +49,22 @@ export class NavComponent{
         // Only check once even if component is
         // destroyed and constructed again
 
+        // this.userAuthService
+        //     .authenticatedChange
+        //     .subscribe((isLogged: boolean) => this.isLoggedIn = isLogged);
+
+
 
         this.isLoggedIn = this.userAuthService.authenticated;
         console.log('isLoggedIn nav-'+this.isLoggedIn);
         console.log('item tested nav-'+this.item);
-}
+    }
+
+    toggleLoginTest(): void{
+        this.userAuthService.authenticated = !this.userAuthService.authenticated;
+
+        //this.isLoggedIn = this.userAuthService.authenticated;
+
+        console.log('isLoggedIn from userAuthService -' + this.isLoggedIn);
+    }
 }

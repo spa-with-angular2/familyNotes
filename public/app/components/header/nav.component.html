@@ -14,12 +14,13 @@
                 <li>
                     <!--<a class="hvr-grow" href="./home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home </a>-->
                     <a class="hvr-grow" routerLink='/home' routerLinkActive="active"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home </a>
+                    <button type="button" class="btn btn-default" (click)="toggleLoginTest()">ToggleLogin</button>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hvr-grow" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Notes <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a routerLink="/add-note" routerLinkActive="active" [hidden]="isLoggedIn">Create Note</a></li>
-                        <li><a routerLink="/notes" routerLinkActive="active" [hidden]="!isLoggedIn">See Notes</a></li>
+                        <li><a routerLink="/add-note" routerLinkActive="active" *ngIf="isLoggedIn">Create Note</a></li>
+                        <li><a routerLink="/notes" routerLinkActive="active">See Notes</a></li>
                     </ul>
                 </li>
                 <li><a class="hvr-grow" routerLink="/about" routerLinkActive="active"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> About</a></li>

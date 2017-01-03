@@ -9,7 +9,7 @@ import {UserMainService} from "../../../services/user/user-main.service";
 @Component ({
     selector: 'login',
     templateUrl: './app/components/main/login/login.component.html',
-    providers: [UserAuthService, UserMainService],
+    // providers: [UserAuthService, UserMainService],
     styleUrls: ['./app/components/main/login/login-component.css'],
 })
 export class LoginComponent{
